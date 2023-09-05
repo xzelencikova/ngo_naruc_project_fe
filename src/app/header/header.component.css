@@ -1,0 +1,30 @@
+.navbar-red {
+    background:#fff;
+    height:95px;
+    box-shadow:0px 2px 2px #C1c0c0;
+}
+
+.nav-link {
+    color: #5c5c5c !important;
+    font-size: 16px ;
+    
+}
+
+.navbar-brand {
+    text-transform:uppercase;
+    color:red;
+}
+
+.navbar-nav > li{
+    padding-left:25px;
+    padding-right:25px;
+  }
+
+.navbar-brand > img{
+    width: 122px;
+    height: 45px;
+}
+
+.dropdown-item{
+    color: #5c5c5c;
+}

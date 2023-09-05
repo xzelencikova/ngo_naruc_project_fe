@@ -1,0 +1,35 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-red static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="/assets/images/logo.png" alt="logo" height="36">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Domov</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Zoznam Klientov</a>
+          </li>
+          <li ngbDropdown class="nav-item dropdown">
+            <a ngbDropdownToggle class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Profil
+            </a>
+            <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><a ngbDropdownItem class="dropdown-item" href="#">Profil</a></li>
+              <li><a ngbDropdownItem class="dropdown-item" href="#">Správa zamestnancov</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a ngbDropdownItem class="dropdown-item" href="#">Odhlásiť sa</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
