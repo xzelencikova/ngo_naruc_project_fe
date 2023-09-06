@@ -1,0 +1,12 @@
+<div class="progress-div">
+    <ul class="progress">
+      <li *ngFor="let phase of phasesList; first as isFirst"
+          [class.inactive]="phase.id > phaseId"
+
+          [class.not-first]="!isFirst"
+          >
+        <span [class.active-status]="phase.id <= phaseId">{{phase.name}}</span>
+        <!-- <span *ngIf="phase.id < phaseId">{{phase.name}}</span> -->
+      </li>
+    </ul>
+  </div>
