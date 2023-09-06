@@ -13,7 +13,7 @@ export class PhasesProgressbarComponent {
     {name: "Aktivizačná fáza", id: 3}
   ];
 
-  phaseId: number = 2;
+  phaseId: number = 3;
 
 
 }
