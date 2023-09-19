@@ -1,0 +1,44 @@
+<form>
+    <ul>
+        <li *ngFor="let category of questionnaire; let i = index" class="list-category">
+            <h1 class="category-space">{{ category.category }}</h1>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 60%"></th>
+                        <th style="text-align: center"><fa-icon [icon]="['fas', 'face-frown']" class="rating-icon rating-icon--red"></fa-icon></th>
+                        <th style="text-align: center"><fa-icon [icon]="['fas', 'face-meh']" class="rating-icon rating-icon--yellow"></fa-icon></th>
+                        <th style="text-align: center"><fa-icon [icon]="['fas', 'face-smile']" class="rating-icon rating-icon--green"></fa-icon></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let question of category.questions; let i = index">
+                        <td style="font-size: 18px">{{ question.question }}</td>
+                        <td style="text-align: center">
+                            <input type="radio" name="question_{{question._id}}" id="question_{{question._id}}_1" value="1"/>
+                            <label for="question_{{question._id}}_1" class="xbutton-label">
+                                <fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--red"></fa-icon>
+                            </label>
+                        </td>
+                        <td style="text-align: center">
+                            <input type="radio" name="question_{{question._id}}" id="question_{{question._id}}_2" value="2"/>
+                            <label for="question_{{question._id}}_2" class="xbutton-label">
+                                <fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--yellow"></fa-icon>
+                            </label>
+                        </td>
+                        <td style="text-align: center">
+                            <input type="radio" name="question_{{question._id}}" id="question_{{question._id}}_3" value="3"/>
+                            <label for="question_{{question._id}}_3" class="xbutton-label">
+                                <fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--green"></fa-icon>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </li>
+    </ul>
+    <div class="submit-position">
+        <button role="submit" class="submit-button">Uložiť</button>
+    </div>
+</form>

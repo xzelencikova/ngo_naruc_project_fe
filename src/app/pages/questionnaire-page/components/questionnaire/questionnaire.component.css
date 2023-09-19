@@ -1,0 +1,79 @@
+*,*::before,*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.list-category {
+    list-style-type: none;
+}
+
+.category-space {
+    padding-top: 5rem;
+}
+
+.list-question {
+    padding: 1rem 1.5rem 1rem 0rem;
+}
+
+.submit-position {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2rem 0;
+}
+
+.submit-button {
+    padding: 1rem 4rem;
+    border-radius: 50px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(0.25turn, #FF4D00, #FC7900);
+    border: none;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    padding: 1rem 0;
+    border-bottom: 1px solid #D9D9D9;
+    border-right: 1px dashed #D9D9D9;
+}
+
+td:last-child {
+    border-right: none;
+}
+
+.rating-icon {
+    font-size: 40px;
+}
+
+.rating-icon--green {
+    color: #189D5F;
+}
+
+.rating-icon--yellow {
+    color: #FF9A65;
+}
+
+.rating-icon--red {
+    color: #FF5800;
+}
+
+input[type="radio"]{
+    -webkit-appearance: none;
+}
+
+.xbutton-label {
+    cursor: pointer;
+    opacity: 5%;
+}
+
+.xbutton-label:hover {
+    opacity: 100%;
+}
+
+input[type="radio"]:checked + .xbutton-label {
+    opacity: 100%;
+}
