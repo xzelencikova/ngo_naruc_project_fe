@@ -5,6 +5,7 @@ import { QuestionnaireRoutingModule } from "./questionnaire-routing.module";
 import { PhasesProgressbarComponent } from './components/phases-progressbar/phases-progressbar.component';
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -15,7 +16,9 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     imports: [
         CommonModule,
         QuestionnaireRoutingModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [],
     schemas: []

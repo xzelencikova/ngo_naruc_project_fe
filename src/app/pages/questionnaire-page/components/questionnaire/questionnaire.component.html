@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="questForm" (ngSubmit)="onSubmit()">
     <ul>
         <li *ngFor="let category of questionnaire; let i = index" class="list-category">
             <h1 class="category-space">{{ category.category }}</h1>
@@ -15,22 +15,22 @@
                 <tbody>
                     <tr *ngFor="let question of category.questions; let i = index">
                         <td style="font-size: 18px">{{ question.question }}</td>
-                        <td style="text-align: center">
-                            <input type="radio" name="question_{{question._id}}" id="question_{{question._id}}_1" value="1"/>
-                            <label for="question_{{question._id}}_1" class="xbutton-label">
-                                <fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--red"></fa-icon>
+                        <td style="text-align: center">                            
+                            <label>
+                                <input type="radio" formControlName="{{question._id}}" value="1"/>
+                                <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--red"></fa-icon></span>
                             </label>
                         </td>
                         <td style="text-align: center">
-                            <input type="radio" name="question_{{question._id}}" id="question_{{question._id}}_2" value="2"/>
-                            <label for="question_{{question._id}}_2" class="xbutton-label">
-                                <fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--yellow"></fa-icon>
+                            <label>
+                                <input type="radio" formControlName="{{question._id}}" value="2"/>
+                                <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--yellow"></fa-icon></span>
                             </label>
                         </td>
                         <td style="text-align: center">
-                            <input type="radio" name="question_{{question._id}}" id="question_{{question._id}}_3" value="3"/>
-                            <label for="question_{{question._id}}_3" class="xbutton-label">
-                                <fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--green"></fa-icon>
+                            <label>
+                                <input type="radio" [formControlName]="question._id" value="3"/>
+                                <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--green"></fa-icon></span>
                             </label>
                         </td>
                     </tr>
@@ -39,6 +39,6 @@
         </li>
     </ul>
     <div class="submit-position">
-        <button role="submit" class="submit-button">Uložiť</button>
+        <button role="submit" class="submit-button">ULOŽIŤ</button>
     </div>
 </form>
