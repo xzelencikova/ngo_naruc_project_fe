@@ -14,7 +14,6 @@ export class QuestionnaireService {
   private baseUrl: string = environment.baseUrl;
 
   getQuestionnaire(): Observable<QuestionnaireCategoryModel[]> {
-    console.log("Lalalalal")
     return this.http.get<QuestionnaireCategoryModel[]>(`${this.baseUrl}/ngo/questionnaire`);
   }
 }
