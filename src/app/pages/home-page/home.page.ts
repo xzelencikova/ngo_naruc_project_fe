@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-homepage',
-  templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  selector: 'app-home-page',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.css']
 })
-export class HomepageComponent{
+export class HomePage{
 
   openForm(){
     const overlayDiv = document.getElementById('overlay');
