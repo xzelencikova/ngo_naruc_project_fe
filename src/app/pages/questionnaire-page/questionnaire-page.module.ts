@@ -6,6 +6,7 @@ import { PhasesProgressbarComponent } from './components/phases-progressbar/phas
 import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         QuestionnaireRoutingModule,
         FontAwesomeModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatStepperModule
     ],
     providers: [],
     schemas: []

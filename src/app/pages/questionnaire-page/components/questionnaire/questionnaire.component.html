@@ -1,43 +1,47 @@
 <form [formGroup]="questForm" (ngSubmit)="onSubmit()">
-    <ul>
-        <li *ngFor="let category of questionnaire; let i = index" class="list-category">
-            <h1 class="category-space">{{ category.category }}</h1>
-            
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 60%"></th>
-                        <th style="text-align: center"><fa-icon [icon]="['fas', 'face-frown']" class="rating-icon rating-icon--red"></fa-icon></th>
-                        <th style="text-align: center"><fa-icon [icon]="['fas', 'face-meh']" class="rating-icon rating-icon--yellow"></fa-icon></th>
-                        <th style="text-align: center"><fa-icon [icon]="['fas', 'face-smile']" class="rating-icon rating-icon--green"></fa-icon></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let question of category.questions; let i = index">
-                        <td style="font-size: 18px">{{ question.question }}</td>
-                        <td style="text-align: center">                            
-                            <label>
-                                <input type="radio" formControlName="{{question._id}}" value="1"/>
-                                <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--red"></fa-icon></span>
-                            </label>
-                        </td>
-                        <td style="text-align: center">
-                            <label>
-                                <input type="radio" formControlName="{{question._id}}" value="2"/>
-                                <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--yellow"></fa-icon></span>
-                            </label>
-                        </td>
-                        <td style="text-align: center">
-                            <label>
-                                <input type="radio" [formControlName]="question._id" value="3"/>
-                                <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--green"></fa-icon></span>
-                            </label>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </li>
-    </ul>
+    <!-- <mat-stepper [linear]="false" #stepper animationDuration="0"> -->
+        <ul>
+            <li *ngFor="let category of questionnaire; let i = index" class="list-category">
+                <!-- <mat-step [stepControl]="questForm"> -->
+                    <h1 id="{{category}}" class="category-space">{{ category.category }}</h1>
+                <!-- </mat-step>     -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 60%"></th>
+                                <th style="text-align: center"><fa-icon [icon]="['fas', 'face-frown']" class="rating-icon rating-icon--red"></fa-icon></th>
+                                <th style="text-align: center"><fa-icon [icon]="['fas', 'face-meh']" class="rating-icon rating-icon--yellow"></fa-icon></th>
+                                <th style="text-align: center"><fa-icon [icon]="['fas', 'face-smile']" class="rating-icon rating-icon--green"></fa-icon></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let question of category.questions; let i = index">
+                                <td style="font-size: 18px">{{ question.question }}</td>
+                                <td style="text-align: center">                            
+                                    <label>
+                                        <input type="radio" formControlName="{{question._id}}" value="1"/>
+                                        <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--red"></fa-icon></span>
+                                    </label>
+                                </td>
+                                <td style="text-align: center">
+                                    <label>
+                                        <input type="radio" formControlName="{{question._id}}" value="2"/>
+                                        <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--yellow"></fa-icon></span>
+                                    </label>
+                                </td>
+                                <td style="text-align: center">
+                                    <label>
+                                        <input type="radio" [formControlName]="question._id" value="3"/>
+                                        <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--green"></fa-icon></span>
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <!-- </mat-step> -->
+            </li>
+        </ul>
+    <!-- </mat-stepper> -->
     <div class="submit-position">
         <button role="submit" class="submit-button">ULOŽIŤ</button>
     </div>
