@@ -9,6 +9,7 @@
 }
 
 .category-space {
+    font-weight: bold;
     padding-top: 5rem;
 }
 
@@ -29,6 +30,16 @@
     color: white;
     background: linear-gradient(0.25turn, #FF4D00, #FC7900);
     border: none;
+}
+
+.save-button {
+    padding: 1rem 4rem;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #FF4D00;
+    background: white;
+    border: 1px solid #FF4D00;
+    margin-right: 1rem;
 }
 
 table {
@@ -76,4 +87,47 @@ input[type="radio"]{
 
 input[type="radio"]:checked + .xbutton-label {
     opacity: 100%;
+}
+
+::ng-deep .mat-vertical-stepper-content 
+{
+    visibility: visible !important;
+    height: 100% !important;
+}
+
+:host ::ng-deep .mat-step-icon-state-edit  {
+    color: #FF5800;
+    background: white;
+    border: 1px solid #FF5800;
+}
+
+:host ::ng-deep .mat-step-icon-selected  {
+    color: #FF5800 !important;
+    background: white !important;
+    border: 1px solid #FF5800 !important;
+}
+
+:host ::ng-deep .mat-step-icon-state-number {
+    color: #929292;
+    background: white;
+    border: 1px solid #929292;
+}
+
+:host ::ng-deep .mat-stepper-vertical-line::before {
+    border-left-width: 3.5px !important;
+}
+
+/* :host ::ng-deep .mat-stepper-vertical-line::before .mat-step-icon-selected {
+    border-left-color: #FF5800 !important;
+} */
+
+::ng-deep .mat-vertical-stepper-header {
+    &[ng-reflect-state='edit'] + .mat-stepper-vertical-line {
+               border-left-color: #FF5800 !important;
+    }
+}
+
+.stepper-position {
+    position: fixed;
+    padding-top: 2.5rem;
 }
