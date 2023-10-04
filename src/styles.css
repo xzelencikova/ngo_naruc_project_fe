@@ -1,8 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~font-awesome/css/font-awesome.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"; 
+@import "~@fortawesome/fontawesome-free/css/all.css";
 
 body {
     color: #5C5C5C;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-step-header {
+    background-color: #07C496 !important;
+}
+
+.mat-step-header {
+    background-color: transparent !important;
+}
