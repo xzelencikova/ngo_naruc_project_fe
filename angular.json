@@ -26,6 +26,7 @@
               "src/assets/images"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
@@ -90,6 +91,7 @@
               "src/assets"
             ],
             "styles": [
+              "../node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css",
               "../node_modules/bootstrap/dist/css/boostrap.min.css"
             ],

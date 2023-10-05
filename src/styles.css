@@ -1,6 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~font-awesome/css/font-awesome.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"; 
+@import "~@fortawesome/fontawesome-free/css/all.css";
 
 body {
     color: #5C5C5C;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-step-header {
+    background-color: #07C496 !important;
+}
+
+.mat-step-header {
+    background-color: transparent !important;
+}
+
+.mat-mdc-snack-bar-container {
+    --mdc-snackbar-container-color: lightgreen !important;
+    --mdc-snackbar-supporting-text-color: green !important;
+    --mat-snack-bar-button-color: green !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 80px !important;
+    padding: 2rem 5rem !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__title {
+    color: #929090 !important;
+    text-align: center !important;
+    font-size: 40px !important;
+    font-weight: bold !important;
 }
