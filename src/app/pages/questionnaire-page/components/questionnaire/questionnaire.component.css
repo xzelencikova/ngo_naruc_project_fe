@@ -131,3 +131,7 @@ input[type="radio"]:checked + .xbutton-label {
     position: fixed;
     padding-top: 2.5rem;
 }
+
+:host ::ng-deep .mat-mdc-snack-bar-container .mdc-snackbar__surface {
+    background-color: lightgreen !important;
+}

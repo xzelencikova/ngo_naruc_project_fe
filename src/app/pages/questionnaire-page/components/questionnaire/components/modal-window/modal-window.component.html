@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>PRAJETE SI ULOŽIŤ ZMENY?</h1>
+
+<mat-dialog-content class="dialog-text">
+  <p>Po uložení zmien sa fáza X uzavrie.</p>
+
+  <p>Pozorovací hárok bude naďalej k dispozícii v histórii pozorovacích hárkov klienta.</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-button mat-dialog-close class="cancel-button">ZRUŠIŤ</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="submit-button">ULOŽIŤ</button>
+</mat-dialog-actions>

@@ -1,28 +1,24 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { QuestionnairePage } from "./questionnaire.page";
-import { QuestionnaireRoutingModule } from "./questionnaire-routing.module";
-import { PhasesProgressbarComponent } from './components/phases-progressbar/phases-progressbar.component';
-import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
+import { QuestionnaireSentPage } from "./questionnaire-sent.page";
+import { QuestionnaireSentRoutingModule } from "./questionnaire-sent-routing.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
-import { ModalWindowComponent } from './components/questionnaire/components/modal-window/modal-window.component';
+import { SentMessageComponent } from './components/sent-message/sent-message.component';
 
 
 
 @NgModule({
     declarations: [
-        QuestionnairePage,
-        PhasesProgressbarComponent,
-        QuestionnaireComponent,
-        ModalWindowComponent
+        QuestionnaireSentPage,
+        SentMessageComponent,
     ],
     imports: [
         CommonModule,
-        QuestionnaireRoutingModule,
+        QuestionnaireSentRoutingModule,
         FontAwesomeModule,
         FormsModule,
         ReactiveFormsModule,
@@ -33,4 +29,4 @@ import { ModalWindowComponent } from './components/questionnaire/components/moda
     providers: [],
     schemas: []
 })
-export class QuestionnairePageModule {}
+export class QuestionnaireSentPageModule {}

@@ -11,6 +11,11 @@ import { RatingService } from 'src/app/services/rating.service';
 
 import { MatStepper } from '@angular/material/stepper';
 import { pluck } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ModalWindowComponent } from './components/modal-window/modal-window.component';
+import { MatDialog } from '@angular/material/dialog';
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-questionnaire',
@@ -42,7 +47,13 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     // }
   }
 
-  constructor(private questionnaireService: QuestionnaireService, private fb: FormBuilder, library: FaIconLibrary, private ratingService: RatingService) {
+  constructor(private questionnaireService: QuestionnaireService, 
+    private fb: FormBuilder, 
+    library: FaIconLibrary, 
+    private ratingService: RatingService, 
+    private saveMessageBar: MatSnackBar, 
+    private dialog: MatDialog, 
+    private router: Router) {
     library.addIconPacks(fas, far);
   }
 
@@ -75,7 +86,16 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   
   ngOnDestroy(): void {}
 
-  onSubmit(): void {
+  openSaveMessage() {
+    this.saveMessageBar.open('Pozorovací hárok bol úspešne uložený!', 'X', {
+      horizontalPosition: "end",
+      verticalPosition: "bottom",
+    });
+
+    this.saveFormData();
+  }
+
+  saveFormData() {
     let rating: RatingModel = {
       date_rated: new Date,
       rated_by_user_id: "80d71b90976f4933b42abc22d94510e6",
@@ -97,5 +117,17 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     })
     
     this.subscription2 = this.ratingService.postRating(rating).subscribe(rating => {});
+  }
+
+  onSubmit(): void {
+    const dialogRef = this.dialog.open(ModalWindowComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.saveFormData();
+        this.router.navigate(['/questionnaire-sent'])
+        // redirect na finalizáciu dotazníka
+      }
+    });
   }
 }

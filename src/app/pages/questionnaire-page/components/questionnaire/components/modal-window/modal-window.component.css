@@ -1,0 +1,23 @@
+.dialog-text {
+    text-align: center;
+    padding: 2rem 0 5rem 0;
+}
+
+.submit-button {
+    padding: 1rem 4rem;
+    border-radius: 50px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(0.25turn, #FF4D00, #FC7900);
+    border: none;
+}
+
+.cancel-button {
+    padding: 1rem 4rem;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #FF4D00;
+    background: white;
+    border: 1px solid #FF4D00;
+    margin-right: 1rem;
+}

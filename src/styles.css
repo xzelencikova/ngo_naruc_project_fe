@@ -16,3 +16,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-step-header {
     background-color: transparent !important;
 }
+
+.mat-mdc-snack-bar-container {
+    --mdc-snackbar-container-color: lightgreen !important;
+    --mdc-snackbar-supporting-text-color: green !important;
+    --mat-snack-bar-button-color: green !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+    border-radius: 80px !important;
+    padding: 2rem 5rem !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__title {
+    color: #929090 !important;
+    text-align: center !important;
+    font-size: 40px !important;
+    font-weight: bold !important;
+}
