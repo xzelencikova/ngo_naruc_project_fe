@@ -43,7 +43,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
           const bottomShown = rect?.bottom ? rect?.bottom <= window.innerHeight : undefined;
           if (topShown && bottomShown) this.currentStep = index;
         }
-      }, 1500);
+      }, 1000);
     // }
   }
 

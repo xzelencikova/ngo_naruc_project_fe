@@ -4,6 +4,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ClientModel } from 'src/app/models/client.model';
 import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class ClientsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(private clientService: ClientService) {
+  constructor(private clientService: ClientService, private router: Router) {
     this.dataSource = new MatTableDataSource<ClientModel>();
   }
 
@@ -31,7 +32,6 @@ export class ClientsTableComponent implements OnInit, AfterViewInit {
       this.dataSource = new MatTableDataSource<ClientModel>(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-
     })
   }
 
@@ -48,4 +48,8 @@ export class ClientsTableComponent implements OnInit, AfterViewInit {
     }
   }
 
+  showClientOverview(client: ClientModel) {
+    this.router.navigate(["/client-overview", client._id]);
+    this.clientService.selectedClient$.emit(client);
+  }
 }

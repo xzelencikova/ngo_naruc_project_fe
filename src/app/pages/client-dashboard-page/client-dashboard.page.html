@@ -1,0 +1,13 @@
+<div style="margin: 0 10%;">
+    <div class="overview-header">
+        <div>
+            <h1>Prehľad</h1>
+            <h1><b>{{ client.name }} {{ client.surname }}</b></h1>
+        </div>
+
+       <div>
+            <button role="button" class="questionnaire-button" (click)="loadQuestionnaire()">Vyplniť pozorovacie hárky</button>
+            <button role="button" class="download-button" (click)="downloadOverview() ">Stiahnuť prehľad</button>
+        </div>
+    </div>
+</div>

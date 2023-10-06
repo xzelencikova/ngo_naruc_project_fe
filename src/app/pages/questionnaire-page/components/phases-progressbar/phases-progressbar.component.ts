@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Phase } from 'src/app/models/phase.model';
 
 @Component({
@@ -13,7 +13,7 @@ export class PhasesProgressbarComponent {
     {name: "Aktivizačná fáza", id: 3}
   ];
 
-  phaseId: number = 1;
+  @Input() phaseId: number = 1;
 
 
 }
