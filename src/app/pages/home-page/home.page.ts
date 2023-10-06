@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -35,14 +36,12 @@ export class HomePage{
 
 
   constructor(
-
+    private router: Router
   ){}
+  
 
-
-
-
-
-
-
+  navigateClientsList(): void {
+    this.router.navigate(['/clients-list'])
+  }
 
 }
