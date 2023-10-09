@@ -1,0 +1,141 @@
+.page-content-white{
+    display: block;
+    position: inherit;
+    text-align: center;
+    /* padding-top: 23%; */
+}
+
+.welcome{
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.input-position{
+    margin: auto;
+    width: 85%;
+}
+
+.input-position> input{
+    border-radius: 80px;
+    height: 56.6px;
+}
+
+
+input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    /* Email */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #929090;
+}
+
+.label-position{
+    padding-left: 11%;
+    padding-bottom: 1%;
+}
+
+.label-position> label{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #929090;
+}
+
+.form-group{
+    width: 100%;
+}
+
+.btn-orange-form{
+
+    width: 399.03px;
+    height: 73px;
+    
+    /* Button Shadow */
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+
+    /* Button */
+    background: linear-gradient(87.91deg, #FF5800 0.65%, #FF8B00 100%);
+    border-radius: 50px;
+
+    /* font-family: 'Inter'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+}
+
+.btn-orange-form:hover {
+
+    width: 399.03px;
+    height: 73px;
+    
+    /* Button shadow */
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+
+    /* Button */
+    background: linear-gradient(90deg, #bcbcbc 0%, #bcbcbc 99.99%);
+    border-radius: 50px;
+
+    /* font-family: 'Inter'; */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: uppercase;
+
+    color: #FF4D00;
+}
+
+.form{
+    padding-top: 7.5vh;
+}
+
+.button-position{
+    text-align: center;
+}
+
+.spacer2{
+    padding-top: 3%;
+}
+
+.spacer3{
+    padding-top: 15vh;
+}
+
+.bottom-description-position{
+    text-align: center;
+    padding-top: 5vh;
+}
+
+.bottom-description{
+    /* Nepamätáš si heslo? Klikni sem a pošleme ti nové na email. */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #929090;
+}
+
+.btn-reset{
+font-style: normal;
+font-weight: 400;
+font-size: 17.168px;
+line-height: 21px;
+/* identical to box height */
+text-decoration-line: underline;
+
+color: #929292;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0rem;
+}
