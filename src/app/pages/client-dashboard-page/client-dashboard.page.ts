@@ -4,11 +4,11 @@ import { ClientModel } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/services/client.service';
 
 @Component({
-  selector: 'app-questionnaire-page',
-  templateUrl: './questionnaire.page.html',
-  styleUrls: ['./questionnaire.page.css']
+  selector: 'app-client-dashboard-page',
+  templateUrl: './client-dashboard.page.html',
+  styleUrls: ['./client-dashboard.page.css']
 })
-export class QuestionnairePage {
+export class ClientDashboardPage {
   public client: ClientModel = {_id: "", name: "", surname: "", last_phase: 1, registration_date: new Date(), active: true};
 
   constructor(private router: Router, private clientService: ClientService) {
@@ -21,4 +21,13 @@ export class QuestionnairePage {
   ngOnInit() {
     this.client = this.clientService.getSelectedClient();
   }
+
+  loadQuestionnaire() {
+    this.router.navigate(["questionnaire"]);
+  }
+
+  downloadOverview() {
+    console.log("Stiahnuť prehľad");
+  }
+
 }

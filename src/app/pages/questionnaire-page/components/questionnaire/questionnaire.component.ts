@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewChildren, QueryList, ElementRef, HostListener } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewChildren, QueryList, ElementRef, HostListener, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { QuestionnaireCategoryModel } from 'src/app/models/questionnaire-category.model';
 import { QuestionnaireService } from 'src/app/services/questionnaire.service';
@@ -16,6 +16,7 @@ import { ModalWindowComponent } from './components/modal-window/modal-window.com
 import { MatDialog } from '@angular/material/dialog';
 
 import { Router } from '@angular/router';
+import { ClientModel } from 'src/app/models/client.model';
 
 @Component({
   selector: 'app-questionnaire',
@@ -30,6 +31,8 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   questionnaire: QuestionnaireCategoryModel[] = [];
   currentStep: number = 0;
 
+  @Input() client: ClientModel | undefined;
+
   @ViewChild("stepper") private stepper!: MatStepper;
   @ViewChildren('shownCategory') titles!: QueryList<ElementRef>; // getting your sections here
 
@@ -43,7 +46,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
           const bottomShown = rect?.bottom ? rect?.bottom <= window.innerHeight : undefined;
           if (topShown && bottomShown) this.currentStep = index;
         }
-      }, 1500);
+      }, 1000);
     // }
   }
 
@@ -99,10 +102,12 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     let rating: RatingModel = {
       date_rated: new Date,
       rated_by_user_id: "80d71b90976f4933b42abc22d94510e6",
-      client_id: "client_id",
-      phase_no: 1,
+      client_id: this.client?._id ? this.client._id : "",
+      phase_no: this.client?.last_phase ? this.client.last_phase : 1,
       questions_rating: []
     }
+
+    this.client!.last_phase = this.client!.last_phase + 1;
 
     this.questionnaire.forEach(category => {
       category.questions.forEach(question => {
