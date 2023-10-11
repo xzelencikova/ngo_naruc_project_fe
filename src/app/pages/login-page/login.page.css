@@ -1,0 +1,81 @@
+html, body {
+    margin: 0;
+    height:100vh;
+}
+
+.wrapper{
+    display: flex;
+    margin: 0;
+    height:100vh;
+}
+
+.container-blue{
+    display:block;
+    height: 100%;
+    background-color: #F7FBFF;
+    width: 40%;
+}
+
+.container-white{
+    display:block;
+    height: 100%;
+    background-color: #FFFFFF;
+    width: 60%;
+}
+
+.page-content-logo{
+    display: block;
+    text-align: center;
+    padding-top: 11%;
+    height: 17%;
+}
+
+.page-content{
+    display: block;
+    position: inherit;
+    text-align: center;
+}
+
+.main-logo >img{
+    width: 22%;
+}
+
+
+.welcome{
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.description{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #5C5C5C;
+}
+
+.login-img{
+    position: inherit;
+    text-align: center;
+}
+
+.img-fluid {
+    max-width: 30vw;
+}
+
+
+.spacer{
+    padding-top: 8vh;
+}
+
+
+.login-form{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+
+
+
+
