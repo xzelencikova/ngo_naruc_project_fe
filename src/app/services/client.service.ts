@@ -25,6 +25,10 @@ export class ClientService {
     return this.http.get<ClientModel[]>(`${this.baseUrl}/ngo/client/show_clients`);
   }
 
+  editClient(client: ClientModel): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/ngo/client/update_client/${client._id}`, client);
+  }
+
   getSelectedClient(): ClientModel {
     return this.client;
   }

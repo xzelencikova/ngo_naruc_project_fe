@@ -4,11 +4,11 @@
             <h1 class="title"><b>úspešne odoslaný!</b></h1>
         </div>
         <div class="sent-card__body">
-            <p>Fáza č. X pre klienta Leonóra Amaretto bola ukončená.</p>
+            <p>Fáza č. {{client!.last_phase - 1}} pre klienta {{client?.name}} {{client?.surname}} bola ukončená.</p>
             <p>Pozorovacie hárky môžete znova vidieť a upraviť v histórií pozorovacích hárkov klienta.</p>
         </div>
         <div class="sent-card__footer">
-            <button role="button" class="overview-button">Prehľad klienta</button>
-            <button role="button" class="download-button"><i class="fa fa-solid fa-download"></i> Stiahnuť pozorovací hárok</button>
+            <button role="button" class="overview-button" (click)="showClient()"><i class="fa fa-xl fa-solid fa-chart-line"></i> &nbsp;&nbsp;Prehľad klienta</button>
+            <button role="button" class="download-button"><i class="fa fa-xl fa-solid fa-download"></i>&nbsp;&nbsp;Stiahnuť pozorovací hárok</button>
         </div>
 </div>

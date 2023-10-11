@@ -17,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Router } from '@angular/router';
 import { ClientModel } from 'src/app/models/client.model';
+import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-questionnaire',
@@ -46,14 +47,15 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
           const bottomShown = rect?.bottom ? rect?.bottom <= window.innerHeight : undefined;
           if (topShown && bottomShown) this.currentStep = index;
         }
-      }, 1000);
+      }, 1500);
     // }
   }
 
   constructor(private questionnaireService: QuestionnaireService, 
     private fb: FormBuilder, 
     library: FaIconLibrary, 
-    private ratingService: RatingService, 
+    private ratingService: RatingService,
+    private clientService: ClientService, 
     private saveMessageBar: MatSnackBar, 
     private dialog: MatDialog, 
     private router: Router) {
@@ -90,15 +92,17 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   ngOnDestroy(): void {}
 
   openSaveMessage() {
-    this.saveMessageBar.open('Pozorovací hárok bol úspešne uložený!', 'X', {
-      horizontalPosition: "end",
-      verticalPosition: "bottom",
-    });
 
-    this.saveFormData();
+    const sent = this.saveFormData();
+    
+    if (sent)
+      this.saveMessageBar.open('Pozorovací hárok bol úspešne uložený!', 'X', {
+        horizontalPosition: "end",
+        verticalPosition: "bottom",
+      });
   }
 
-  saveFormData() {
+  saveFormData(): boolean {
     let rating: RatingModel = {
       date_rated: new Date,
       rated_by_user_id: "80d71b90976f4933b42abc22d94510e6",
@@ -107,7 +111,10 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
       questions_rating: []
     }
 
-    this.client!.last_phase = this.client!.last_phase + 1;
+    if (this.client!.last_phase < 3)
+      this.client!.last_phase = this.client!.last_phase + 1;
+    else this.client!.active = false;
+
 
     this.questionnaire.forEach(category => {
       category.questions.forEach(question => {
@@ -120,8 +127,29 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
         })
       })
     })
+
+    this.clientService.editClient(this.client!).subscribe({
+      next: success => {},
+      error: err => {
+        this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
+          horizontalPosition: "end",
+          verticalPosition: "bottom",
+        });
+        return false;
+      }
+    });
     
-    this.subscription2 = this.ratingService.postRating(rating).subscribe(rating => {});
+    this.subscription2 = this.ratingService.postRating(rating).subscribe({
+      next: success => {},
+      error: err => {
+        this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
+          horizontalPosition: "end",
+          verticalPosition: "bottom",
+        });
+        return false;
+      }
+    });
+    return true;
   }
 
   onSubmit(): void {
@@ -129,9 +157,9 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.saveFormData();
-        this.router.navigate(['/questionnaire-sent'])
-        // redirect na finalizáciu dotazníka
+        const sent = this.saveFormData();
+        if (sent)
+          this.router.navigate(['/questionnaire-sent'])
       }
     });
   }
