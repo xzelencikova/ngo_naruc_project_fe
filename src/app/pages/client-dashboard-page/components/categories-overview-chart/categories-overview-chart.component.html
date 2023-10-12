@@ -1,0 +1,69 @@
+
+<div class="row col-md-12">
+  <div class="col-md-8">
+    <ngx-charts-bar-horizontal-2d
+      scheme="flame"
+      [results]="ratingOverview.bar_overview"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [trimYAxisTicks]="false"
+      [xScaleMax]=100
+      [legend]="showLegend"
+      legendTitle=""
+      [legendPosition]="legendPosition"
+      [showXAxisLabel]="false"
+      [showYAxisLabel]="false"
+      [barPadding]=20
+      [groupPadding]=50
+    >
+    </ngx-charts-bar-horizontal-2d>
+  </div>
+  <div class="col-md-3">
+    <div>
+      <ngx-charts-pie-chart
+        [view]="[390, 200]"
+        scheme="flame"
+        [results]="ratingOverview.pie_1"
+        [gradient]="gradient"
+        [legend]="showLegend"
+        legendTitle="Fáza 1"
+        [legendPosition]="legendPosition"
+        [doughnut]="true"
+        [trimLabels]="false"
+        [arcWidth]=0.45
+        >
+      </ngx-charts-pie-chart>
+    </div>
+
+    <div>
+      <ngx-charts-pie-chart
+        [view]="[390, 200]"
+        scheme="flame"
+        [results]="ratingOverview.pie_1"
+        [gradient]="gradient"
+        [legend]="showLegend"
+        legendTitle="Fáza 2"
+        [legendPosition]="legendPosition"
+        [doughnut]="true"
+        [arcWidth]=0.45
+        >
+      </ngx-charts-pie-chart>
+    </div>
+
+    <div>
+      <ngx-charts-pie-chart
+        [view]="[390, 200]"
+        scheme="flame"
+        [results]="ratingOverview.pie_1"
+        [gradient]="gradient"
+        [legend]="showLegend"
+        legendTitle="Fáza 3"
+        [legendPosition]="legendPosition"
+        [doughnut]="true"
+        [arcWidth]=0.45
+        >
+      </ngx-charts-pie-chart>
+    </div>
+  </div>
+</div>

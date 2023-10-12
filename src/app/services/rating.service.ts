@@ -21,4 +21,8 @@ export class RatingService {
         catchError(this.errorHandlerService.handleError)
       );
   }
+
+  getRatingOverviewForClient(clientId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/ngo/rating_overview/${clientId}`);
+  }
 }

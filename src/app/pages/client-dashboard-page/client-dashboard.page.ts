@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClientModel } from 'src/app/models/client.model';
+import { RatingModel } from 'src/app/models/rating.model';
 import { ClientService } from 'src/app/services/client.service';
+import { RatingService } from 'src/app/services/rating.service';
 
 @Component({
   selector: 'app-client-dashboard-page',
@@ -10,16 +12,35 @@ import { ClientService } from 'src/app/services/client.service';
 })
 export class ClientDashboardPage {
   public client: ClientModel = {_id: "", name: "", surname: "", last_phase: 1, registration_date: new Date(), active: true};
+  ratingOverview: any[] = []
 
-  constructor(private router: Router, private clientService: ClientService) {
-    // this.clientService.selectedClient$.subscribe(value => {
-    //   this.clientName = `${value.name} ${value.surname}`;
-    //   this.client = value;
-    // });
+  constructor(private router: Router, private clientService: ClientService, private ratingService: RatingService, private activatedRoute: ActivatedRoute) {
+    this.client = this.clientService.getSelectedClient();
+
+    if (this.client._id === "") {
+      const client_id = this.activatedRoute.snapshot.paramMap.get('id');
+      
+      this.clientService.getClientById(client_id!).subscribe(res => {
+        this.client = res;
+
+        this.clientService.selectedClient$.emit(res);
+        
+        this.ratingService.getRatingOverviewForClient(this.client?._id ? this.client._id : "").subscribe(ratingList => {
+          this.ratingOverview = ratingList;
+          console.log(ratingList);
+        });
+      })
+    }
+    else {
+      this.ratingService.getRatingOverviewForClient(this.client?._id ? this.client._id : "").subscribe(ratingList => {
+        this.ratingOverview = ratingList;
+        console.log(ratingList);
+      });
+    }
   }
 
   ngOnInit() {
-    this.client = this.clientService.getSelectedClient();
+    
   }
 
   loadQuestionnaire() {
