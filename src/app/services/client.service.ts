@@ -36,4 +36,9 @@ export class ClientService {
   getClientById(client_id: string): Observable<ClientModel> {
     return this.http.get<ClientModel>(`${this.baseUrl}/ngo/client/get_client_info/${client_id}`);
   }
+
+  postNewClient(body: ClientModel): Observable<ClientModel[]> {
+    console.log(body);
+    return this.http.post<ClientModel[]>(`${this.baseUrl}/ngo/client/add_new_client`, body);
+  }
 }
