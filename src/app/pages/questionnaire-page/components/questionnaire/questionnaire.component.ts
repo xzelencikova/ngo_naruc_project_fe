@@ -107,7 +107,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
       date_rated: new Date,
       rated_by_user_id: "80d71b90976f4933b42abc22d94510e6",
       client_id: this.client?._id ? this.client._id : "",
-      phase_no: this.client?.last_phase ? this.client.last_phase : 1,
+      phase_no: this.client?.last_phase ? this.client.last_phase + 1 : 1,
       questions_rating: []
     }
 

@@ -32,4 +32,8 @@ export class ClientService {
   getSelectedClient(): ClientModel {
     return this.client;
   }
+
+  getClientById(client_id: string): Observable<ClientModel> {
+    return this.http.get<ClientModel>(`${this.baseUrl}/ngo/client/get_client_info/${client_id}`);
+  }
 }

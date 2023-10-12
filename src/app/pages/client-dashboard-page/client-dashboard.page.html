@@ -6,8 +6,14 @@
         </div>
 
        <div>
-            <button role="button" class="questionnaire-button" (click)="loadQuestionnaire()">Vyplniť pozorovacie hárky</button>
+            <ng-template [ngIf]="client.last_phase < 3">
+                <button role="button" class="questionnaire-button" (click)="loadQuestionnaire()">Vyplniť pozorovacie hárky</button>
+            </ng-template>
             <button role="button" class="download-button" (click)="downloadOverview() ">Stiahnuť prehľad</button>
         </div>
+    </div>
+
+    <div style="padding-top: 1.5rem;">
+        <app-categories-overview-chart [ratingOverview]="ratingOverview"></app-categories-overview-chart>
     </div>
 </div>

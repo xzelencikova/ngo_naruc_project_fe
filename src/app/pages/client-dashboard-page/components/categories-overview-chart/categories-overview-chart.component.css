@@ -1,0 +1,37 @@
+.demo-chart {
+    height: 400px;
+  }
+
+:host ::ng-deep .ngx-charts .grid-panel.odd rect {
+    fill: white !important;
+}
+
+:host ::ng-deep .chart-legend .legend-labels {
+  background: none !important;
+}
+
+/* Makes the chart container expand to the full width of the parent container*/
+/* :host ::ng-deep .ngx-charts-outer {
+  width: 100% !important;
+} */
+
+/* Sets the legend width to auto expand to fit labels, but caps at 200px */
+:host ::ng-deep .chart-legend {
+  width: auto !important;
+  /* max-width: 200px; */
+}
+
+/* Some extra space is needed to offset the way the labels display */
+.legend-labels {
+  width: calc(100% + 10px) !important;
+}
+
+/* Wrap the label text if it ends up being longer than the max width */
+/* :host ::ng-deep .legend-label-text {
+  white-space: normal !important;
+  width: 100% !important;
+} */
+
+:host ::ng-deep .chart-legend .legend-labels {
+  width: auto;
+}
