@@ -1,1 +1,36 @@
-<p>questions-overview-chart works!</p>
+<div class="row col-md-12">
+    <a (click)="backToOverview.emit(true)"><i class="fa fa-chevron-left fa-lg fa-light"></i> Späť na dashboard</a>
+    <div class="col-md-3"></div>
+    <div class="col-md-9 rating-icons-layout">
+        <fa-icon [icon]="['fas', 'face-frown']" class="rating-icon rating-icon--red"></fa-icon>
+        <fa-icon [icon]="['fas', 'face-meh']" class="rating-icon rating-icon--yellow"></fa-icon>
+        <fa-icon [icon]="['fas', 'face-smile']" class="rating-icon rating-icon--green"></fa-icon>
+    </div>
+    <ng-template ngFor let-question [ngForOf]="ratingCategory" let-i="index">
+        <div class="col-md-3" style="margin:auto">
+            <p>{{ question.name }}</p>
+        </div>
+        <div class="col-md-9">
+            <div class="chart-wrapper">
+                <ngx-charts-bar-horizontal-2d
+                    [customColors]="customColors[i].series"
+                    [results]="[question]"
+                    [gradient]="false"
+                    [xAxis]="showXAxis"
+                    [yAxis]="false"
+                    [trimYAxisTicks]="true"
+                    [maxYAxisTickLength]="50"
+                    [maxXAxisTickLength]="0"
+                    [xScaleMax]=3
+                    [legend]="false"
+                    [showXAxisLabel]="false"
+                    [showYAxisLabel]="false"
+                    [barPadding]=20
+                    [groupPadding]=0
+                    [xAxisTicks]="[0, 1, 2, 3]"
+                >
+                </ngx-charts-bar-horizontal-2d>
+            </div>
+        </div>
+    </ng-template>
+</div>

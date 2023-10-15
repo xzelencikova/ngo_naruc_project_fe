@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Color, LegendPosition, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { RatingModel } from 'src/app/models/rating.model';
+import { Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -15,6 +16,8 @@ export class CategoriesOverviewChartComponent {
     "pie_2": [],
     "pie_3": []
   };
+  @Input() isOverview: boolean = true;
+  @Output() selectedCategory = new EventEmitter<string>();
 
   view: number[] = [800, 400];
 
@@ -31,10 +34,23 @@ export class CategoriesOverviewChartComponent {
     group: ScaleType.Ordinal,
     domain: ["horizon"] // ['#1E19FF', '#1E19FF', '#1E19FF']
   };
-  schemeType: string = 'linear';
+  schemeType = ScaleType.Linear;
 
   constructor() {
   }
 
+  onSelect(data: any): void {
+    let category = JSON.parse(JSON.stringify(data));
+
+    if (category?.series) this.selectedCategory.emit(category?.series);
+    else if (category?.name) this.selectedCategory.emit(category?.name);
+    else this.selectedCategory.emit(category);
+
+    this.isOverview = false;
+  }
+
+  formatPercent(val: number) {
+      return val + '%';
+  } 
 
 }
