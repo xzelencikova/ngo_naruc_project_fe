@@ -1,9 +1,19 @@
 <div style="margin: 0 10%;">
     <div class="overview-header">
         <div>
-            <h1>Prehľad</h1>
+            <div *ngIf="isOverview; else notOverview">
+                <h1>Prehľad</h1>
+            </div>
+            <ng-template #notOverview>
+                <h1>{{category}}</h1>
+            </ng-template>
             <h1><b>{{ client.name }} {{ client.surname }}</b></h1>
         </div>
+        <!-- </div>
+        <ng-template #notOverview>
+            <h1>{{category}}</h1>
+            <h1><b>{{ client.name }} {{ client.surname }}</b></h1>
+        </ng-template> -->
 
        <div>
             <ng-template [ngIf]="client.last_phase < 3">
@@ -12,8 +22,15 @@
             <button role="button" class="download-button" (click)="downloadOverview() ">Stiahnuť prehľad</button>
         </div>
     </div>
-
-    <div style="padding-top: 1.5rem;">
-        <app-categories-overview-chart [ratingOverview]="ratingOverview"></app-categories-overview-chart>
+    
+    <div *ngIf="isOverview; else categoryChart">
+        <div style="padding-top: 1.5rem;">
+            <app-categories-overview-chart [ratingOverview]="ratingOverview" (selectedCategory)="getCategoryRating($event)"></app-categories-overview-chart>
+        </div>
     </div>
+    <ng-template #categoryChart>
+        <div style="padding-top: 1.5rem;">
+            <app-questions-overview-chart [ratingCategory]="ratingCategory" [customColors]="customColors" (backToOverview)="setOverview($event)"></app-questions-overview-chart>
+        </div>
+    </ng-template>
 </div>

@@ -16,6 +16,9 @@
       [showYAxisLabel]="false"
       [barPadding]=20
       [groupPadding]=50
+      [xAxisTickFormatting]='formatPercent'
+      (select)="onSelect($event)"
+      [showDataLabel]="true"
     >
     </ngx-charts-bar-horizontal-2d>
   </div>
@@ -32,6 +35,7 @@
         [doughnut]="true"
         [trimLabels]="false"
         [arcWidth]=0.45
+        (select)="onSelect($event)"
         >
       </ngx-charts-pie-chart>
     </div>
@@ -47,11 +51,12 @@
         [legendPosition]="legendPosition"
         [doughnut]="true"
         [arcWidth]=0.45
+        (select)="onSelect($event)"
         >
       </ngx-charts-pie-chart>
     </div>
 
-    <div>
+    <div width="100%">
       <ngx-charts-pie-chart
         [view]="[390, 200]"
         scheme="flame"
@@ -62,6 +67,7 @@
         [legendPosition]="legendPosition"
         [doughnut]="true"
         [arcWidth]=0.45
+        (select)="onSelect($event)"
         >
       </ngx-charts-pie-chart>
     </div>

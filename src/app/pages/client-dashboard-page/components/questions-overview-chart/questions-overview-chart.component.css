@@ -1,0 +1,40 @@
+:host ::ng-deep .ngx-charts .grid-panel.odd rect {
+    fill: white !important;
+}
+
+.chart-wrapper {
+    height: 100px;
+    width: 100%;
+}
+
+:host ::ng-deep .ngx-charts text { 
+    fill: #fff; 
+}
+
+.rating-icon {
+    font-size: 40px;
+}
+
+.rating-icon--green {
+    color: #189D5F;
+}
+
+.rating-icon--yellow {
+    color: #FF9A65;
+}
+
+.rating-icon--red {
+    color: #FF5800;
+}
+
+.rating-icons-layout {
+    display: flex;
+    justify-content: space-around;
+    padding: 1.5rem 0;
+}
+
+a {
+    color: #929090;
+    text-decoration: none;
+    cursor: pointer;
+}
