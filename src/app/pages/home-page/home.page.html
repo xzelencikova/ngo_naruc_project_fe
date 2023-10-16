@@ -1,72 +1,79 @@
+
+<!-- <div class="container-white" id="container-white"> -->
 <div class="wrapper">
-
-    <div class="container-white" id="container-white">
-
+    <div class="row col-md-12">
         <div class="page-content">
-
-            <div class="main-text">
-                <h1 class="font-weight-normal welcome">Vitaj</h1>
-                <h1 class="font-weight-bold name">Leonóra!</h1>
-            </div>
-
-
             <div class="main-description">
-                <p id="description">Začni cestu vytvorením nového klienta. Po vytvorení možeš 
-                    hned začať vypĺňať dotazník a vydať sa na cestu 
-                    spolu s klientom.
-                </p> 
+                <div>
+                    <h1 class="font-weight-normal welcome">Vitaj</h1>
+                    <h1 class="font-weight-bold name">Leonóra!</h1>
+                </div>
+                    
+                <div>    
+                    <p>
+                        Začni cestu vytvorením nového klienta. Po vytvorení možeš 
+                        hned začať vypĺňať dotazník a vydať sa na cestu 
+                        spolu s klientom.
+                    </p> 
+                </div>
+                
+                <div>
+                    <button class="btn btn-orange" type="button" (click) = "openForm()">
+                        Vytvoriť nového klienta
+                    </button>
+                </div>
             </div>
 
-
-            <div class="main-button">
-                <button class="btn btn-orange" type="submit" (click) = "openForm()">
-                    Vytvoriť nového klienta
-                </button>
+            <div>
+                <img src="/assets/images/data_boy.svg"  class="img-fluid" alt="Responsive image">
             </div>
         </div>
-
-        <img src="/assets/images/data_boy.svg"  class="img-fluid" alt="Responsive image">
-    </div>
-
-</div>
-
-
-<div class="wrapper">
-
-    <div class="container-blue" id="container-blue">
-
-
-        <div class="main-text2">
-            <h1 class="font-weight-normal welcome">Vyplniť</h1>
-            <h1 class="font-weight-bold name">pozorovacie hárky</h1>
-        </div>
-
-
-        <div class="main-description2">
-            <p id="description">Nájdi v zozname osobu, pre ktorú chceš vyplniť 
-                pozorovacie hárky a klikni na Zobraziť detaily. 
-                Budeš presmerovaný na dashboard klienta, kde si možeš pozrieť 
-                grafické výsledky, vyplniť pozorovacie hárky a vytlačiť 
-                všetky dokumenty.
-            </p> 
-        </div>
-
-        <div class="main-button2">
-            <button class="btn btn-orange" type="submit">
-                Zoznam Klientov
-            </button>
-        </div>
-
-
-
-        <img src="/assets/images/data_boy2.svg"  class="img-fluid" alt="Responsive image">
-
     </div>
 </div>
 
-<div class="footer">
+    <!-- </div> -->
+
+
+
+
+    <div class="container-blue">
+        <div class="wrapper">
+            <div class="row col-md-12">
+                <div class="page-content">
+                    <div>
+                        <img src="/assets/images/data_boy2.svg" class="img-fluid" alt="Responsive image">
+                    </div>
+
+                    <div class="main-description">
+                        <div>
+                            <h1 class="font-weight-normal welcome">Vyplniť</h1>
+                            <h1 class="font-weight-bold name">pozorovacie hárky</h1>
+                        </div>
+
+
+                        <div>
+                            <p>Nájdi v zozname osobu, pre ktorú chceš vyplniť 
+                                pozorovacie hárky a klikni na Zobraziť detaily. 
+                                Budeš presmerovaný na dashboard klienta, kde si možeš pozrieť 
+                                grafické výsledky, vyplniť pozorovacie hárky a vytlačiť 
+                                všetky dokumenty.
+                            </p> 
+                        </div>
+
+                        <div>
+                            <button class="btn btn-orange" type="button" (click)="navigateClientsList()">
+                                Zoznam Klientov
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- <div class="footer">
     <p>Created by Dell Technologies</p>
- </div> 
+ </div>  -->
 
 <!-- NEW CLIENT FORM -->
 
