@@ -1,0 +1,66 @@
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+
+<div class = "headline" style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+        <h1>Zoznam</h1>
+        <h1><b>zamestnancov</b></h1>
+    </div>
+    <div>
+        <app-add-new-user></app-add-new-user>
+    </div>
+</div>
+
+
+
+  
+<table mat-table [dataSource]="dataSource" class="user-table" matSort>
+
+    <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Meno</th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="surname">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Priezvisko</th>
+    <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Rola</th>
+    <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Upraviť</th>
+        <td mat-cell *matCellDef="let element">
+            <button role="button" class="edit-button">
+                <img src="/assets/images/edit.png"  class="img-fluid" alt="Responsive image">
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>Vymazať</th>
+        <td mat-cell *matCellDef="let element">
+            <button role="button" class="delete-button">
+                <img src="/assets/images/delete.png"  class="img-fluid" alt="Responsive image">
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator #paginator 
+            [pageSize]="5"
+            [hidePageSize]="true"
+            showFirstLastButtons
+            aria-label="">
+</mat-paginator>

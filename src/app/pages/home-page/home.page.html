@@ -60,7 +60,7 @@
                             </p> 
                         </div>
 
-                        <div>
+                        <div class="clients-list">
                             <button class="btn btn-orange" type="button" (click)="navigateClientsList()">
                                 Zoznam Klientov
                             </button>
@@ -81,23 +81,32 @@
     <div class="modal" tabindex="-1" role="dialog" id="form-new-client">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="main-text-form">
-                    <h1 class="font-weight-normal welcome">Vytvoriť</h1>
-                    <h1 class="font-weight-bold name">nového klienta</h1>
-                </div>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeForm()">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <div class="main-description-form">
-                    <p class="description-form">
-                        Vyplň formulár, my pre teba všetko pripravíme aby si mohol rovno vypĺňať pozorovací hárok !
-                    </p> 
+
+                <div class="row">
+
+                    <div class="col-md-5 form-col">
+                        <img src="/assets/images/data_form.svg"  class="img-fluid form-img" alt="Responsive image">
+                    </div>
+
+                    <div class="col-md-7 form-col2">
+
+                        <div>
+                            <h1 class="font-weight-normal welcome">Vytvoriť</h1>
+                            <h1 class="font-weight-bold name">nového klienta</h1>
+                        </div>
+                        
+                        <div class="main-description-form">
+                            <p class="description-form">
+                                Vyplň formulár, my pre teba všetko pripravíme aby si mohol rovno vypĺňať pozorovací hárok !
+                            </p> 
+                        </div>
+                    </div>
                 </div>
-
-                <img src="/assets/images/data_form.svg"  class="img-fluid" alt="Responsive image">
-
                 <hr/>
-
                 <div class="modal-form-body">
                     <app-new-client-form></app-new-client-form>
                 </div>
