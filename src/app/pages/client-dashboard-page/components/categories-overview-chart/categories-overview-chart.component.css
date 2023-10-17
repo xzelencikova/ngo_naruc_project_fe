@@ -35,3 +35,13 @@
 :host ::ng-deep .chart-legend .legend-labels {
   width: auto;
 }
+
+p {
+  font-size: 16px;
+  color: #5c5c5c;
+}
+
+:host ::ng-deep .ngx-charts text { 
+  fill: #5c5c5c;
+  font-size: 16px; 
+}

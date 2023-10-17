@@ -1,5 +1,5 @@
 <div class="row col-md-12">
-    <a (click)="backToOverview.emit(true)"><i class="fa fa-chevron-left fa-lg fa-light"></i> Späť na dashboard</a>
+    <a (click)="backToOverview.emit(true)"><i class="fa fa-chevron-left fa-lg fa-light"></i> Späť na prehľad</a>
     <div class="col-md-3"></div>
     <div class="col-md-9 rating-icons-layout">
         <fa-icon [icon]="['fas', 'face-frown']" class="rating-icon rating-icon--red"></fa-icon>
@@ -20,7 +20,7 @@
                     [yAxis]="false"
                     [trimYAxisTicks]="true"
                     [maxYAxisTickLength]="50"
-                    [maxXAxisTickLength]="0"
+                    [maxXAxisTickLength]="5"
                     [xScaleMax]=3
                     [legend]="false"
                     [showXAxisLabel]="false"
