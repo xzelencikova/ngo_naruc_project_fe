@@ -1,0 +1,37 @@
+.btn-orange{
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.1));
+    width: 12.5rem;
+    height: 2.5rem;
+
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border-radius: 50px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    border: 0.3px solid #D40045;
+    color: #FF5800;
+
+}
+
+.btn-orange:hover {
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.1));
+    box-sizing: border-box;
+    background: linear-gradient(88.1deg, #FF5800 0%, #FF8B00 100%);
+    border-radius: 50px;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+
+    color: #FFFFFF;
+
+}
+
+
+
+

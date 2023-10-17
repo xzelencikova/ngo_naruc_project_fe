@@ -25,14 +25,7 @@
     background: linear-gradient(88deg, #D44900 -0.01%, #FF6C1D 100.02%);
 }
 
-.main-text{
-    position: absolute;
-    top:25%;
-    /* left:9%; */
-}
-
 .welcome{
-    /* Vitaj Leonóra! */
     font-style: normal;
     font-weight: 400;
     font-size: 48px;
@@ -40,8 +33,7 @@
     padding-bottom: 0.5rem;
 
     color: #000000;
-
-}
+} 
 
 @media screen and (max-width: 600px) {
     .welcome {
@@ -80,25 +72,6 @@ p {
     width: 30%;
 }
 
-#description{
-
-    overflow-wrap: break-word;  
-    word-wrap: break-word; 
-    word-break: break-word;
-
-    position: absolute;
-    width: 380px;
-    height: 67px;
-
-    /* font-family: 'Inter'; */
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-
-    color: #5C5C5C;
-}
-
 .container-blue{
     display:block;
     height: 100%;
@@ -106,33 +79,21 @@ p {
     background-color: #F7FBFF;
 }
 
-.modal{
-    position: absolute;
-    float: left;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
 .modal-dialog{
-    width: 823px;
     max-width: 100%;
-    height: 747px;
-    max-height: 100%;
+    width: 90vh;
+    height: 90vh;
 }
 
 .modal-content {
-    position: absolute;
     box-sizing: border-box;
     background: #FFFFFF;
-    /* border: 1px solid #FF5800; */
     border-radius: 80px;
     overflow:hidden;
     text-align: center;
     pointer-events:all;
     width: 100%;
     height: 100%;
-   
 }
 
 .close {
@@ -150,67 +111,36 @@ p {
     right: 5%;
 }
 
-.main-text-form{
-    position: absolute;
-    top: 10%;
-    left:50%;
+.form-col{
+    padding-top:3%;
+    padding-left: 3%;
+}
+
+.form-col2{
+    padding-left: 6%;
+    padding-top:8%;
     text-align: left;
+}
+
+.form-img{
+    width: 85%;
 }
 
 .main-description-form{
-    position: absolute;
-    top: 30%;
-    left:50%;
-    text-align: left;
-}
-
-.description-form{
-    /* font-family: 'Inter'; */
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-
-    color: #5C5C5C;
-
-    overflow-wrap: break-word;  
-    word-wrap: break-word; 
-    word-break: break-word;
-    width: 340px;
-    height: 67px;
+    padding-top: 10%;
+    width: 80%;
 }
 
 .modal-form-body{
     width: 100%;
-    padding-left: 15%;
     padding-top: 4%;
     height: 50%;
-}
-
-.spacer{
-    padding-top: 5%;
 }
 
 hr{
     width:80%; 
     margin-left:10% !important; 
-    margin-top: 38% !important;
     border: 1px solid #5C5C5C;
-
-}
-
-.modal-body{
-    position: absolute;
-    top:42%;
-    left:30%;
-}
-
-.modal-content img{
-    display:block;
-    position:absolute;
-    top: 3%;
-    left: 10%;
-    max-width: 30%;
 }
 
 .overlay{
@@ -223,22 +153,3 @@ hr{
     display: none; /* making it hidden by default */
 }
 
-
-.footer{
-    width: 100%;
-    height: 28px;
-    position: absolute;
-    top: 189.5%; 
-    left: 0px; 
-    text-align: center; 
-}
-
-.footer p{
-    /* Created by Dell Technologies */
-    font-style: normal;
-    font-weight: 400;
-    font-size: 10px;
-    line-height: 12px;
-
-    color: #5C5C5C;
-}
