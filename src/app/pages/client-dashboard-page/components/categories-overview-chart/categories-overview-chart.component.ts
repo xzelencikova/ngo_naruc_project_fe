@@ -18,6 +18,7 @@ export class CategoriesOverviewChartComponent {
   };
   @Input() isOverview: boolean = true;
   @Output() selectedCategory = new EventEmitter<string>();
+  @Input() categoryColors: any[] = [];
 
   view: number[] = [800, 400];
 
@@ -32,7 +33,7 @@ export class CategoriesOverviewChartComponent {
     name: "myScheme",
     selectable: true,
     group: ScaleType.Ordinal,
-    domain: ["horizon"] // ['#1E19FF', '#1E19FF', '#1E19FF']
+    domain: ['#FFA539', '#FF4219', '#19BAFF', '#1E19FF', '#27CD9B'] // ['#1E19FF', '#1E19FF', '#1E19FF']
   };
   schemeType = ScaleType.Linear;
 

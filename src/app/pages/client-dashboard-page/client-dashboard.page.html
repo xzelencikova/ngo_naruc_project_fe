@@ -25,7 +25,7 @@
     
     <div *ngIf="isOverview; else categoryChart">
         <div style="padding-top: 1.5rem;">
-            <app-categories-overview-chart [ratingOverview]="ratingOverview" (selectedCategory)="getCategoryRating($event)"></app-categories-overview-chart>
+            <app-categories-overview-chart [ratingOverview]="ratingOverview" [categoryColors]="categoryColors" (selectedCategory)="getCategoryRating($event)"></app-categories-overview-chart>
         </div>
     </div>
     <ng-template #categoryChart>

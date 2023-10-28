@@ -41,7 +41,26 @@ p {
   color: #5c5c5c;
 }
 
+.xaxis {
+  font-size: 12px;
+  color: #5c5c5c;
+  max-width: 2rem;
+  padding: 0;
+}
+
+.yaxis {
+  font-size: 10px;
+  color: #5c5c5c;
+  max-width: 1rem;
+  padding: 0;
+}
+
 :host ::ng-deep .ngx-charts text { 
-  fill: #5c5c5c;
+  fill: #fff;
   font-size: 16px; 
+}
+
+.chart-wrapper {
+  height: 110px;
+  width: 100%;
 }

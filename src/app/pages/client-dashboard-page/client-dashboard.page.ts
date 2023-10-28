@@ -19,6 +19,8 @@ export class ClientDashboardPage {
   customColors: any[] = [];
   isOverview: boolean = true;
   category: string = "";
+  colors: string[] = ['FFA539', 'FF4219', '19BAFF', '1E19FF', '27CD9B'];
+  categoryColors: any[] = [];
 
   colorScheme: Color = {
     name: "myScheme",
@@ -41,6 +43,16 @@ export class ClientDashboardPage {
 
     this.ratingService.getRatingOverviewForClient(this.client?._id ? this.client._id : client_id!).subscribe(overview => {
       this.ratingOverview = overview;
+      console.log(overview);
+      this.categoryColors = JSON.parse(JSON.stringify(overview.bar_overview));
+
+      for (let index = 0; index < this.categoryColors.length; index++) {
+        this.categoryColors[index].series[0].value = `#${this.colors[index]}80`;
+        this.categoryColors[index].series[1].value = `#${this.colors[index]}BF`;
+        this.categoryColors[index].series[2].value = `#${this.colors[index]}FF`;
+      }
+      console.log(this.categoryColors);
+
     });
     this.ratingService.getRatingsByClientId(this.client?._id ? this.client._id : client_id!).subscribe(ratingsList => {
       this.ratings = ratingsList;

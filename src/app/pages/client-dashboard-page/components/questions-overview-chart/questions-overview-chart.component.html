@@ -7,9 +7,14 @@
         <fa-icon [icon]="['fas', 'face-smile']" class="rating-icon rating-icon--green"></fa-icon>
     </div>
     <ng-template ngFor let-question [ngForOf]="ratingCategory" let-i="index">
-        <div class="col-md-3" style="margin:auto">
+        <div class="col-md-2" style="margin:auto">
             <p>{{ question.name }}</p>
         </div>
+        <div class="col-md-1" style="text-align: -webkit-right;">
+            <p class="yaxis">1</p>
+            <p class="yaxis">2</p>
+            <p class="yaxis">3</p>
+          </div>
         <div class="col-md-9">
             <div class="chart-wrapper">
                 <ngx-charts-bar-horizontal-2d

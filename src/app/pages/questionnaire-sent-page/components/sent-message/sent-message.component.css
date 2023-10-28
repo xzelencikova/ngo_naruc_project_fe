@@ -34,3 +34,12 @@
     border: 1px solid #FF4D00;
     margin-right: 1rem;
 }
+
+.overview-button:hover {
+    background: linear-gradient(90deg, #FF4D00 0%, #FC7900 99.99%);
+    color: white;
+}
+
+.download-button:hover {
+    background: linear-gradient(88deg, #D44900 -0.01%, #FF6C1D 100.02%);
+}
