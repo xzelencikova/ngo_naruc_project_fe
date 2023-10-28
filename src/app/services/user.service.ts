@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user.model';
+import { data } from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,10 @@ export class UserService {
 
   getUserList(): Observable<UserModel[]> {
     return this.http.get<UserModel[]>(`${this.baseUrl}/ngo/user/show_users`);
+  }
+
+  loginUser(data: UserModel): Observable<UserModel> {
+    return this.http.post<UserModel>(`${this.baseUrl}/ngo/user/login`, data);
   }
 
 //   editClient(client: ClientModel): Observable<any> {
