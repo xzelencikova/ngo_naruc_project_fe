@@ -41,9 +41,10 @@ export class CategoriesOverviewChartComponent {
   }
 
   onSelect(data: any): void {
+    console.log(data);
     let category = JSON.parse(JSON.stringify(data));
 
-    if (category?.series) this.selectedCategory.emit(category?.series);
+    if (category?.series && typeof category.series === "string") this.selectedCategory.emit(category?.series);
     else if (category?.name) this.selectedCategory.emit(category?.name);
     else this.selectedCategory.emit(category);
 

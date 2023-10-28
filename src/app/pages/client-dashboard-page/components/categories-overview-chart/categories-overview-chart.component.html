@@ -2,37 +2,39 @@
 <div class="row col-md-12">
   <div class="col-md-8">
     <ng-template ngFor let-category [ngForOf]="ratingOverview.bar_overview" let-i="index" class="row">
-      <div class="row col-md-12">
-        <div class="col-md-2" style="margin:auto">
-          <p>{{ category.name }}</p>
-        </div>
-        <div class="col-md-1" style="text-align: -webkit-right;">
-          <p class="yaxis">1</p>
-          <p class="yaxis">2</p>
-          <p class="yaxis">3</p>
-        </div>
-        <div class="col-md-9">
-          <div class="chart-wrapper">
-            <ngx-charts-bar-horizontal-2d
-              [customColors]="categoryColors[i].series"
-              [results]="[category]"
-              [gradient]="gradient"
-              [xAxis]="true"
-              [yAxis]="false"
-              [trimYAxisTicks]="false"
-              [xScaleMax]=100
-              [legend]="false"
-              [showXAxisLabel]="false"
-              [showYAxisLabel]="false"
-              [barPadding]=17
-              [groupPadding]=10
-              [xAxisTickFormatting]='formatPercent'
-              (select)="onSelect($event)"
-            >
-            </ngx-charts-bar-horizontal-2d>
+      <a (click)="onSelect(category)">
+        <div class="row col-md-12">
+          <div class="col-md-2" style="margin:auto">
+            <p>{{ category.name }}</p>
+          </div>
+          <div class="col-md-1" style="text-align: -webkit-right;">
+            <p class="yaxis">1</p>
+            <p class="yaxis">2</p>
+            <p class="yaxis">3</p>
+          </div>
+          <div class="col-md-9">
+            <div class="chart-wrapper">
+                <ngx-charts-bar-horizontal-2d
+                [customColors]="categoryColors[i].series"
+                [results]="[category]"
+                [gradient]="gradient"
+                [xAxis]="true"
+                [yAxis]="false"
+                [trimYAxisTicks]="false"
+                [xScaleMax]=100
+                [legend]="false"
+                [showXAxisLabel]="false"
+                [showYAxisLabel]="false"
+                [barPadding]=17
+                [groupPadding]=10
+                [xAxisTickFormatting]='formatPercent'
+                (select)="onSelect($event)"
+              >
+              </ngx-charts-bar-horizontal-2d>
+            </div>
           </div>
         </div>
-      </div>
+      </a>
     </ng-template>
     <div class="row col-md-12">
       <div class="col-md-3" style="margin:auto">

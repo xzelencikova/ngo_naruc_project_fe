@@ -7,15 +7,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { FormsModule } from '@angular/forms';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SpinnerWrapperComponent } from './components/spinner-wrapper/spinner-wrapper.component';
+import { SpinnerInterceptorService } from './services/spinner-interceptor.service';
+import { PortalModule } from '@angular/cdk/portal';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    SpinnerComponent,
+    SpinnerWrapperComponent
   ],
   imports: [
     BrowserModule,
@@ -26,9 +32,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
   //  ReactiveFormsModule,
     BrowserAnimationsModule,
-    
+    PortalModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

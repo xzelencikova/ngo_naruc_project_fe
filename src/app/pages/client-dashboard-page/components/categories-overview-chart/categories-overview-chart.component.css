@@ -64,3 +64,8 @@ p {
   height: 110px;
   width: 100%;
 }
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
