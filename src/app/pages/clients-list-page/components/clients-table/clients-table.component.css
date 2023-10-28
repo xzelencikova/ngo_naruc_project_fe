@@ -8,6 +8,10 @@
     border: none;
 }
 
+.detail-button:hover {
+    background: linear-gradient(88deg, #D44900 -0.01%, #FF6C1D 100.02%);
+}
+
 td {
     padding: 1rem;
     color: #929090;

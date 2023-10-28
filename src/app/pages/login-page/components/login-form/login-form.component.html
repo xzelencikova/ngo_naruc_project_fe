@@ -4,14 +4,14 @@
     </div>
 </div>
 
-<form class="form">
+<form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 
     <div class="form-group">
         <div class="label-position">
-            <label for="exampleInputEmail1">Zadaj svoj pracovný email</label>
+            <label for="email">Zadaj svoj pracovný email</label>
         </div>
         <div class="input-position">
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+            <input type="email" class="form-control" formControlName="email" aria-describedby="emailHelp" placeholder="Email">
         </div>
     </div>
 
@@ -20,10 +20,10 @@
     <div class="form-group">
 
         <div class="label-position">
-            <label for="exampleInputPassword1">Zadaj svoje heslo</label>
+            <label for="password">Zadaj svoje heslo</label>
         </div>
         <div class="input-position">
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Heslo">
+            <input type="password" class="form-control" formControlName="password" placeholder="Heslo">
         </div>  
         
     </div>

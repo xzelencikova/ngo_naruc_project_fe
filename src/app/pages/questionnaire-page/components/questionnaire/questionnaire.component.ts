@@ -33,22 +33,21 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   currentStep: number = 0;
 
   @Input() client: ClientModel | undefined;
+  @Input() prefill_questionnaire!: RatingModel;
 
   @ViewChild("stepper") private stepper!: MatStepper;
   @ViewChildren('shownCategory') titles!: QueryList<ElementRef>; // getting your sections here
 
   @HostListener('window:scroll', ['$event'])
   isScrolledIntoView(){
-    // if (!this.stepper.){
-      setTimeout(() => {
-        for (let index = 0; index < this.titles.length; index++) {
-          const rect = document.getElementById(this.questionnaire[index].icon)?.getBoundingClientRect();
-          const topShown = rect?.top ? rect?.top >= 0 : undefined;
-          const bottomShown = rect?.bottom ? rect?.bottom <= window.innerHeight : undefined;
-          if (topShown && bottomShown) this.currentStep = index;
-        }
-      }, 1500);
-    // }
+    setTimeout(() => {
+      for (let index = 0; index < this.titles.length; index++) {
+        const rect = document.getElementById(this.questionnaire[index].icon)?.getBoundingClientRect();
+        const topShown = rect?.top ? rect?.top >= 0 : undefined;
+        const bottomShown = rect?.bottom ? rect?.bottom <= window.innerHeight : undefined;
+        if (topShown && bottomShown) this.currentStep = index;
+      }
+    }, 1500);
   }
 
   constructor(private questionnaireService: QuestionnaireService, 
@@ -68,10 +67,15 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     this.subscription = this.questionnaireService.getQuestionnaire().subscribe(categories => {
           this.questionnaire = categories;
           let group: any = {};
+          console.log(this.prefill_questionnaire);
 
           for (let i = 0; i < this.questionnaire.length; i++) {
             this.questionnaire[i].questions.forEach(question => {
-              group[question._id] = ['0']
+              if (this.prefill_questionnaire === undefined)
+                group[question._id] = ['0']
+              else {
+                group[question._id] = [String(this.prefill_questionnaire.questions_rating.filter(q => q.question_id == question._id)[0].rating)];
+              }
             }
           );
 
@@ -91,18 +95,46 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   
   ngOnDestroy(): void {}
 
-  openSaveMessage() {
+  saveFormData(): void {
+    console.log("save");
+    let rating: RatingModel = {
+      date_rated: new Date,
+      rated_by_user_id: "80d71b90976f4933b42abc22d94510e6",
+      client_id: this.client?._id ? this.client._id : "",
+      phase_no: this.client?.last_phase ? this.client.last_phase + 1 : 1,
+      questions_rating: []
+    }
 
-    const sent = this.saveFormData();
+    this.questionnaire.forEach(category => {
+      category.questions.forEach(question => {
+        rating.questions_rating.push({
+          question_id: question._id,
+          rating: Number((this.questForm.value as any)[question._id]),
+          question: question.question,
+          category: category.category,
+          icon: category.icon
+        })
+      })
+    })
     
-    if (sent)
-      this.saveMessageBar.open('Pozorovací hárok bol úspešne uložený!', 'X', {
-        horizontalPosition: "end",
-        verticalPosition: "bottom",
-      });
+    this.subscription2 = this.ratingService.postRating(rating).subscribe({
+      next: success => {
+        this.saveMessageBar.open('Pozorovací hárok bol úspešne uložený!', 'X', {
+          horizontalPosition: "end",
+          verticalPosition: "bottom",
+        });
+      },
+      error: err => {
+        this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
+          horizontalPosition: "end",
+          verticalPosition: "bottom",
+        });
+      }
+    });
   }
 
-  saveFormData(): boolean {
+  submitFormData(): boolean {
+    console.log("submit")
     let rating: RatingModel = {
       date_rated: new Date,
       rated_by_user_id: "80d71b90976f4933b42abc22d94510e6",
@@ -131,10 +163,10 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     this.clientService.editClient(this.client!).subscribe({
       next: success => {},
       error: err => {
-        this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
-          horizontalPosition: "end",
-          verticalPosition: "bottom",
-        });
+        // this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
+        //   horizontalPosition: "end",
+        //   verticalPosition: "bottom",
+        // });
         return false;
       }
     });
@@ -142,10 +174,10 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     this.subscription2 = this.ratingService.postRating(rating).subscribe({
       next: success => {},
       error: err => {
-        this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
-          horizontalPosition: "end",
-          verticalPosition: "bottom",
-        });
+        // this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
+        //   horizontalPosition: "end",
+        //   verticalPosition: "bottom",
+        // });
         return false;
       }
     });
@@ -154,10 +186,9 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
 
   onSubmit(): void {
     const dialogRef = this.dialog.open(ModalWindowComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const sent = this.saveFormData();
+        const sent = this.submitFormData();
         if (sent)
           this.router.navigate(['/questionnaire-sent'])
       }
