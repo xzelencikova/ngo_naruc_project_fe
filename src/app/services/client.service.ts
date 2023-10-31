@@ -22,7 +22,7 @@ export class ClientService {
   }
 
   getClientsList(): Observable<ClientModel[]> {
-    return this.http.get<ClientModel[]>(`${this.baseUrl}/ngo/client/show_clients`);
+    return this.http.get<ClientModel[]>(`${this.baseUrl}/ngo/clients`);
   }
 
   editClient(client: ClientModel): Observable<any> {
@@ -38,7 +38,6 @@ export class ClientService {
   }
 
   postNewClient(body: ClientModel): Observable<ClientModel[]> {
-    console.log(body);
     return this.http.post<ClientModel[]>(`${this.baseUrl}/ngo/client/add_new_client`, body);
   }
 }
