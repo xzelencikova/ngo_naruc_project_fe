@@ -14,6 +14,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerWrapperComponent } from './components/spinner-wrapper/spinner-wrapper.component';
 import { SpinnerInterceptorService } from './services/spinner-interceptor.service';
 import { PortalModule } from '@angular/cdk/portal';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { PortalModule } from '@angular/cdk/portal';
     PortalModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
