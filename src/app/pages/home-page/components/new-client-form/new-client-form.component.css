@@ -7,6 +7,10 @@
     height: 120%;
 }
 
+.butt{
+    padding-top: 10%;
+}
+
 .form-group > label{
     width: 25%;
     font-style: normal;
@@ -19,7 +23,7 @@
 }
 
 .spacer{
-    padding-top: 5%;
+    padding-top: 4%;
 }
 
 .row{
@@ -27,9 +31,6 @@
     padding-left: 15%;
 }
 
-.butt{
-    padding-left: 27%!important;
-}
 
 .btn-orange-form {
     padding: 1.5rem 5rem;
