@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 })
 export class HomePage{
 
+
+  user: string = localStorage.getItem('user_name')!;
+
   openForm(){
     const overlayDiv = document.getElementById('overlay');
     const modelDiv = document.getElementById('form-new-client');
