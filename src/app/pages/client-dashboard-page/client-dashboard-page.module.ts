@@ -8,18 +8,25 @@ import { ClientDashboardRoutingModule } from "./client-dashboard-routing.module"
 import { CategoriesOverviewChartComponent } from './components/categories-overview-chart/categories-overview-chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { QuestionsOverviewChartComponent } from './components/questions-overview-chart/questions-overview-chart.component';
+import { HistoryModalWindowComponent } from './components/history-modal-window/history-modal-window.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+
 
 @NgModule({
     declarations: [
         ClientDashboardPage,
         CategoriesOverviewChartComponent,
-        QuestionsOverviewChartComponent
+        QuestionsOverviewChartComponent,
+        HistoryModalWindowComponent
     ],
     imports: [
         CommonModule,
         ClientDashboardRoutingModule,
         FontAwesomeModule,
-        NgxChartsModule
+        NgxChartsModule,
+        MatDialogModule,
+        MatTableModule
     ],
     providers: [],
     schemas: []

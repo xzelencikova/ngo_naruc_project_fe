@@ -22,7 +22,7 @@
             <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <li><a ngbDropdownItem class="dropdown-item" href="user-profile">Profil</a></li>
               <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" href="user-management">Správa zamestnancov</a></li>
-              <li><a ngbDropdownItem class="dropdown-item" href="#">Správa dotazníka</a></li>
+              <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" href="#">Správa dotazníka</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

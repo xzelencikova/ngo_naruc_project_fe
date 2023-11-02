@@ -14,7 +14,6 @@ export class SpinnerOverlayService {
 
   public show(message = '') {
     // Returns an OverlayRef (which is a PortalHost)
-    console.log("show")
     if (!this.overlayRef) {
       this.overlayRef = this.overlay.create();
     }
@@ -27,7 +26,6 @@ export class SpinnerOverlayService {
   public hide() {
     if (!!this.overlayRef) {
       this.overlayRef.detach();
-      console.log("hide");
     }
   }
 }
