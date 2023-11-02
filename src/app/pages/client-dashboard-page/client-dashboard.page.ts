@@ -5,6 +5,8 @@ import { ClientModel } from 'src/app/models/client.model';
 import { RatingModel } from 'src/app/models/rating.model';
 import { ClientService } from 'src/app/services/client.service';
 import { RatingService } from 'src/app/services/rating.service';
+import { HistoryModalWindowComponent } from './components/history-modal-window/history-modal-window.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-client-dashboard-page',
@@ -29,7 +31,7 @@ export class ClientDashboardPage {
     domain: this.customColors // ['#1E19FF', '#1E19FF', '#1E19FF']
   };
 
-  constructor(private router: Router, private clientService: ClientService, private ratingService: RatingService, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private clientService: ClientService, private ratingService: RatingService, private activatedRoute: ActivatedRoute, private dialog: MatDialog) {
     this.client = this.clientService.getSelectedClient();
     const client_id = this.activatedRoute.snapshot.paramMap.get('id');
 
@@ -43,7 +45,6 @@ export class ClientDashboardPage {
 
     this.ratingService.getRatingOverviewForClient(this.client?._id ? this.client._id : client_id!).subscribe(overview => {
       this.ratingOverview = overview;
-      console.log(overview);
       this.categoryColors = JSON.parse(JSON.stringify(overview.bar_overview));
 
       for (let index = 0; index < this.categoryColors.length; index++) {
@@ -51,7 +52,6 @@ export class ClientDashboardPage {
         this.categoryColors[index].series[1].value = `#${this.colors[index]}BF`;
         this.categoryColors[index].series[2].value = `#${this.colors[index]}FF`;
       }
-      console.log(this.categoryColors);
 
     });
     this.ratingService.getRatingsByClientId(this.client?._id ? this.client._id : client_id!).subscribe(ratingsList => {
@@ -136,11 +136,16 @@ export class ClientDashboardPage {
   }
 
   loadQuestionnaire() {
+    this.ratingService.isHistory$.emit({isHistory: false, questionnaire: {}});
     this.router.navigate(["questionnaire"]);
   }
 
   downloadOverview() {
     console.log("Stiahnuť prehľad");
+  }
+
+  openHistoryModal() {
+    const dialogRef = this.dialog.open(HistoryModalWindowComponent);
   }
 
 }

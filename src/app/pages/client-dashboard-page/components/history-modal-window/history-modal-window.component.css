@@ -1,0 +1,48 @@
+.dialog-text {
+    text-align: center;
+    padding: 2rem 0 5rem 0;
+}
+
+.submit-button {
+    padding: 1rem 4rem;
+    border-radius: 50px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(0.25turn, #FF4D00, #FC7900);
+    border: none;
+}
+
+.submit-button:hover {
+    background: linear-gradient(88deg, #D44900 -0.01%, #FF6C1D 100.02%);
+}
+
+.cancel-button {
+    padding: 1rem 4rem;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #FF4D00;
+    background: white;
+    border: 1px solid #FF4D00;
+    margin-right: 1rem;
+}
+
+.cancel-button:hover {
+    background: linear-gradient(90deg, #FF4D00 0%, #FC7900 99.99%);
+    color: white;
+}
+
+.detail-button {
+    padding: 0.75rem 3rem;
+    /* border-radius: 50px; */
+    font-size: 16px;
+    font-weight: 700;
+    color: #FC7900;
+    background: none;
+    /* background: linear-gradient(0.25turn, #FF4D00, #FC7900); */
+    border: none;
+}
+
+.detail-button:hover {
+    color: #D44900;
+    font-weight: bold;
+}

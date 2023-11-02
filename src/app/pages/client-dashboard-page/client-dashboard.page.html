@@ -19,6 +19,7 @@
             <ng-template [ngIf]="client.last_phase < 3">
                 <button role="button" class="questionnaire-button" (click)="loadQuestionnaire()">Vyplniť pozorovacie hárky</button>
             </ng-template>
+            <button role="button" class="questionnaire-button" (click)="openHistoryModal()">História pozorovacích hárkov</button>
             <button role="button" class="download-button" (click)="downloadOverview() ">Stiahnuť prehľad</button>
         </div>
     </div>

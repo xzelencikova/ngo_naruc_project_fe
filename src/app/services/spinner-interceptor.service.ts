@@ -18,7 +18,6 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     
     this.count++;
     if (this.count === 1) this.spinnerOverlayService.show();
-    console.log(this.count)
 
     return next.handle(req).pipe(  
       finalize(() => {

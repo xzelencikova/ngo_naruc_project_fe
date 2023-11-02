@@ -10,7 +10,6 @@ import { RatingModel } from 'src/app/models/rating.model';
 import { RatingService } from 'src/app/services/rating.service';
 
 import { MatStepper } from '@angular/material/stepper';
-import { pluck } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -31,6 +30,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
 
   questionnaire: QuestionnaireCategoryModel[] = [];
   currentStep: number = 0;
+  isHistory: boolean = false;
 
   @Input() client: ClientModel | undefined;
   @Input() prefill_questionnaire!: RatingModel;
@@ -64,10 +64,11 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   questForm = this.fb.group({});
 
   ngOnInit(): void {
+    this.isHistory = this.ratingService.getHistory();
+    
     this.subscription = this.questionnaireService.getQuestionnaire().subscribe(categories => {
           this.questionnaire = categories;
           let group: any = {};
-          console.log(this.prefill_questionnaire);
 
           for (let i = 0; i < this.questionnaire.length; i++) {
             this.questionnaire[i].questions.forEach(question => {
@@ -96,12 +97,12 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   ngOnDestroy(): void {}
 
   saveFormData(): void {
-    console.log("save");
+
     let rating: RatingModel = {
       date_rated: new Date,
-      rated_by_user_id: "80d71b90976f4933b42abc22d94510e6",
+      rated_by_user_id: localStorage.getItem('user_name') + ' ' + localStorage.getItem('user_surname'),
       client_id: this.client?._id ? this.client._id : "",
-      phase_no: this.client?.last_phase ? this.client.last_phase + 1 : 1,
+      phase_no: this.prefill_questionnaire ? this.prefill_questionnaire?.phase_no : this.client?.last_phase!,
       questions_rating: []
     }
 
@@ -134,10 +135,9 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   submitFormData(): boolean {
-    console.log("submit")
     let rating: RatingModel = {
       date_rated: new Date,
-      rated_by_user_id: "80d71b90976f4933b42abc22d94510e6",
+      rated_by_user_id: localStorage.getItem('user_name') + ' ' + localStorage.getItem('user_surname'),
       client_id: this.client?._id ? this.client._id : "",
       phase_no: this.client?.last_phase ? this.client.last_phase + 1 : 1,
       questions_rating: []
