@@ -5,6 +5,8 @@ import { ClientModel } from 'src/app/models/client.model';
 import { RatingModel } from 'src/app/models/rating.model';
 import { ClientService } from 'src/app/services/client.service';
 import { RatingService } from 'src/app/services/rating.service';
+import { HistoryModalWindowComponent } from './components/history-modal-window/history-modal-window.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-client-dashboard-page',
@@ -29,7 +31,7 @@ export class ClientDashboardPage {
     domain: this.customColors // ['#1E19FF', '#1E19FF', '#1E19FF']
   };
 
-  constructor(private router: Router, private clientService: ClientService, private ratingService: RatingService, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private clientService: ClientService, private ratingService: RatingService, private activatedRoute: ActivatedRoute, private dialog: MatDialog) {
     this.client = this.clientService.getSelectedClient();
     const client_id = this.activatedRoute.snapshot.paramMap.get('id');
 
@@ -141,6 +143,10 @@ export class ClientDashboardPage {
 
   downloadOverview() {
     console.log("Stiahnuť prehľad");
+  }
+
+  openHistoryModal() {
+    const dialogRef = this.dialog.open(HistoryModalWindowComponent);
   }
 
 }
