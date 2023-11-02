@@ -30,6 +30,10 @@ export class UserService {
     return this.http.post<UserModel>(`${this.baseUrl}/ngo/user/login`, data);
   }
 
+  changeUser(data: UserModel): Observable<UserModel> {
+    return this.http.put<UserModel>(`${this.baseUrl}/ngo/user/update_user/${data._id}`, data);
+  }
+
 //   editClient(client: ClientModel): Observable<any> {
 //     return this.http.put<any>(`${this.baseUrl}/ngo/client/update_client/${client._id}`, client);
 //   }
