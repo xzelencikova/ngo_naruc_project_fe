@@ -27,7 +27,7 @@
 }
 
 .cancel-button:hover {
-    color: linear-gradient(90deg, #FF4D00 0%, #FC7900 99.99%);
+    background: linear-gradient(90deg, #FF4D00 0%, #FC7900 99.99%);
     color: white;
 }
 

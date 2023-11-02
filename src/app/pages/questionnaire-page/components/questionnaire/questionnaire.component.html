@@ -69,7 +69,7 @@
             <!-- </mat-vertical-stepper> -->
             <div class="submit-position">
                 <button type="button" class="save-button" (click)="saveFormData()">ULOŽIŤ</button>
-                <button type="submit" class="submit-button">VYHODNOTIŤ</button>
+                <button *ngIf="!isHistory" type="submit" class="submit-button">VYHODNOTIŤ</button>
             </div>
         </div>
     </div>

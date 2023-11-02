@@ -45,7 +45,6 @@ export class ClientDashboardPage {
 
     this.ratingService.getRatingOverviewForClient(this.client?._id ? this.client._id : client_id!).subscribe(overview => {
       this.ratingOverview = overview;
-      console.log(overview);
       this.categoryColors = JSON.parse(JSON.stringify(overview.bar_overview));
 
       for (let index = 0; index < this.categoryColors.length; index++) {
@@ -53,7 +52,6 @@ export class ClientDashboardPage {
         this.categoryColors[index].series[1].value = `#${this.colors[index]}BF`;
         this.categoryColors[index].series[2].value = `#${this.colors[index]}FF`;
       }
-      console.log(this.categoryColors);
 
     });
     this.ratingService.getRatingsByClientId(this.client?._id ? this.client._id : client_id!).subscribe(ratingsList => {
@@ -138,6 +136,7 @@ export class ClientDashboardPage {
   }
 
   loadQuestionnaire() {
+    this.ratingService.isHistory$.emit({isHistory: false, questionnaire: {}});
     this.router.navigate(["questionnaire"]);
   }
 
