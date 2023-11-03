@@ -34,3 +34,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-size: 40px !important;
     font-weight: bold !important;
 }
+
+.mat-mdc-menu-content {
+    margin: 0 0.8rem !important;
+    padding: 1rem 0 !important;
+}
+
+.mat-mdc-button {
+    height: auto !important;
+}
