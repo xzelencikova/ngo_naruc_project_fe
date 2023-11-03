@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 import { ClientModel } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/services/client.service';
 
+
 @Component({
   selector: 'app-questionnaire',
   templateUrl: './questionnaire.component.html',
@@ -123,12 +124,14 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
         this.saveMessageBar.open('Pozorovací hárok bol úspešne uložený!', 'X', {
           horizontalPosition: "end",
           verticalPosition: "bottom",
+          duration: 2000
         });
       },
       error: err => {
         this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
           horizontalPosition: "end",
           verticalPosition: "bottom",
+          duration: 2000
         });
       }
     });
@@ -166,6 +169,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
         // this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
         //   horizontalPosition: "end",
         //   verticalPosition: "bottom",
+        //   duration: 2000
         // });
         return false;
       }
@@ -177,6 +181,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
         // this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
         //   horizontalPosition: "end",
         //   verticalPosition: "bottom",
+        //   duration: 2000
         // });
         return false;
       }
@@ -184,8 +189,21 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     return true;
   }
 
+  countUnansweredQuestions(questions: any): number {
+    let counter = 0;
+    for (let k in questions) {
+      if (questions[k] === "0") counter++;
+    }
+    
+    return counter;
+  }
+
   onSubmit(): void {
-    const dialogRef = this.dialog.open(ModalWindowComponent);
+    const dialogRef = this.dialog.open(ModalWindowComponent, {
+      data: {
+        unasweredQuestions: this.countUnansweredQuestions(this.questForm.value)
+      }
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const sent = this.submitFormData();
