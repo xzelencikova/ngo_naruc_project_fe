@@ -23,6 +23,7 @@ table {
 
 table.mat-table {
     display: table;
+    z-index: 1000;
 }
 
 :host ::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
@@ -58,3 +59,8 @@ h1 {
     border: none;
     width: 2.5rem;
 }
+
+.mat-checkbox {
+    opacity: 0.03 !important;
+    background-color: #005691!important;
+  }

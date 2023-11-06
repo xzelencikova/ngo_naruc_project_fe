@@ -12,6 +12,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatIconModule} from '@angular/material/icon';
 import { UserTableComponent } from './components/user-table/user-table.component';
 import { AddNewUserComponent } from './components/add-new-user/add-new-user.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+ 
 
 
 
@@ -32,7 +34,8 @@ import { AddNewUserComponent } from './components/add-new-user/add-new-user.comp
     MatSortModule,
     MatInputModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule
   ]
 })
 export class UserManagementPageModule { }
