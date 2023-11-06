@@ -32,6 +32,156 @@
 
 }
 
+.main-description-form{
+    padding-top: 5%;
+    width: 80%;
+}
+
+.modal-form-body{
+    width: 100%;
+    padding-top: 4%;
+    height: 50%;
+}
+
+hr{
+    width:80%; 
+    margin-left:10% !important; 
+    border: 1px solid #5C5C5C;
+}
+
+.overlay{
+    z-index: 2000;
+    position: fixed; /* Positioning and size */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(128,128,128,0.5); /* color */
+    display: none; /* making it hidden by default */
+}
+
+.modal-dialog{
+    max-width: 100%;
+    width: 90vh;
+    height: 90vh;
+}
+
+.modal-content {
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border-radius: 80px;
+    overflow:hidden;
+    text-align: center;
+    pointer-events:all;
+    width: 100%;
+    height: 100%;
+}
+
+.close {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    padding: 0;
+    border: none;
+    background: none;
+    position: absolute;
+    top: 4%;
+    right: 5%;
+}
+
+.form-head{
+    text-align: left;
+    padding: 2rem 0rem 0rem 5rem;
+}
+
+.form-img{
+    width: 85%;
+}
+
+.welcome{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 58px;
+    padding-bottom: 0.5rem;
+
+    color: #000000;
+} 
+
+.name{
+    font-size: 48px;
+    font-weight: bold;
+    line-height: 50px;
+    /* padding-bottom: 5rem; */
+}
+
+p {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.main-description{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30%;
+    text-align: left;
+}
+
+.col-sm-10> input{
+    border-radius: 24px;
+}
+.col-sm-10{
+    width: 50%;
+    padding-left: 5%;
+    height: 120%;
+}
+
+.form-group > label{
+    width: 35%;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    color: #929090;
+}
+
+.row{
+    text-align: center;
+}
+
+input{
+    margin: 5%;
+}
+
+.form-control-radio{
+    margin: 5%;
+}
+
+.btn-orange-form {
+    padding: 1rem 5rem;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+    background: linear-gradient(87.91deg, #FF5800 0.65%, #FF8B00 100%);
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    width: 27rem;
+}
+
+.btn-orange-form:hover {
+    background: linear-gradient(88deg, #D44900 -0.01%, #FF6C1D 100.02%);
+}
+
+
 
 
 
