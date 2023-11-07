@@ -1,17 +1,18 @@
 <div class="page-content-white">
     <div class="main-text">
-        <h1 class="font-weight-bold welcome">Zmena údajov</h1>
+        <h1 class="font-weight-bold welcome">{{name1}} {{surname1}}</h1>
     </div>
 </div>
 
 <form class="change" [formGroup]="changeForm" (ngSubmit)="onSubmit()">
-                
+    <div class="spacer2"></div>
+
     <div class="form-group">
         <div class="label-position">
             <label for="name">Meno</label>
         </div>
         <div class="input-position">
-            <input type="text" class="form-control" formControlName="name" placeholder="Meno">
+            <input type="text" class="form-control" formControlName="name" placeholder="{{name1}}">
         </div>
     </div>
 
@@ -22,11 +23,11 @@
             <label for="surname">Priezvisko</label>
         </div>
         <div class="input-position">
-            <input type="text" class="form-control" formControlName="surname" placeholder="Priezvisko">
+            <input type="text" class="form-control" formControlName="surname" placeholder="{{surname1}}">
         </div>  
     </div>
 
-    <div class="spacer3"></div>
+    <div class="spacer2"></div>
 
     <div class="button-position">
         <button class="btn btn-orange-form" type="submit">

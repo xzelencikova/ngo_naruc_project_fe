@@ -11,6 +11,9 @@ import { UserModel } from 'src/app/models/user.model';
 })
 export class ChangeFormComponent {
   public user: UserModel;
+  
+  name1: string = localStorage.getItem('user_name')!;
+  surname1: string = localStorage.getItem('user_surname')!;
 
   public changeForm = this.fb.group({
     name: [''],

@@ -10,43 +10,63 @@
     font-weight: bold;
 }
 
-.input-position{
-    margin: auto;
-    width: 85%;
-}
-
-.input-position> input{
+.input-position {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 399.03px;
+    height: 73px;
     border-radius: 80px;
-    height: 56.6px;
+    margin: 0 auto; /* Center horizontally */
 }
 
+.input-position input {
+    width: calc(100% - 40px); /* Adjust this value to leave space for the text to be left-aligned */
+    height: 100%;
+    border-radius: 80px;
+    text-align: center;
+    padding-left: 20px; /* Add padding for left alignment */
+}
 
-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    /* Email */
+.label-position {
+    text-align: left; /* Align labels to the left */
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
-
     color: #929090;
-}
-
-.label-position{
-    padding-left: 11%;
     padding-bottom: 1%;
 }
 
-.label-position> label{
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-
-    color: #929090;
+.label-position label[for="surname"] {
+    margin-left: 23px; 
 }
 
-.form-group{
+.label-position label[for="name"] {
+    margin-left: 23px; 
+}
+
+.form-group {
+    text-align: center;
+    width: 399.03px; 
+    margin: 0 auto; 
+}
+
+.form-group .input-position {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    height: 73px;
+    border-radius: 80px;
+    margin: 0 auto; /* Center horizontally */
+}
+
+.form-group .input-position input {
+    width: 100%;
+    height: 100%;
+    border-radius: 80px;
+    text-align: left; /* Center text within inputs */
 }
 
 .btn-orange-form{

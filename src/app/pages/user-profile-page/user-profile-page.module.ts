@@ -12,8 +12,6 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatIconModule} from '@angular/material/icon';
 import { ChangeFormComponent } from './components/change-form/change-form.component';
 
-
-
 @NgModule({
   declarations: [
     UserProfilePage,
