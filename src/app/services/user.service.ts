@@ -23,15 +23,15 @@ export class UserService {
   }
 
   getUserList(): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>(`${this.baseUrl}/ngo/user/show_users`);
+    return this.http.get<UserModel[]>(`${this.baseUrl}/ngo/users`);
   }
 
   deleteUser(user_id: string): Observable<UserModel> {
-    return this.http.delete<UserModel>(`${this.baseUrl}/ngo/user/delete_user/${user_id}`);
+    return this.http.delete<UserModel>(`${this.baseUrl}/ngo/user/${user_id}`);
   }
 
   updateUser(user_id: string, data:UserModel): Observable<UserModel> {
-    return this.http.put<UserModel>(`${this.baseUrl}/ngo/user/update_user/${user_id}`, data);
+    return this.http.put<UserModel>(`${this.baseUrl}/ngo/user/${user_id}`, data);
   }
 
   loginUser(data: UserModel): Observable<UserModel> {
@@ -39,7 +39,7 @@ export class UserService {
   }
 
   postNewUser(body: UserModel): Observable<UserModel[]> {
-    return this.http.post<UserModel[]>(`${this.baseUrl}/ngo/user/sign_in`, body);
+    return this.http.post<UserModel[]>(`${this.baseUrl}/ngo/user/register`, body);
   }
 
 //   editClient(client: ClientModel): Observable<any> {

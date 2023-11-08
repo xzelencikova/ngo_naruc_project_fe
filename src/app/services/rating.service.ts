@@ -27,7 +27,7 @@ export class RatingService {
   private baseUrl: string = environment.baseUrl;
 
   postRating(rating: RatingModel): Observable<RatingModel> {
-    return this.http.post<RatingModel>(`${this.baseUrl}/ngo/rating`, rating)
+    return this.http.post<RatingModel>(`${this.baseUrl}/ngo/ratings`, rating)
       .pipe(
         catchError(this.errorHandlerService.handleError)
       );
@@ -38,7 +38,7 @@ export class RatingService {
   }
 
   getRatingsByClientId(clientId: string): Observable<RatingModel[]> {
-    return this.http.get<RatingModel[]>(`${this.baseUrl}/ngo/client/get_client_results/${clientId}`)
+    return this.http.get<RatingModel[]>(`${this.baseUrl}/ngo/ratings/for_client/${clientId}`)
   }
 
   getHistory(): boolean {
