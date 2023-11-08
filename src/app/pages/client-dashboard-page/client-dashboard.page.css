@@ -12,10 +12,10 @@ h1 {
 
 .questionnaire-button {
     margin-right: 1rem;
-    padding: 1rem 4rem;
+    padding: 1rem 4rem !important;
     border-radius: 50px;
     font-weight: 600;
-    color: white;
+    color: white !important;
     background: linear-gradient(0.25turn, #FF4D00, #FC7900);
     border: none;
 }
