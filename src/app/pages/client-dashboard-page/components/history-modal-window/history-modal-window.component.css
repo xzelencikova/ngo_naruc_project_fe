@@ -4,10 +4,10 @@
 }
 
 .submit-button {
-    padding: 1rem 4rem;
+    padding: 1rem 4rem !important;
     border-radius: 50px;
     font-weight: 600;
-    color: white;
+    color: white !important;
     background: linear-gradient(0.25turn, #FF4D00, #FC7900);
     border: none;
 }
@@ -20,15 +20,15 @@
     padding: 1rem 4rem;
     border-radius: 50px;
     font-weight: 600;
-    color: #FF4D00;
-    background: white;
-    border: 1px solid #FF4D00;
+    color: #FF4D00 !important;
+    background-color: white !important;
+    border: 1px solid #FF4D00 !important;
     margin-right: 1rem;
 }
 
 .cancel-button:hover {
-    background: linear-gradient(90deg, #FF4D00 0%, #FC7900 99.99%);
-    color: white;
+    background-color: linear-gradient(90deg, #FF4D00 0%, #FC7900 99.99%) !important;
+    color: white !important;
 }
 
 .detail-button {

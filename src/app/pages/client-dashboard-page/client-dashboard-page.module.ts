@@ -11,6 +11,8 @@ import { QuestionsOverviewChartComponent } from './components/questions-overview
 import { HistoryModalWindowComponent } from './components/history-modal-window/history-modal-window.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { MatTableModule } from '@angular/material/table';
         FontAwesomeModule,
         NgxChartsModule,
         MatDialogModule,
-        MatTableModule
+        MatTableModule,
+        MatMenuModule,
+        MatButtonModule
     ],
     providers: [],
     schemas: []
