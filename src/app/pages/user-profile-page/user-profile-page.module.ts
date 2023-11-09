@@ -11,11 +11,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatIconModule} from '@angular/material/icon';
 import { ChangeFormComponent } from './components/change-form/change-form.component';
+import {PasswordFormComponent} from './components/password-form/password-form.component';
 
 @NgModule({
   declarations: [
     UserProfilePage,
     ChangeFormComponent,
+    PasswordFormComponent,
   ],
   imports: [
     CommonModule,
