@@ -33,15 +33,16 @@
             </div>
         </div>
     </div>
-    
-    <div *ngIf="isOverview; else categoryChart">
-        <div style="padding-top: 1.5rem;">
-            <app-categories-overview-chart [ratingOverview]="ratingOverview" [categoryColors]="categoryColors" (selectedCategory)="getCategoryRating($event)"></app-categories-overview-chart>
+    <div #dataToExport>
+        <div *ngIf="isOverview; else categoryChart">
+            <div style="padding-top: 1.5rem;">
+                <app-categories-overview-chart [ratingOverview]="ratingOverview" [categoryColors]="categoryColors" (selectedCategory)="getCategoryRating($event)"></app-categories-overview-chart>
+            </div>
         </div>
+        <ng-template #categoryChart>
+            <div style="padding-top: 1.5rem;">
+                <app-questions-overview-chart [ratingCategory]="ratingCategory" [customColors]="customColors" (backToOverview)="setOverview($event)"></app-questions-overview-chart>
+            </div>
+        </ng-template>
     </div>
-    <ng-template #categoryChart>
-        <div style="padding-top: 1.5rem;">
-            <app-questions-overview-chart [ratingCategory]="ratingCategory" [customColors]="customColors" (backToOverview)="setOverview($event)"></app-questions-overview-chart>
-        </div>
-    </ng-template>
 </div>
