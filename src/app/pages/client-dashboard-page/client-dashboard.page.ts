@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { ClientModel } from 'src/app/models/client.model';
@@ -7,6 +7,8 @@ import { ClientService } from 'src/app/services/client.service';
 import { RatingService } from 'src/app/services/rating.service';
 import { HistoryModalWindowComponent } from './components/history-modal-window/history-modal-window.component';
 import { MatDialog } from '@angular/material/dialog';
+import domToImage from 'dom-to-image';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-client-dashboard-page',
@@ -140,12 +142,37 @@ export class ClientDashboardPage {
     this.router.navigate(["questionnaire"]);
   }
 
-  downloadOverview() {
-    console.log("Stiahnuť prehľad");
-  }
+  // @ts-ignore
+  @ViewChild('dataToExport', { static: false }) public dataToExport: ElementRef;
 
-  openHistoryModal() {
-    const dialogRef = this.dialog.open(HistoryModalWindowComponent);
-  }
+  public downloadOverview(): void {
+  const width = Math.max(this.dataToExport.nativeElement.clientWidth, 
+    this.dataToExport.nativeElement.scrollWidth, 
+    this.dataToExport.nativeElement.offsetWidth);
+
+  const height = Math.max(this.dataToExport.nativeElement.clientHeight, 
+    this.dataToExport.nativeElement.scrollHeight, 
+    this.dataToExport.nativeElement.offsetHeight);
+  domToImage
+  .toPng(this.dataToExport.nativeElement, {
+  width: width,
+  height: height,
+  
+  })
+  .then(result => {
+  const pdf = new jsPDF('l','mm','a4');
+  pdf.setFontSize(20);
+  pdf.setTextColor('#5C5C5C');
+  pdf.text(this.client!.name +'_' +this.client!.surname!, 10, 10);
+  pdf.addImage(result, 'PNG', 5, 20, 287, height*(287/width));
+  pdf.save(this.client!.name +'_' +this.client!.surname! + '_prehlad' + '.pdf');
+  })
+  .catch(error => {
+  });
+}
+
+openHistoryModal() {
+  const dialogRef = this.dialog.open(HistoryModalWindowComponent);
+}
 
 }
