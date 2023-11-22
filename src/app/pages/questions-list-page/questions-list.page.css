@@ -1,0 +1,21 @@
+h1 {
+    font-size: 40px;
+    padding: 0.5rem;
+}
+
+.layout {
+    background: linear-gradient(0.25turn, #f7fbff, #f7fbff, #fff);;
+}
+
+.page-explanation {
+    background-color: #f7fbff;
+    padding: 3rem 3rem 0 0;
+    width: 100%;
+    height: 100%;
+}
+
+p {
+    font-size: 16px;
+    text-align: left;
+    padding: 3rem 0 ;
+}

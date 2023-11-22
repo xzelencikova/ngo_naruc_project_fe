@@ -37,6 +37,11 @@ const routes: Routes = [
     loadChildren: () => import('src/app/pages/user-management-page/user-management-page.module').then(m => m.UserManagementPageModule),
     canActivate: [authGuard]
   },
+  {
+    path: 'questions-management',
+    loadChildren: () => import('src/app/pages/questions-list-page/questions-list-page.module').then(m => m.QuestionsListPageModule),
+    canActivate: [authGuard]
+  }
 ];
 
 @NgModule({
