@@ -1,0 +1,43 @@
+<div class="page-content-white">
+    <div class="spacer2"></div>
+    <div class="main-text">
+        <h1 class="font-weight-bold welcome">{{user.name}} {{user.surname}}</h1>
+    </div>
+    <div class="spacer2"></div>
+    <div class="group-119">
+        <a routerLink="/change" class="personal-details">Osobné údaje</a>
+        <a routerLink="/password" class="password">Heslo</a>
+      </div>
+</div>
+
+<form class="change" [formGroup]="changeForm" (ngSubmit)="onSubmit()">
+    <div class="spacer3"></div>
+
+    <div class="form-group">
+        <div class="label-position">
+            <label for="name">Meno</label>
+        </div>
+        <div class="input-position">
+            <input type="text" class="form-control" formControlName="name" placeholder="Meno">
+        </div>
+    </div>
+
+    <div class="spacer2"></div>
+
+    <div class="form-group">
+        <div class="label-position">
+            <label for="surname">Priezvisko</label>
+        </div>
+        <div class="input-position">
+            <input type="text" class="form-control" formControlName="surname" placeholder="Priezvisko">
+        </div>  
+    </div>
+
+    <div class="spacer2"></div>
+
+    <div class="button-position">
+        <button class="btn btn-orange-form" type="submit">
+            Uložiť zmeny
+        </button>
+    </div>
+</form>

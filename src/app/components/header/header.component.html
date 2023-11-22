@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-red static-top">
     <div class="container">
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" [routerLink]="['/']">
         <img src="/assets/images/logo.png" alt="logo" height="36">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,19 +10,19 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Domov</a>
+            <a class="nav-link active" aria-current="page" [routerLink]="['/']">Domov</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/clients-list">Zoznam klientov</a>
+            <a class="nav-link" [routerLink]="['/clients-list']">Zoznam klientov</a>
           </li>
           <li ngbDropdown class="nav-item dropdown">
             <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{user}}
             </a>
             <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li><a ngbDropdownItem class="dropdown-item" href="#">Profil</a></li>
-              <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" href="user-management">Správa zamestnancov</a></li>
-              <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" href="#">Správa dotazníka</a></li>
+              <li><a ngbDropdownItem class="dropdown-item" [routerLink]="['/user-profile']">Profil</a></li>
+              <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" [routerLink]="['/user-management']">Správa zamestnancov</a></li>
+              <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" [routerLink]="['/']">Správa dotazníka</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

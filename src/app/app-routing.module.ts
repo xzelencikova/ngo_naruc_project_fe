@@ -37,6 +37,11 @@ const routes: Routes = [
     loadChildren: () => import('src/app/pages/user-management-page/user-management-page.module').then(m => m.UserManagementPageModule),
     canActivate: [authGuard]
   },
+  {
+    path: 'user-profile',
+    loadChildren: () => import('src/app/pages/user-profile-page/user-profile-page.module').then(m => m.UserProfilePageModule),
+    canActivate: [authGuard]
+  },
 ];
 
 @NgModule({

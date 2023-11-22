@@ -31,6 +31,14 @@ export class LoginFormComponent {
         localStorage.setItem('user_id', success._id ? success._id : "");
         localStorage.setItem('user_role', success.role);
         localStorage.setItem('token', success.token ? success.token : "")
+        
+        this.userService.selectedUser$.emit({
+          _id: success._id,
+          name: success.name,
+          surname: success.surname,
+          email: success.email,
+          role: success.role
+        });
 
         this.router.navigate(['/'])
       },

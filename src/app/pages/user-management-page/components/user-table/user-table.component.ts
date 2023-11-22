@@ -42,7 +42,7 @@ export class UserTableComponent implements OnInit, AfterViewInit{
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataSource.filter);
+
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -66,9 +66,11 @@ export class UserTableComponent implements OnInit, AfterViewInit{
     else {
       user.role = 'admin';
     }
-    console.log(user.name + user.role);
+
     this.userService.updateUser(user._id!, user).subscribe(res => {
     });
+
+    console.log(this.userService.getLoggedInUser());
   }
 
 }
