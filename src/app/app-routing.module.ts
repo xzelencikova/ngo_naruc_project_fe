@@ -38,6 +38,11 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'user-profile',
+    loadChildren: () => import('src/app/pages/user-profile-page/user-profile-page.module').then(m => m.UserProfilePageModule),
+    canActivate: [authGuard]
+  },
+  {
     path: 'questions-management',
     loadChildren: () => import('src/app/pages/questions-list-page/questions-list-page.module').then(m => m.QuestionsListPageModule),
     canActivate: [authGuard]
