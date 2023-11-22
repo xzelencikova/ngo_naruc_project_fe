@@ -17,9 +17,15 @@ export class UserService {
 
   constructor(private http: HttpClient) { 
     this.selectedUser$.subscribe(selection => {
+      console.log(selection);
       this.user = selection;
+      console.log(this.user);
     });
+  }
 
+  getLoggedInUser(): UserModel {
+    console.log(this.user);
+    return this.user;
   }
 
   getUserList(): Observable<UserModel[]> {
@@ -42,9 +48,6 @@ export class UserService {
     return this.http.post<UserModel[]>(`${this.baseUrl}/ngo/user/register`, body);
   }
 
-  changeUser(data: UserModel): Observable<UserModel> {
-    return this.http.put<UserModel>(`${this.baseUrl}/ngo/user/update_user/${data._id}`, data);
-  }
 
 //   editClient(client: ClientModel): Observable<any> {
 //     return this.http.put<any>(`${this.baseUrl}/ngo/client/update_client/${client._id}`, client);

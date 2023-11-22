@@ -12,8 +12,8 @@ import { UserModel } from 'src/app/models/user.model';
 export class ChangeFormComponent {
   public user: UserModel;
   
-  name1: string = localStorage.getItem('user_name')!;
-  surname1: string = localStorage.getItem('user_surname')!;
+  // name1: string = localStorage.getItem('user_name')!;
+  // surname1: string = localStorage.getItem('user_surname')!;
 
   public changeForm = this.fb.group({
     name: [''],
@@ -21,7 +21,14 @@ export class ChangeFormComponent {
   });
 
   constructor(private userService: UserService, private fb: FormBuilder, private router: Router) {
-    this.user = this.userService.user;
+    this.user = this.userService.getLoggedInUser();
+  }
+
+  ngOnInit(): void {
+    this.changeForm.patchValue({
+      name: this.user.name,
+      surname: this.user.surname
+    });
   }
 
   sanitizeValue(value: string | null | undefined): string {
@@ -38,7 +45,7 @@ export class ChangeFormComponent {
       surname: updatedSurname 
     };
   
-    this.userService.changeUser(updatedUser).subscribe({
+    this.userService.updateUser(updatedUser._id!, updatedUser).subscribe({
       next: success => {
         this.userService.selectedUser$.emit(success);
         this.router.navigate(['/success']);

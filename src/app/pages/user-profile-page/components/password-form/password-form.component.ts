@@ -38,7 +38,7 @@ export class PasswordFormComponent {
       surname: updatedSurname 
     };
   
-    this.userService.changeUser(updatedUser).subscribe({
+    this.userService.updateUser(updatedUser._id!, updatedUser).subscribe({
       next: success => {
         this.userService.selectedUser$.emit(success);
         this.router.navigate(['/success']);

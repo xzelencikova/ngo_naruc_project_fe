@@ -1,7 +1,7 @@
 <div class="page-content-white">
     <div class="spacer2"></div>
     <div class="main-text">
-        <h1 class="font-weight-bold welcome">{{name1}} {{surname1}}</h1>
+        <h1 class="font-weight-bold welcome">{{user.name}} {{user.surname}}</h1>
     </div>
     <div class="spacer2"></div>
     <div class="group-119">
@@ -18,7 +18,7 @@
             <label for="name">Meno</label>
         </div>
         <div class="input-position">
-            <input type="text" class="form-control" formControlName="name" placeholder="{{name1}}">
+            <input type="text" class="form-control" formControlName="name" placeholder="Meno">
         </div>
     </div>
 
@@ -29,7 +29,7 @@
             <label for="surname">Priezvisko</label>
         </div>
         <div class="input-position">
-            <input type="text" class="form-control" formControlName="surname" placeholder="{{surname1}}">
+            <input type="text" class="form-control" formControlName="surname" placeholder="Priezvisko">
         </div>  
     </div>
 
