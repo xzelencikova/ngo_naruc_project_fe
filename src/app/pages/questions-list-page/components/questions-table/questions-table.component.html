@@ -1,38 +1,23 @@
 <mat-form-field style="width: 100%;">
-  <input matInput #searchVal placeholder="Vyhľadaj klienta" (keyup)="applyFilter(searchVal.value)">
+  <input matInput #searchVal placeholder="Vyhľadaj otázku" (keyup)="applyFilter(searchVal.value)">
   <mat-icon matSuffix>search</mat-icon>
 </mat-form-field>
 
 <table mat-table [dataSource]="dataSource" class="clients-table" matSort>
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Meno</th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <ng-container matColumnDef="question">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Otázka</th>
+      <td mat-cell *matCellDef="let element"> {{element.question}} </td>
     </ng-container>
   
-    <ng-container matColumnDef="surname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Priezvisko</th>
-      <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="contract_no">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Číslo zmluvy</th>
-      <td mat-cell *matCellDef="let element"> {{element.contract_no}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="registration_date">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rok</th>
-      <td mat-cell *matCellDef="let element"> {{element.registration_date | date: 'yyyy'}} </td>
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Kategória</th>
+      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="last_phase">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Posledná Fáza</th>
-        <td mat-cell *matCellDef="let element"> {{element.last_phase}} </td>
-      </ng-container>
-
-    <ng-container matColumnDef="details">
+    <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element"><button role="button" class="detail-button" (click)="showClientOverview(element)">Detaily</button></td>
+        <td mat-cell *matCellDef="let element"><button role="button" class="detail-button" >Detaily</button></td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
