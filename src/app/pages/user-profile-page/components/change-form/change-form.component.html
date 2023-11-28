@@ -4,10 +4,6 @@
         <h1 class="font-weight-bold welcome">{{user.name}} {{user.surname}}</h1>
     </div>
     <div class="spacer2"></div>
-    <div class="group-119">
-        <a routerLink="/change" class="personal-details">Osobné údaje</a>
-        <a routerLink="/password" class="password">Heslo</a>
-      </div>
 </div>
 
 <form class="change" [formGroup]="changeForm" (ngSubmit)="onSubmit()">
@@ -21,6 +17,8 @@
             <input type="text" class="form-control" formControlName="name" placeholder="Meno">
         </div>
     </div>
+
+    <div *ngIf="message" [class.message-bar-success]="!error" [class.message-bar-error]="error">{{ message }}</div>
 
     <div class="spacer2"></div>
 

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user.model';
+import { PasswordModel } from '../models/password.model';
 import { data } from 'jquery';
 
 @Injectable({
@@ -48,6 +49,12 @@ export class UserService {
     return this.http.post<UserModel[]>(`${this.baseUrl}/ngo/user/register`, body);
   }
 
+  updateUserPassword(userId: string, newPassword: PasswordModel): Observable<any> {
+    const url = `${this.baseUrl}/ngo/user/update_password/${userId}`;
+    return this.http.put(url, newPassword);
+  }
+}
+
 
 //   editClient(client: ClientModel): Observable<any> {
 //     return this.http.put<any>(`${this.baseUrl}/ngo/client/update_client/${client._id}`, client);
@@ -66,4 +73,3 @@ export class UserService {
 //     return this.http.post<ClientModel[]>(`${this.baseUrl}/ngo/client/add_new_client`, body);
 //   }
 
-}

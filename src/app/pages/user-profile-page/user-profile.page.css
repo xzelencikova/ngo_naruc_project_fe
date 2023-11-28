@@ -27,3 +27,41 @@ p {
     text-align: left;
     padding: 3rem 0 ;
 }
+
+.group-119 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    left: 61.5%;
+    transform: translateX(-50%);
+    bottom: 65%;
+    z-index: 2;
+}
+
+.navigation-link {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px;
+}
+
+.personal-details.active {
+    color: #FF4D00;
+}
+
+.password.active {
+    color: #FF4D00;
+}
+
+.personal-details.inactive {
+    color: #C1C0C0;
+}
+
+.password.inactive {
+    color: #C1C0C0;
+}
