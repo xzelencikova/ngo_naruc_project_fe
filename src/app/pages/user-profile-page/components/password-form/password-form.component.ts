@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { UserModel } from 'src/app/models/user.model'; 
+import { BehaviorSubject } from 'rxjs';  
+import { UserModel } from 'src/app/models/user.model';
+import { PasswordModel } from 'src/app/models/password.model';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-password-form',
@@ -10,18 +12,42 @@ import { UserModel } from 'src/app/models/user.model';
   styleUrls: ['./password-form.component.css']
 })
 export class PasswordFormComponent {
-  public user: UserModel;
-  
-  name1: string = localStorage.getItem('user_name')!;
-  surname1: string = localStorage.getItem('user_surname')!;
+  public user: UserModel = this.userService.getLoggedInUser();
+  public message: string | null = null;
+  public error: boolean = false;
 
-  public passwordForm = this.fb.group({
-    name: [''],
-    surname: ['']
-  });
+  // Define a BehaviorSubject to hold user data
+  private userDataSubject = new BehaviorSubject<UserModel | null>(null);
+  userData$ = this.userDataSubject.asObservable();
 
-  constructor(private userService: UserService, private fb: FormBuilder, private router: Router) {
-    this.user = this.userService.user;
+  public passwordForm: FormGroup;
+
+  constructor(
+    private userService: UserService,
+    private fb: FormBuilder,
+    private userDataService: UserDataService
+  ) {
+    this.userService.selectedUser$.subscribe(selection => {
+      this.user = selection;
+    });
+
+    this.passwordForm = this.fb.group({
+      newPassword: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', Validators.required],
+    });
+  }
+
+  ngOnInit(): void {
+    this.passwordForm.setValue({
+      newPassword: '',  // Set default value or leave it empty
+      confirmPassword: '',  // Set default value or leave it empty
+    });
+  }
+
+  activeForm: 'change' | 'password' = 'change';  // Set default form
+
+  setActiveForm(form: 'change' | 'password') {
+      this.activeForm = form;
   }
 
   sanitizeValue(value: string | null | undefined): string {
@@ -29,23 +55,54 @@ export class PasswordFormComponent {
   }
   
   onSubmit() {
-    const updatedName = this.sanitizeValue(this.passwordForm.get('name')?.value);
-    const updatedSurname = this.sanitizeValue(this.passwordForm.get('surname')?.value);
+    const newPasswordControl = this.passwordForm.get('newPassword');
+    const confirmPasswordControl = this.passwordForm.get('confirmPassword');
   
-    const updatedUser = { 
-      ...this.userService.user, 
-      name: updatedName, 
-      surname: updatedSurname 
+    if (!newPasswordControl || !confirmPasswordControl) {
+      return;
+    }
+  
+    const newPassword: string = newPasswordControl.value;
+    const confirmPassword: string = confirmPasswordControl.value;
+  
+    if (
+      newPassword === undefined ||
+      confirmPassword === undefined ||
+      newPassword !== confirmPassword
+    ) {
+      this.message = 'Heslá sa nezhodujú';
+      this.error = true;
+      setTimeout(() => {
+        this.message = null;
+        this.error = false;
+      }, 3000);
+      return;
+    }
+  
+    const updatedPassword: PasswordModel = {
+      password: newPassword,
     };
   
-    this.userService.updateUser(updatedUser._id!, updatedUser).subscribe({
-      next: success => {
-        this.userService.selectedUser$.emit(success);
-        this.router.navigate(['/success']);
-      },
-      error: err => {
-      }
-    });
+    if (newPassword !== undefined) {
+      this.userService
+        .updateUserPassword(this.user._id!, updatedPassword)
+        .subscribe({
+          next: (success) => {
+            this.user = { ...this.user, password: newPassword }; 
+            this.userDataService.updateUserData(this.user);
+            this.userService.selectedUser$.emit(success);
+            this.message = 'Heslo úspešne zmenené';
+            setTimeout(() => (this.message = null), 3000);
+          },
+          error: (err) => {
+            this.message = 'Nastala chyba';
+            this.error = true;
+            setTimeout(() => {
+              this.message = null;
+              this.error = false;
+            }, 3000);
+          },
+        });
+    }
   }
 }
-

@@ -34,6 +34,23 @@ table.mat-table {
     color: #929090;
 }
 
-:host ::ng-deep .mat-mdc-dialog-container {
+/* :host ::ng-deep .mat-mdc-dialog-container {
     width: 1000px !important;
+} */
+
+input {
+    border-radius: 80px !important;
+    margin: 5%;
+}
+
+span {
+    position: absolute;
+    top: 38%;
+    right: 2%;
+}
+
+.size-input-wrapper {
+    max-width: 100%;
+    position: relative;
+    display: inline-block;
 }

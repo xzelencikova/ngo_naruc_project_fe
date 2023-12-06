@@ -1,10 +1,7 @@
-html, body {
-    height: 100vh;
-}
-
 .row{
     height: 100%;
 }
+
 h1 {
     font-size: 40px;
     padding: 0.5rem;
@@ -26,4 +23,49 @@ p {
     font-size: 16px;
     text-align: left;
     padding: 3rem 0 ;
+}
+
+.navigation-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.navigation-link {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px;
+}
+
+.personal-details.active {
+    color: #FF4D00;
+}
+
+.password.active {
+    color: #FF4D00;
+}
+
+.personal-details.inactive {
+    color: #C1C0C0;
+}
+
+.password.inactive {
+    color: #C1C0C0;
+}
+
+.user-name {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.page-content-white {
+    text-align: center;
+    position: relative;
+    padding: 2rem 0;
 }
