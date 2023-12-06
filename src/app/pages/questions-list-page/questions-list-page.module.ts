@@ -11,12 +11,18 @@ import {MatIconModule} from '@angular/material/icon';
 import { QuestionsListPage } from "./questions-list.page";
 import { QuestionsTableComponent } from "./components/questions-table/questions-table.component";
 import { QuestionsListRoutingModule } from "./questions-list-routing.module";
+import { AddQuestionFormComponent } from './components/add-question-form/add-question-form.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatSelectModule } from "@angular/material/select";
+import { DeleteWindowComponent } from "./components/modal-window/delete-window.component";
 
 
 @NgModule({
     declarations: [
         QuestionsListPage,
-        QuestionsTableComponent
+        QuestionsTableComponent,
+        AddQuestionFormComponent,
+        DeleteWindowComponent
     ],
     imports: [
         CommonModule,
@@ -29,7 +35,9 @@ import { QuestionsListRoutingModule } from "./questions-list-routing.module";
         MatSortModule,
         MatInputModule,
         MatFormFieldModule,
-        MatIconModule
+        MatIconModule,
+        MatDialogModule,
+        MatSelectModule
     ],
     providers: [],
     schemas: []

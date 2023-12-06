@@ -1,5 +1,5 @@
 export interface ClientModel {
-    _id?: string;
+    _id?: number;
     name: string;
     surname: string;
     registration_date: Date;

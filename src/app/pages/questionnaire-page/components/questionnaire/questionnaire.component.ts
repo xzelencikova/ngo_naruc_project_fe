@@ -102,7 +102,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     let rating: RatingModel = {
       date_rated: new Date,
       rated_by_user_id: localStorage.getItem('user_name') + ' ' + localStorage.getItem('user_surname'),
-      client_id: this.client?._id ? this.client._id : "",
+      client_id: this.client?._id ? this.client._id : 0,
       phase_no: this.prefill_questionnaire ? this.prefill_questionnaire?.phase_no : this.client?.last_phase! + 1,
       questions_rating: []
     }
@@ -141,7 +141,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     let rating: RatingModel = {
       date_rated: new Date,
       rated_by_user_id: localStorage.getItem('user_name') + ' ' + localStorage.getItem('user_surname'),
-      client_id: this.client?._id ? this.client._id : "",
+      client_id: this.client?._id ? this.client._id : 0,
       phase_no: this.client?.last_phase ? this.client.last_phase + 1 : 1,
       questions_rating: []
     }

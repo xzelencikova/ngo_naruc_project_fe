@@ -1,0 +1,20 @@
+<mat-dialog-content align="center">
+  <img src="../../../../../../../assets/images/delete_popup.svg">
+</mat-dialog-content>
+
+<h1 mat-dialog-title>VYMAZAŤ OTÁZKU?</h1>
+
+<mat-dialog-content class="dialog-text" align="center">
+  <p>Cheš natrvalo vymazať nasledujúcu otázku?</p> 
+  <p><b>Otázka:</b> {{data.question.question}}</p>
+  <p><b>Kategória:</b> {{data.question.category}}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-button mat-dialog-close class="cancel-button">NIE</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="submit-button">ÁNO</button>
+</mat-dialog-actions>
+
+<mat-dialog-content align="center">
+  <p><b>Po potvrdení už nebude možné tento krok vrátiť späť.</b></p>
+</mat-dialog-content>

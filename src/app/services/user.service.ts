@@ -13,7 +13,7 @@ export class UserService {
   private baseUrl: string = environment.baseUrl;
 
   public selectedUser$: EventEmitter<UserModel> = new EventEmitter<UserModel>();
-  public user: UserModel = {_id: "", name: "", surname: "", email: "", role: ""};
+  public user: UserModel = {_id: 0, name: "", surname: "", email: "", role: ""};
 
   constructor(private http: HttpClient) { 
     this.selectedUser$.subscribe(selection => {
@@ -32,11 +32,11 @@ export class UserService {
     return this.http.get<UserModel[]>(`${this.baseUrl}/ngo/users`);
   }
 
-  deleteUser(user_id: string): Observable<UserModel> {
+  deleteUser(user_id: number): Observable<UserModel> {
     return this.http.delete<UserModel>(`${this.baseUrl}/ngo/user/${user_id}`);
   }
 
-  updateUser(user_id: string, data:UserModel): Observable<UserModel> {
+  updateUser(user_id: number, data:UserModel): Observable<UserModel> {
     return this.http.put<UserModel>(`${this.baseUrl}/ngo/user/${user_id}`, data);
   }
 

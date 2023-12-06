@@ -12,7 +12,7 @@ export class ClientService {
   private baseUrl: string = environment.baseUrl;
 
   public selectedClient$: EventEmitter<ClientModel> = new EventEmitter<ClientModel>();
-  public client: ClientModel = {_id: "", name: "", surname: "", last_phase: 1, registration_date: new Date(), active: true};
+  public client: ClientModel = {_id: 0, name: "", surname: "", last_phase: 1, registration_date: new Date(), active: true};
 
   constructor(private http: HttpClient) { 
     this.selectedClient$.subscribe(selection => {
@@ -33,7 +33,7 @@ export class ClientService {
     return this.client;
   }
 
-  getClientById(client_id: string): Observable<ClientModel> {
+  getClientById(client_id: number): Observable<ClientModel> {
     return this.http.get<ClientModel>(`${this.baseUrl}/ngo/client/${client_id}`);
   }
 
