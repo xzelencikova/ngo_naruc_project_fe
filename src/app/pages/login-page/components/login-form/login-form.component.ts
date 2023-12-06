@@ -28,7 +28,7 @@ export class LoginFormComponent {
       next: success => {
         localStorage.setItem('user_name', success.name);
         localStorage.setItem('user_surname', success.surname);
-        localStorage.setItem('user_id', success._id ? success._id : "");
+        localStorage.setItem('user_id', success._id ? String(success._id) : "0");
         localStorage.setItem('user_role', success.role);
         localStorage.setItem('token', success.token ? success.token : "")
         

@@ -33,11 +33,11 @@ export class RatingService {
       );
   }
 
-  getRatingOverviewForClient(clientId: string): Observable<any> {
+  getRatingOverviewForClient(clientId: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/ngo/rating_overview/${clientId}`);
   }
 
-  getRatingsByClientId(clientId: string): Observable<RatingModel[]> {
+  getRatingsByClientId(clientId: number): Observable<RatingModel[]> {
     return this.http.get<RatingModel[]>(`${this.baseUrl}/ngo/ratings/for_client/${clientId}`)
   }
 

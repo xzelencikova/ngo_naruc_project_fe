@@ -17,4 +17,20 @@ export class QuestionService {
   getQuestionsList(): Observable<QuestionModel[]> {
     return this.http.get<QuestionModel[]>(`${this.baseUrl}/ngo/questions`);
   }
+
+  getCategoriesOptions(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/ngo/categories`)
+  }
+
+  addQuestion(question: QuestionModel): Observable<QuestionModel> {
+    return this.http.post<QuestionModel>(`${this.baseUrl}/ngo/questions`, question);
+  }
+
+  editQuestion(question: any): Observable<QuestionModel> {
+    return this.http.put<QuestionModel>(`${this.baseUrl}/ngo/question/${question._id}`, question);
+  }
+
+  deleteQuestion(question_id: number): Observable<QuestionModel> {
+    return this.http.delete<QuestionModel>(`${this.baseUrl}/ngo/question/${question_id}`);
+  }
 }

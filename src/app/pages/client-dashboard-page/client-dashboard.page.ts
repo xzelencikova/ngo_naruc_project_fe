@@ -16,7 +16,7 @@ import jsPDF from 'jspdf';
   styleUrls: ['./client-dashboard.page.css']
 })
 export class ClientDashboardPage {
-  public client: ClientModel = {_id: "", name: "", surname: "", last_phase: 1, registration_date: new Date(), active: true};
+  public client: ClientModel = {_id: 0, name: "", surname: "", last_phase: 1, registration_date: new Date(), active: true};
   ratingOverview: any = {};
   ratingCategory: any[] = [];
   ratings: RatingModel[] = [];
@@ -35,9 +35,9 @@ export class ClientDashboardPage {
 
   constructor(private router: Router, private clientService: ClientService, private ratingService: RatingService, private activatedRoute: ActivatedRoute, private dialog: MatDialog) {
     this.client = this.clientService.getSelectedClient();
-    const client_id = this.activatedRoute.snapshot.paramMap.get('id');
+    const client_id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
-    if (this.client._id === "") {   
+    if (this.client._id === 0) {   
       this.clientService.getClientById(client_id!).subscribe(res => {
         this.client = res;
 

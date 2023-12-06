@@ -11,7 +11,7 @@ import { RatingService } from 'src/app/services/rating.service';
   styleUrls: ['./questionnaire.page.css']
 })
 export class QuestionnairePage {
-  public client: ClientModel = {_id: "", name: "", surname: "", last_phase: 1, registration_date: new Date(), active: true};
+  public client: ClientModel = {_id: 0, name: "", surname: "", last_phase: 1, registration_date: new Date(), active: true};
   public phase_no: number = 0;
   unfinished_rating!: RatingModel;
 
@@ -32,7 +32,7 @@ export class QuestionnairePage {
     }
     else {
       this.phase_no = this.client.last_phase;
-      this.ratingService.getRatingsByClientId(this.client._id!).subscribe(ratings => {
+      this.ratingService.getRatingsByClientId(Number(this.client._id!)).subscribe(ratings => {
         ratings.forEach(r => {
           if (r.phase_no == this.client.last_phase + 1) {
             this.unfinished_rating = r;

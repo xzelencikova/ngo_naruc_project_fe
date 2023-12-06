@@ -6,6 +6,9 @@ import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { QuestionService } from 'src/app/services/question.service';
 import { QuestionModel } from 'src/app/models/question.model';
+import { MatDialog } from '@angular/material/dialog';
+import { AddQuestionFormComponent } from '../add-question-form/add-question-form.component';
+import { DeleteWindowComponent } from '../modal-window/delete-window.component';
 
 
 @Component({
@@ -23,18 +26,20 @@ export class QuestionsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(private questionsService: QuestionService, private router: Router) {
+  constructor(private questionsService: QuestionService, private router: Router, private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<QuestionModel>();
   }
 
-
-  ngOnInit(): void {
+  reloadTable() {
     this.questionsService.getQuestionsList().subscribe(res => {
-      console.log(res)
       this.dataSource = new MatTableDataSource<QuestionModel>(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    })
+    });
+  }
+
+  ngOnInit(): void {
+    this.reloadTable();
   }
 
   ngAfterViewInit(): void {
@@ -49,8 +54,49 @@ export class QuestionsTableComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // showClientOverview(client: ClientModel) {
-  //   this.router.navigate(["/client-overview", client._id]);
-  //   this.clientService.selectedClient$.emit(client);
-  // }
+  openQuestionForm() {
+    const dialogRef = this.dialog.open(AddQuestionFormComponent, {
+      data: {
+        formType: "PRIDAŤ NOVÚ OTÁZKU",
+        question: {}
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.reloadTable();
+      }
+    });
+  }
+
+  editQuestionForm(e: any) {
+    console.log(e);
+    const dialogRef = this.dialog.open(AddQuestionFormComponent, {
+      data: {
+        formType: "UPRAVIŤ OTÁZKU",
+        question: e
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.reloadTable();
+      }
+    });
+  }
+
+  deleteQuestion(e: any) {
+    const dialogRef = this.dialog.open(DeleteWindowComponent, {
+      data: {
+        question: e
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.questionsService.deleteQuestion(e._id).subscribe(res => {});
+        this.reloadTable();
+      }
+    });
+  }
 }

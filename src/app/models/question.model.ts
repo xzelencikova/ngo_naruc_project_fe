@@ -1,4 +1,7 @@
 export interface QuestionModel {
-    _id: string,
-    question: string
+    _id: number,
+    question: string,
+    category?: string,
+    icon?: string,
+    order?: string
 }
