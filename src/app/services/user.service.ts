@@ -18,9 +18,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { 
     this.selectedUser$.subscribe(selection => {
-      console.log(selection);
       this.user = selection;
-      console.log(this.user);
     });
   }
 
@@ -49,9 +47,13 @@ export class UserService {
     return this.http.post<UserModel[]>(`${this.baseUrl}/ngo/user/register`, body);
   }
 
-  updateUserPassword(userId: string, newPassword: PasswordModel): Observable<any> {
+  updateUserPassword(userId: number, newPassword: PasswordModel): Observable<any> {
     const url = `${this.baseUrl}/ngo/user/update_password/${userId}`;
     return this.http.put(url, newPassword);
+  }
+
+  getUserById(user_id: number) {
+    return this.http.get<UserModel>(`${this.baseUrl}/ngo/user/${user_id}`);
   }
 }
 

@@ -11,7 +11,7 @@ import { UserDataService } from 'src/app/services/user-data.service';
   styleUrls: ['./change-form.component.css']
 })
 export class ChangeFormComponent {
-  public user: UserModel;
+  public user: UserModel = this.userService.getLoggedInUser();
   public message: string | null = null;
   public error: boolean = false;
 
@@ -30,20 +30,19 @@ export class ChangeFormComponent {
     private userDataService: UserDataService
   ) 
   {
-    this.user = this.userService.getLoggedInUser();
+    this.userService.selectedUser$.subscribe(selection => {
+      this.user = selection;
+      this.changeForm.setValue({
+        name: selection.name,
+        surname: selection.surname
+      });
+    });
   }
 
   activeForm: 'change' | 'password' = 'change';  // Set default form
 
   setActiveForm(form: 'change' | 'password') {
       this.activeForm = form;
-  }
-
-  ngOnInit(): void {
-    this.changeForm.setValue({
-      name: this.user.name,
-      surname: this.user.surname
-    });
   }
 
   sanitizeValue(value: string | null | undefined): string {
@@ -65,9 +64,6 @@ export class ChangeFormComponent {
         this.userService.selectedUser$.emit(success);
         this.message = 'Úspešne zmenené';
         setTimeout(() => this.message = null, 3000);
-
-        // Update the user property with the new user data
-        this.user = updatedUser;
 
         // Emit the updated user data
         this.userDataService.updateUserData(updatedUser);

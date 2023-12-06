@@ -1,10 +1,7 @@
-html, body {
-    height: 100vh;
-}
-
 .row{
     height: 100%;
 }
+
 h1 {
     font-size: 40px;
     padding: 0.5rem;
@@ -28,15 +25,11 @@ p {
     padding: 3rem 0 ;
 }
 
-.group-119 {
+.navigation-links {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    left: 61.5%;
-    transform: translateX(-50%);
-    bottom: 65%;
-    z-index: 2;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem;
 }
 
 .navigation-link {
@@ -64,4 +57,15 @@ p {
 
 .password.inactive {
     color: #C1C0C0;
+}
+
+.user-name {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.page-content-white {
+    text-align: center;
+    position: relative;
+    padding: 2rem 0;
 }

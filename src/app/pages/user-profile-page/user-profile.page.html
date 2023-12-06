@@ -1,5 +1,6 @@
 <div class="layout">
     <div class="row" style="margin: 0 10%">
+        
         <div class="col-md-4">
             <div class="page-explanation">
                 <h1>Tvoje</h1>
@@ -14,16 +15,23 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-8" style="background-color: white;">
             <div style="padding: 3rem 1rem 2rem;">
-                <div class='change-form'> 
-                    <div class="navigation-links group-119">
-                        <a routerLink="/user-profile/change" class="navigation-link personal-details" [ngClass]="{ 'active': activeForm === 'change', 'inactive': activeForm !== 'change' }">Zmeniť údaje</a>
-                        <a routerLink="/user-profile/password" class="navigation-link password" [ngClass]="{ 'active': activeForm === 'password', 'inactive': activeForm !== 'password' }">Zmeniť heslo</a>
+                <div class="page-content-white">
+                    <div class="spacer2"></div>
+                    <div class="main-text">
+                        <h1 class="user-name">{{user.name}} {{user.surname}}</h1>
                     </div>
-                      
-                    <router-outlet></router-outlet>
+                    <div class="spacer2"></div>
                 </div>
+
+                <div class="navigation-links">
+                    <a routerLink="/user-profile/change" class="navigation-link personal-details" [ngClass]="{ 'active': activeForm === 'change', 'inactive': activeForm !== 'change' }">Zmeniť údaje</a>
+                    <a routerLink="/user-profile/password" class="navigation-link password" [ngClass]="{ 'active': activeForm === 'password', 'inactive': activeForm !== 'password' }">Zmeniť heslo</a>
+                </div>
+                    
+                <router-outlet></router-outlet>
             </div>
         </div>
     </div>

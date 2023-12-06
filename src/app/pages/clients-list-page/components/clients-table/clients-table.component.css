@@ -41,3 +41,20 @@ table.mat-table {
 :host ::ng-deep .mat-mdc-paginator-container {
     color: #929090;
 }
+
+span {
+    position: absolute;
+    top: 38%;
+    right: 2%;
+}
+
+.size-input-wrapper {
+    max-width: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+input {
+    border-radius: 80px !important;
+    margin: 5%;
+}

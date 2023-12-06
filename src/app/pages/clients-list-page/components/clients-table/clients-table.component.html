@@ -1,7 +1,13 @@
-<mat-form-field style="width: 100%;" appearance="outline">
+<!-- <mat-form-field style="width: 100%;" appearance="outline">
   <input matInput #searchVal placeholder="Vyhľadaj klienta" (keyup)="applyFilter(searchVal.value)">
   <mat-icon matSuffix>search</mat-icon>
-</mat-form-field>
+</mat-form-field> -->
+<div class="form-group row" style="width: 70%;">
+  <div class="col-sm-10 size-input-wrapper">
+      <input #searchVal placeholder="Vyhľadaj otázku" type="text" class="form-control" (keyup)="applyFilter(searchVal.value)">
+      <span><i class="fas fa-search"></i></span>
+  </div>
+</div>
 
 <table mat-table [dataSource]="dataSource" class="clients-table" matSort>
 

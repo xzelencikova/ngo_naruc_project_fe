@@ -12,7 +12,7 @@ import { UserDataService } from 'src/app/services/user-data.service';
   styleUrls: ['./password-form.component.css']
 })
 export class PasswordFormComponent {
-  public user: UserModel;
+  public user: UserModel = this.userService.getLoggedInUser();
   public message: string | null = null;
   public error: boolean = false;
 
@@ -27,7 +27,10 @@ export class PasswordFormComponent {
     private fb: FormBuilder,
     private userDataService: UserDataService
   ) {
-    this.user = this.userService.getLoggedInUser();
+    this.userService.selectedUser$.subscribe(selection => {
+      this.user = selection;
+    });
+
     this.passwordForm = this.fb.group({
       newPassword: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
@@ -85,10 +88,10 @@ export class PasswordFormComponent {
         .updateUserPassword(this.user._id!, updatedPassword)
         .subscribe({
           next: (success) => {
-            this.userService.selectedUser$.emit(success);
-            this.message = 'Heslo úspešne zmenené';
             this.user = { ...this.user, password: newPassword }; 
             this.userDataService.updateUserData(this.user);
+            this.userService.selectedUser$.emit(success);
+            this.message = 'Heslo úspešne zmenené';
             setTimeout(() => (this.message = null), 3000);
           },
           error: (err) => {
