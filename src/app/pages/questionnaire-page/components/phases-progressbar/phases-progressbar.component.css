@@ -120,3 +120,11 @@
 .progress, .progress-stacked {
     --bs-progress-height: 100% !important;
 }
+
+.static-top {
+    position: sticky;
+    width: 100%;
+    top: 95px;
+    z-index: 10000;
+    background: white;
+}

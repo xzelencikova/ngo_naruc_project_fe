@@ -32,6 +32,8 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   questionnaire: QuestionnaireCategoryModel[] = [];
   currentStep: number = 0;
   isHistory: boolean = false;
+  timer: any;
+  private lastClickTime: number = 0;
 
   @Input() client: ClientModel | undefined;
   @Input() prefill_questionnaire!: RatingModel;
@@ -40,15 +42,23 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   @ViewChildren('shownCategory') titles!: QueryList<ElementRef>; // getting your sections here
 
   @HostListener('window:scroll', ['$event'])
-  isScrolledIntoView(){
-    setTimeout(() => {
+  isScrolledIntoView(event: any){
+    // setTimeout(() => {
+
+    const currentTime = Date.now();
+    const timeSinceLastClick = currentTime - this.lastClickTime;
+
+    if(timeSinceLastClick > 1000) {
       for (let index = 0; index < this.titles.length; index++) {
         const rect = document.getElementById(this.questionnaire[index].icon)?.getBoundingClientRect();
         const topShown = rect?.top ? rect?.top >= 0 : undefined;
         const bottomShown = rect?.bottom ? rect?.bottom <= window.innerHeight : undefined;
-        if (topShown && bottomShown) this.currentStep = index;
+        if (topShown && bottomShown) {
+          this.currentStep = index;
+        }
       }
-    }, 1500);
+    }
+    // }, 3000);
   }
 
   constructor(private questionnaireService: QuestionnaireService, 
@@ -88,10 +98,14 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngAfterViewInit(): void {
-    this.stepper.selectedIndexChange
-    .subscribe((res: number) => {
+    this.stepper.selectedIndexChange.subscribe((res: number) => {
+      this.lastClickTime = Date.now();
       this.currentStep = res;
-      document.getElementById(this.questionnaire[res].icon)?.scrollIntoView();
+
+      document.getElementById(this.questionnaire[res].icon)?.scrollIntoView({
+        behavior: 'auto',
+        block: 'center'
+      });
     })
   }
   

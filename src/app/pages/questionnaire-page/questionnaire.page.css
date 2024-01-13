@@ -10,3 +10,11 @@ a {
     color: #929090;
     text-decoration: none;
 }
+
+.static-top {
+    position: sticky;
+    width: 100%;
+    top: 140px;
+    background: white;
+    z-index: 10000;
+}

@@ -2,9 +2,11 @@
 
 <div style="margin: 0 10%">
 
-    <div class="navigation" >
-        <a [routerLink]="['/client-overview', client._id]"><i class="fa fa-chevron-left fa-lg fa-light"></i> Späť na prehľad</a>
-        <p>{{client.name | uppercase}} {{client.surname | uppercase}}</p>
+    <div class="static-top">
+        <div class="navigation">
+            <a [routerLink]="['/client-overview', client._id]"><i class="fa fa-chevron-left fa-lg fa-light"></i> Späť na prehľad</a>
+            <p>{{client.name | uppercase}} {{client.surname | uppercase}}</p>
+        </div>
     </div>
 
     <app-questionnaire [client]="client" [prefill_questionnaire]="unfinished_rating"></app-questionnaire>
