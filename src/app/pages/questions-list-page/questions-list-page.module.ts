@@ -15,6 +15,7 @@ import { AddQuestionFormComponent } from './components/add-question-form/add-que
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSelectModule } from "@angular/material/select";
 import { DeleteWindowComponent } from "./components/modal-window/delete-window.component";
+import { AlertModule } from "src/app/components/alert";
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { DeleteWindowComponent } from "./components/modal-window/delete-window.c
         MatFormFieldModule,
         MatIconModule,
         MatDialogModule,
-        MatSelectModule
+        MatSelectModule,
+        AlertModule
     ],
     providers: [],
     schemas: []

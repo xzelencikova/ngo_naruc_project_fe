@@ -13,6 +13,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { AlertModule } from "src/app/components/alert";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { MatButtonModule } from '@angular/material/button';
         MatDialogModule,
         MatTableModule,
         MatMenuModule,
-        MatButtonModule
+        MatButtonModule,
+        AlertModule
     ],
     providers: [],
     schemas: []

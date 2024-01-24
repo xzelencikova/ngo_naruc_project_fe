@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { UserModel } from 'src/app/models/user.model';
 import { PasswordModel } from 'src/app/models/password.model';
 import { UserDataService } from 'src/app/services/user-data.service';
+import { AlertService } from 'src/app/components/alert';
 
 @Component({
   selector: 'app-password-form',
@@ -25,7 +26,8 @@ export class PasswordFormComponent {
   constructor(
     private userService: UserService,
     private fb: FormBuilder,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    private alertService: AlertService
   ) {
     this.userService.selectedUser$.subscribe(selection => {
       this.user = selection;
@@ -70,12 +72,7 @@ export class PasswordFormComponent {
       confirmPassword === undefined ||
       newPassword !== confirmPassword
     ) {
-      this.message = 'Heslá sa nezhodujú';
-      this.error = true;
-      setTimeout(() => {
-        this.message = null;
-        this.error = false;
-      }, 3000);
+      this.alertService.error("Heslá sa nezhodujú.", "Nastala chyba!")
       return;
     }
   
@@ -91,16 +88,10 @@ export class PasswordFormComponent {
             this.user = { ...this.user, password: newPassword }; 
             this.userDataService.updateUserData(this.user);
             this.userService.selectedUser$.emit(success);
-            this.message = 'Heslo úspešne zmenené';
-            setTimeout(() => (this.message = null), 3000);
+            this.alertService.success("Heslo bolo úspešne zmenené.", "Výborne!");
           },
           error: (err) => {
-            this.message = 'Nastala chyba';
-            this.error = true;
-            setTimeout(() => {
-              this.message = null;
-              this.error = false;
-            }, 3000);
+            this.alertService.error("Nepodarilo sa zmeniť heslo.", "Nastala chyba!");
           },
         });
     }

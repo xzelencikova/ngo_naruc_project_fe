@@ -1,84 +1,64 @@
-<div>
-    <button class="btn btn-orange" type="button" (click) = "openForm()">
-        Pridať zamestnanca 
-    </button>
-</div>
+<alert [maxItems]="3" [delay]="0"></alert>
 
-<div class="overlay" id="overlay">
-    <div class="modal" tabindex="-1" role="dialog" id="form-new-client">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeForm()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-
-                <div class="form-head">
+<form [formGroup]="questForm" (ngSubmit)="onSubmit()">
                     
-                        <div>
-                            <h1 class="font-weight-normal welcome">Vytvoriť</h1>
-                            <h1 class="font-weight-bold name">nového zamestnanca</h1>
-                        </div>
+    <div>
+        <h1 class="font-weight-normal welcome">Vytvoriť</h1>
+        <h1 class="font-weight-bold name">nového zamestnanca</h1>
+    </div>
+    
+    <div class="main-description-form">
+        <p class="description-form">
+            Vyplň formulár a vytvor tak účet novému zamestnancovi!
+        </p> 
+    </div>
+    <hr/>
 
-                        <div class="main-description-form">
-                            <p class="description-form">
-                                Vyplň formulár a vytvor tak účet novému zamestnancovi!
-                            </p> 
-                        </div>
-
+    <mat-dialog-content class="dialog-text">
+        <div class="form-group row">
+            <label for="user-name" class="col-sm-2 col-form-label">Meno</label>
+            <div class="col-sm-10">
+            <input type="text" class="form-control" id="user-name" formControlName="userName">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="user-surname" class="col-sm-2 col-form-label">Priezvisko</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="user-surname" formControlName="userSurname">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="user-email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="user-email"formControlName="userEmail">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="user-role" class="col-sm-2 col-form-label">Rola</label>
+            <div class="col-sm-10">
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="user-role1">
+                    <input type="radio" class="form-control-radio" id="user-role1"  value="admin" formControlName="userRole" >Admin
+                    </label>
                 </div>
-                <hr/>
-                <div class="modal-form-body">
-                    <form [formGroup]="questForm" (ngSubmit)="onSubmit()">
-                        <div class="form-group row">
-                            <label for="user-name" class="col-sm-2 col-form-label">Meno zamestnanca</label>
-                            <div class="col-sm-10">
-                            <input type="text" class="form-control" id="user-name" formControlName="userName">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="user-surname" class="col-sm-2 col-form-label">Priezvisko zamestnanca</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="user-surname" formControlName="userSurname">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="user-email" class="col-sm-2 col-form-label">Email zamestnanca</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="user-email"formControlName="userEmail">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="user-role" class="col-sm-2 col-form-label">Rola zamestnanca</label>
-                            <div class="col-sm-10">
-                                <div class="form-check-inline">
-                                    <label class="form-check-label" for="user-role1">
-                                    <input type="radio" class="form-control-radio" id="user-role1"  value="admin" formControlName="userRole" >Admin
-                                    </label>
-                                </div>
-                                <div class="form-check-inline">
-                                    <label class="form-check-label" for="user-role2">
-                                    <input type="radio" class="form-control-radio" id="user-role2"  value="guest" formControlName="userRole" checked>Hosť
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="user-password" class="col-sm-2 col-form-label">Heslo</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="user-password"formControlName="userPassword">
-                            </div>
-                        </div>
-
-                        <div class="butt">
-                            <button class="btn btn-orange-form" type="submit">
-                                Potvrdiť
-                            </button>
-                        </div>
-                    </form>
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="user-role2">
+                    <input type="radio" class="form-control-radio" id="user-role2"  value="guest" formControlName="userRole" checked>Hosť
+                    </label>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        <div class="form-group row">
+            <label for="user-password" class="col-sm-2 col-form-label">Heslo</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="user-password"formControlName="userPassword">
+            </div>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="center">
+        <button mat-button mat-dialog-close class="cancel-button">ZRUŠIŤ</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="submit-button" type="submit">VYTVORIŤ</button>
+    </mat-dialog-actions>
+</form>
 

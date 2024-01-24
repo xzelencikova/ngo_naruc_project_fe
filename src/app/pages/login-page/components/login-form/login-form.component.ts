@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService, Alert, AlertType, PositiionType } from 'src/app/components/alert';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -15,8 +16,9 @@ export class LoginFormComponent {
     email: [''],
     password: ['']
   });
+  Position = PositiionType;
 
-  constructor(private userService: UserService, private fb: FormBuilder, private router: Router) {}
+  constructor(private userService: UserService, private fb: FormBuilder, private router: Router, private alertService: AlertService) {}
 
   onSubmit() {
     let user: any = {
@@ -26,6 +28,7 @@ export class LoginFormComponent {
 
     this.userService.loginUser(user).subscribe({
       next: success => {
+        this.alertService.success("Prihlásenie prebehlo úspešne.", "Výborne!");
         localStorage.setItem('user_name', success.name);
         localStorage.setItem('user_surname', success.surname);
         localStorage.setItem('user_id', success._id ? String(success._id) : "0");
@@ -39,11 +42,10 @@ export class LoginFormComponent {
           email: success.email,
           role: success.role
         });
-
         this.router.navigate(['/'])
       },
       error: err => {
-        
+        this.alertService.error("Nebolo možné prihlásiť používateľa do systému.", "Nastala chyba!")
       }
     }); 
   }  

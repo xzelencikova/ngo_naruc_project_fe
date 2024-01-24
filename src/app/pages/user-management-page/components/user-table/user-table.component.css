@@ -1,11 +1,15 @@
 .detail-button {
-    padding: 0.75rem 3rem;
-    border-radius: 50px;
+    /* border-radius: 50px; */
     font-size: 16px;
     font-weight: 700;
-    color: white;
-    background: linear-gradient(0.25turn, #FF4D00, #FC7900);
+    color: #FF4D00;
+    background: none;
+    /* background: linear-gradient(0.25turn, #FF4D00, #FC7900); */
     border: none;
+}
+
+.detail-button:hover {
+    color: #D44900;
 }
 
 td {
@@ -63,4 +67,22 @@ h1 {
 .mat-checkbox {
     opacity: 0.03 !important;
     background-color: #005691!important;
-  }
+}
+
+input {
+    border-radius: 80px !important;
+    margin: 5%;
+}
+
+span {
+    position: absolute;
+    top: 38%;
+    right: 2%;
+}
+
+.size-input-wrapper {
+    max-width: 100%;
+    position: relative;
+    display: inline-block;
+}
+

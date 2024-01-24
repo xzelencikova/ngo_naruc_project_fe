@@ -4,6 +4,7 @@ import { HomePage } from "./home.page";
 import { HomeRoutingModule } from "./home-routing.module";
 import { NewClientFormComponent } from './components/new-client-form/new-client-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertModule } from "src/app/components/alert";
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     imports: [
         CommonModule,
         HomeRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        AlertModule
     ],
     providers: [],
     schemas: []

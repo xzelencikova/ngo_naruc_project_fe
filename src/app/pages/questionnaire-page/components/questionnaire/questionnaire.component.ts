@@ -17,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ClientModel } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/services/client.service';
+import { AlertService } from 'src/app/components/alert';
 
 
 @Component({
@@ -68,7 +69,8 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     private clientService: ClientService, 
     private saveMessageBar: MatSnackBar, 
     private dialog: MatDialog, 
-    private router: Router) {
+    private router: Router,
+    private alertService: AlertService) {
     library.addIconPacks(fas, far);
   }
 
@@ -135,18 +137,10 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     
     this.subscription2 = this.ratingService.postRating(rating).subscribe({
       next: success => {
-        this.saveMessageBar.open('Pozorovací hárok bol úspešne uložený!', 'X', {
-          horizontalPosition: "end",
-          verticalPosition: "bottom",
-          duration: 2000
-        });
+        this.alertService.success("Pozorovací hárok bol úspešne uložený.", "Výborne!");
       },
       error: err => {
-        this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
-          horizontalPosition: "end",
-          verticalPosition: "bottom",
-          duration: 2000
-        });
+        this.alertService.error("Nebolo možné presunúť klienta do ďalšej fázy programu.", "Nastala chyba!");
       }
     });
   }
@@ -178,25 +172,21 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     })
 
     this.clientService.editClient(this.client!).subscribe({
-      next: success => {},
+      next: success => {
+        this.alertService.success("Klient bol presunutý do ďalšej fázy programu.", "Výborne!");
+      },
       error: err => {
-        // this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
-        //   horizontalPosition: "end",
-        //   verticalPosition: "bottom",
-        //   duration: 2000
-        // });
+        this.alertService.error("Nebolo možné presunúť klienta do ďalšej fázy programu.", "Nastala chyba!");
         return false;
       }
     });
     
     this.subscription2 = this.ratingService.postRating(rating).subscribe({
-      next: success => {},
+      next: success => {
+        this.alertService.success("Pozorovací hárok bol úspešne uložený.", "Výborne!");
+      },
       error: err => {
-        // this.saveMessageBar.open('Niečo sa pokazilo. Skúste to znova, prosím.', 'X', {
-        //   horizontalPosition: "end",
-        //   verticalPosition: "bottom",
-        //   duration: 2000
-        // });
+        this.alertService.error("Nebolo možné uložiť hodnotenie klienta.", "Nastala chyba!");
         return false;
       }
     });

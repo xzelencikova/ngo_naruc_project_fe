@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { BehaviorSubject } from 'rxjs';  
 import { UserModel } from 'src/app/models/user.model';
 import { UserDataService } from 'src/app/services/user-data.service';
+import { AlertService } from 'src/app/components/alert';
 
 @Component({
   selector: 'app-change-form',
@@ -27,7 +28,8 @@ export class ChangeFormComponent {
   constructor(
     private userService: UserService,
     private fb: FormBuilder,
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    private alertService: AlertService
   ) 
   {
     this.changeForm.setValue({
@@ -67,19 +69,13 @@ export class ChangeFormComponent {
     this.userService.updateUser(this.user._id!, updatedUser).subscribe({
       next: success => {
         this.userService.selectedUser$.emit(success);
-        this.message = 'Úspešne zmenené';
-        setTimeout(() => this.message = null, 3000);
+        this.alertService.success("Údaje boli úspešne zmenené.", "Výborne!");
 
         // Emit the updated user data
         this.userDataService.updateUserData(updatedUser);
       },
       error: err => {
-        this.message = 'Nastala chyba';
-        this.error = true;
-        setTimeout(() => {
-          this.message = null;
-          this.error = false;
-        }, 3000);
+        this.alertService.error("Nepodarilo sa zmeniť údaje.", "Nastala chyba!");
       }
     });
   }
