@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { NewClientFormComponent } from './components/new-client-form/new-client-form.component';
 
 @Component({
   selector: 'app-home-page',
@@ -10,19 +12,14 @@ import { Router } from '@angular/router';
 })
 export class HomePage{
 
-
   user: string = localStorage.getItem('user_name')!;
 
   openForm(){
-    const overlayDiv = document.getElementById('overlay');
-    const modelDiv = document.getElementById('form-new-client');
-    if(modelDiv!=null){
-      modelDiv.style.display = 'block';
-    }
+    const dialogRef = this.dialog.open(NewClientFormComponent, {});
 
-    if(overlayDiv!=null){
-      overlayDiv.style.display = 'block';
-    }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {}
+    });
   }
 
   closeForm(){
@@ -37,9 +34,9 @@ export class HomePage{
   }
 
   constructor(
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ){}
-  
 
   navigateClientsList(): void {
     this.router.navigate(['/clients-list'])

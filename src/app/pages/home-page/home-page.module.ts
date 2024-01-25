@@ -5,6 +5,7 @@ import { HomeRoutingModule } from "./home-routing.module";
 import { NewClientFormComponent } from './components/new-client-form/new-client-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AlertModule } from "src/app/components/alert";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { AlertModule } from "src/app/components/alert";
         CommonModule,
         HomeRoutingModule,
         ReactiveFormsModule,
-        AlertModule
+        AlertModule,
+        MatDialogModule
     ],
     providers: [],
     schemas: []

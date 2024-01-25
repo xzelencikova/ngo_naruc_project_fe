@@ -30,7 +30,7 @@ export class UserTableComponent implements OnInit, AfterViewInit{
   constructor(private userService: UserService, 
     private router: Router, 
     private alertService: AlertService,
-    private dialog: MatDialog,) {
+    private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<UserModel>();
   }
 
