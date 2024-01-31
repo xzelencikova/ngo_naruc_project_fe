@@ -12,6 +12,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatIconModule} from '@angular/material/icon';
 import { ChangeFormComponent } from './components/change-form/change-form.component';
 import {PasswordFormComponent} from './components/password-form/password-form.component';
+import { AlertModule } from "src/app/components/alert";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {PasswordFormComponent} from './components/password-form/password-form.co
     MatSortModule,
     MatInputModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
+    AlertModule
   ]
 })
 export class UserProfilePageModule { }

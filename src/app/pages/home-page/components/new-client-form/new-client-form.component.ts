@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ClientModel } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/services/client.service';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/components/alert';
 
 @Component({
   selector: 'app-new-client-form',
@@ -19,6 +20,7 @@ export class NewClientFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private clientService: ClientService,
+    private alertService: AlertService,
     private router: Router) { }
 
   ngOnInit() {
@@ -35,12 +37,16 @@ export class NewClientFormComponent implements OnInit {
       active: true
     };
 
-
-    this.clientService.postNewClient(client).subscribe(
-      (client: any) => {
-      this.router.navigate(["client-overview", client._id]);
-      this.clientService.selectedClient$.emit(client);
-    });
+    this.clientService.postNewClient(client).subscribe({
+      next: data => {
+        this.alertService.success("Klient bol úspešne pridaný do zoznamu klientov.", "Výborne!");
+        this.clientService.selectedClient$.emit(data);
+        this.router.navigate(["client-overview", data._id]);
+      },
+      error: err => {
+        this.alertService.error("Nebolo možné vytvoriť klienta.", "Nastala chyba!");
+      }}
+    );
     
     
   }

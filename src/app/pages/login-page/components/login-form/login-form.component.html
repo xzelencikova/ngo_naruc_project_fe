@@ -5,7 +5,7 @@
 </div>
 
 <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                
+    <alert [position]="Position.BottomRight" [maxItems]="3" [delay]="0"></alert>
     <div class="form-group">
         <div class="label-position">
             <label for="email">Zadaj svoj pracovný email</label>

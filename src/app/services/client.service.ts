@@ -37,7 +37,7 @@ export class ClientService {
     return this.http.get<ClientModel>(`${this.baseUrl}/ngo/client/${client_id}`);
   }
 
-  postNewClient(body: ClientModel): Observable<ClientModel[]> {
-    return this.http.post<ClientModel[]>(`${this.baseUrl}/ngo/clients`, body);
+  postNewClient(body: ClientModel): Observable<ClientModel> {
+    return this.http.post<ClientModel>(`${this.baseUrl}/ngo/clients`, body);
   }
 }

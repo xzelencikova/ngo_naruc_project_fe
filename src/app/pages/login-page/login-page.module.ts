@@ -4,6 +4,7 @@ import { LoginPage } from "./login.page";
 import { LoginRoutingModule } from "./login-routing.module";
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AlertModule } from "src/app/components/alert";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         CommonModule,
         LoginRoutingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        AlertModule
     ],
     providers: [],
     schemas: []

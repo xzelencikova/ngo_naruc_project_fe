@@ -1,3 +1,5 @@
+<alert [maxItems]="3" [delay]="0"></alert>
+
 <form class="change" [formGroup]="changeForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
@@ -5,7 +7,7 @@
         <input type="text" class="form-control" formControlName="name" placeholder="Meno">
     </div>
 
-    <div *ngIf="message" [class.message-bar-success]="!error" [class.message-bar-error]="error">{{ message }}</div>
+    <!-- <div *ngIf="message" [class.message-bar-success]="!error" [class.message-bar-error]="error">{{ message }}</div> -->
 
     <div class="form-group">
         <label for="surname">Priezvisko</label>

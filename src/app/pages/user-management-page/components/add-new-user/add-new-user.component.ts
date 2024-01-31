@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/user.model';
+import { AlertService } from 'src/app/components/alert';
+
 
 @Component({
   selector: 'app-add-new-user',
@@ -20,33 +22,11 @@ export class AddNewUserComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder, 
-    private userService: UserService) { }
+    private userService: UserService,
+    private alertService: AlertService) { }
 
 
   ngOnInit() {
-  }
-
-  openForm(){
-    const overlayDiv = document.getElementById('overlay');
-    const modelDiv = document.getElementById('form-new-client');
-    if(modelDiv!=null){
-      modelDiv.style.display = 'block';
-    }
-
-    if(overlayDiv!=null){
-      overlayDiv.style.display = 'block';
-    }
-  }
-
-  closeForm(){
-    const modelDiv = document.getElementById('form-new-client');
-    const overlayDiv = document.getElementById('overlay');
-    if(modelDiv!=null){
-      modelDiv.style.display = 'none';
-    }
-    if(overlayDiv!=null){
-      overlayDiv.style.display = 'none';
-    }
   }
 
   onSubmit(): void {
@@ -60,9 +40,13 @@ export class AddNewUserComponent implements OnInit {
       password:  formData.userPassword 
     };
 
-    this.userService.postNewUser(user).subscribe(
-      (user: any) => {
-        window.location.reload();
+    this.userService.postNewUser(user).subscribe({
+      next: success => {
+        this.alertService.success("Používateľ bol úspešne vytvorený.", "Výborne!");
+      },
+      error: err => {
+        this.alertService.error("Nepodarilo sa vytvoriť používateľa.", "Nastala chyba!");
+      }
     });
 
   }

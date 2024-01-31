@@ -1,3 +1,4 @@
+<alert [maxItems]="3" [delay]="0"></alert>
 <div style="padding: 5rem 1rem 2rem; display: flex; justify-content: space-between;">
   <div style="width: 70%;">
     <div class="form-group row">
@@ -30,16 +31,23 @@
       <td mat-cell *matCellDef="let element"> {{element.category}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef></th>
+    <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Upraviť</th>
         <td mat-cell *matCellDef="let element">
           <div style="display: flex;">
-            <button role="button" class="detail-button" (click)="editQuestionForm(element)" ><i class="fas fa-edit"></i></button>
-            <button role="button" class="detail-button" (click)="deleteQuestion(element)" ><i class="fas fa-trash"></i></button>
+            <button role="button" class="detail-button" (click)="editQuestionForm(element)" ><i class="fas fa-xl fa-edit"></i></button>
           </div>
         </td>
 
     </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Vymazať</th>
+      <td mat-cell *matCellDef="let element">
+        <button role="button" class="delete-button" (click)="deleteQuestion(element)" ><img src="/assets/images/delete.png"  class="img-fluid" alt="Responsive image"></button>
+      </td>
+
+  </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

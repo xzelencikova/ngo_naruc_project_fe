@@ -1,15 +1,17 @@
 .detail-button {
     padding: 0.75rem 3rem;
-    border-radius: 50px;
+    /* border-radius: 50px; */
     font-size: 16px;
     font-weight: 700;
-    color: white;
-    background: linear-gradient(0.25turn, #FF4D00, #FC7900);
+    color: #FF4D00;
+    background: none;
+    /* background: linear-gradient(0.25turn, #FF4D00, #FC7900); */
     border: none;
 }
 
 .detail-button:hover {
-    background: linear-gradient(88deg, #D44900 -0.01%, #FF6C1D 100.02%);
+    color: #D44900;
+    font-weight: bold;
 }
 
 td {

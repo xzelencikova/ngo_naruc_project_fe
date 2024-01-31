@@ -10,6 +10,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ModalWindowComponent } from './components/questionnaire/components/modal-window/modal-window.component';
+import { AlertModule } from "src/app/components/alert";
 
 
 
@@ -28,7 +29,8 @@ import { ModalWindowComponent } from './components/questionnaire/components/moda
         ReactiveFormsModule,
         MatStepperModule,
         MatSnackBarModule,
-        MatDialogModule
+        MatDialogModule,
+        AlertModule
     ],
     providers: [],
     schemas: []

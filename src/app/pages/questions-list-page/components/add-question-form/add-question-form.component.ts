@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/components/alert';
 import { QuestionModel } from 'src/app/models/question.model';
 import { QuestionService } from 'src/app/services/question.service';
 
@@ -20,7 +21,12 @@ export class AddQuestionFormComponent {
 
   categoryOptions: any[] = [];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private questionService: QuestionService, private router: Router) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any, 
+    private fb: FormBuilder, 
+    private questionService: QuestionService, 
+    private router: Router,
+    private alertService: AlertService) {
     this.questionService.getCategoriesOptions().subscribe(res => {
       this.categoryOptions = res;
       this.questionForm.controls['category'].setValue(res[0].name);
@@ -43,7 +49,6 @@ export class AddQuestionFormComponent {
   }
 
   onSubmit(): void {
-    console.log(this.data.question);
     const question: any = {
       _id: 0,
       question: this.questionForm.controls['question'].value,
@@ -54,11 +59,23 @@ export class AddQuestionFormComponent {
 
     if (this.data.formType.includes('UPRAVIŤ')) {
       question._id = this.data.question._id;
-      this.questionService.editQuestion(question).subscribe(res => {
+      this.questionService.editQuestion(question).subscribe({
+        next: success => {
+          this.alertService.success("Otázka bola úspešne aktualizovaná.", "Výborne!")
+        },
+        error: err => {
+          this.alertService.error("Nepodarilo sa aktualizovať otázku.", "Nastala chyba!")
+        }
       });
     }
     else {
-      this.questionService.addQuestion(question).subscribe(res => {
+      this.questionService.addQuestion(question).subscribe({
+        next: success => {
+          this.alertService.success("Otázka bola úspešne vytvorená.", "Výborne!")
+        },
+        error: err => {
+          this.alertService.error("Nepodarilo sa vytvoriť otázku.", "Nastala chyba!")
+        }
       });
     }
   }

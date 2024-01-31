@@ -1,4 +1,28 @@
+<alert [maxItems]="3" [delay]="0"></alert>
+
 <form [formGroup]="questForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+
+        <div class="col-md-5 form-col">
+            <img src="/assets/images/create_client.svg"  class="img-fluid form-img" alt="Responsive image">
+        </div>
+
+        <div class="col-md-7 form-col2">
+
+            <div>
+                <h1 class="font-weight-normal welcome">Vytvoriť</h1>
+                <h1 class="font-weight-bold name">nového klienta</h1>
+            </div>
+            
+            <div class="main-description-form">
+                <p class="description-form">
+                    Vyplň formulár, my pre teba všetko pripravíme aby si mohol rovno vypĺňať pozorovací hárok !
+                </p> 
+            </div>
+        </div>
+    </div>
+    <hr/>
+
     <div class="form-group row">
         <label for="client-name" class="col-sm-2 col-form-label">Meno klienta</label>
         <div class="col-sm-10">
@@ -6,22 +30,25 @@
         </div>
     </div>
     <div class="spacer"></div>
-    <div class="form-group row">
-        <label for="client-surname" class="col-sm-2 col-form-label">Priezvisko klienta</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="client-surname" formControlName="clientSurname">
+
+    <mat-dialog-content class="dialog-text">
+        <div class="form-group row">
+            <label for="client-surname" class="col-sm-2 col-form-label">Priezvisko klienta</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="client-surname" formControlName="clientSurname">
+            </div>
         </div>
-    </div>
-    <div class="spacer"></div>
-    <div class="form-group row">
-        <label for="contract-number" class="col-sm-2 col-form-label">Ćíslo zmluvy</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="contract-number"formControlName="contractNumber">
+        <div class="spacer"></div>
+        <div class="form-group row">
+            <label for="contract-number" class="col-sm-2 col-form-label">Ćíslo zmluvy</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="contract-number"formControlName="contractNumber">
+            </div>
         </div>
-    </div>
-    <div class="butt">
-        <button class="btn btn-orange-form" type="submit">
-            Potvrdiť
-        </button>
-    </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="center">
+        <button mat-button mat-dialog-close class="cancel-button">ZRUŠIŤ</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="submit-button" type="submit">VYTVORIŤ</button>
+    </mat-dialog-actions>
 </form>

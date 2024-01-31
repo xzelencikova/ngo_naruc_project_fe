@@ -9,6 +9,7 @@ import { HistoryModalWindowComponent } from './components/history-modal-window/h
 import { MatDialog } from '@angular/material/dialog';
 import domToImage from 'dom-to-image';
 import jsPDF from 'jspdf';
+import { AlertService, Alert } from 'src/app/components/alert';
 
 @Component({
   selector: 'app-client-dashboard-page',
@@ -33,7 +34,7 @@ export class ClientDashboardPage {
     domain: this.customColors // ['#1E19FF', '#1E19FF', '#1E19FF']
   };
 
-  constructor(private router: Router, private clientService: ClientService, private ratingService: RatingService, private activatedRoute: ActivatedRoute, private dialog: MatDialog) {
+  constructor(private router: Router, private clientService: ClientService, private ratingService: RatingService, private activatedRoute: ActivatedRoute, private dialog: MatDialog, private alertService: AlertService) {
     this.client = this.clientService.getSelectedClient();
     const client_id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
@@ -155,19 +156,20 @@ export class ClientDashboardPage {
     this.dataToExport.nativeElement.offsetHeight);
   domToImage
   .toPng(this.dataToExport.nativeElement, {
-  width: width,
-  height: height,
-  
+    width: width,
+    height: height,
   })
   .then(result => {
-  const pdf = new jsPDF('l','mm','a4');
-  pdf.setFontSize(20);
-  pdf.setTextColor('#5C5C5C');
-  pdf.text(this.client!.name +'_' +this.client!.surname!, 10, 10);
-  pdf.addImage(result, 'PNG', 5, 20, 287, height*(287/width));
-  pdf.save(this.client!.name +'_' +this.client!.surname! + '_prehlad' + '.pdf');
+    const pdf = new jsPDF('l','mm','a4');
+    pdf.setFontSize(20);
+    pdf.setTextColor('#5C5C5C');
+    pdf.text(this.client!.name +'_' +this.client!.surname!, 10, 10);
+    pdf.addImage(result, 'PNG', 5, 20, 287, height*(287/width));
+    pdf.save(this.client!.name +'_' +this.client!.surname! + '_prehlad' + '.pdf');
+    this.alertService.success("Prehľad klienta bol úspešne stiahnutý.", "Výborne!");
   })
   .catch(error => {
+    this.alertService.error("Nebolo možné stiahnuť prehľad klienta.", "Nastala chyba!")
   });
 }
 

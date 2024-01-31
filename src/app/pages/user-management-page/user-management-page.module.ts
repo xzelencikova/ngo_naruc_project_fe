@@ -13,6 +13,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { UserTableComponent } from './components/user-table/user-table.component';
 import { AddNewUserComponent } from './components/add-new-user/add-new-user.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AlertModule } from "src/app/components/alert";
+import { MatDialogModule } from "@angular/material/dialog";
+import { DeleteWindowComponent } from "./components/delete-window/delete-window.component";
  
 
 
@@ -21,7 +24,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   declarations: [
     UserManagementPage,
     UserTableComponent,
-    AddNewUserComponent
+    AddNewUserComponent,
+    DeleteWindowComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +39,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    AlertModule,
+    MatDialogModule
   ]
 })
 export class UserManagementPageModule { }

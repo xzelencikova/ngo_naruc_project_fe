@@ -51,3 +51,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-text-field--focused {
     background: white !important;
 } */
+
+.overlay {
+    z-index: 100000 !important;
+}
+
+.cdk-overlay-container {
+    z-index: 100000 !important;
+}

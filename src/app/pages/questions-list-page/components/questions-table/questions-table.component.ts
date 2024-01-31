@@ -9,6 +9,7 @@ import { QuestionModel } from 'src/app/models/question.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AddQuestionFormComponent } from '../add-question-form/add-question-form.component';
 import { DeleteWindowComponent } from '../modal-window/delete-window.component';
+import { AlertService } from 'src/app/components/alert';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { DeleteWindowComponent } from '../modal-window/delete-window.component';
   styleUrls: ['./questions-table.component.css']
 })
 export class QuestionsTableComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['question', 'category', 'actions'];
+  displayedColumns: string[] = ['question', 'category', 'edit', 'delete'];
   public dataSource: MatTableDataSource<QuestionModel>;
 
   // @ts-ignore
@@ -26,7 +27,11 @@ export class QuestionsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
 
-  constructor(private questionsService: QuestionService, private router: Router, private dialog: MatDialog) {
+  constructor(
+    private questionsService: QuestionService, 
+    private router: Router, 
+    private dialog: MatDialog, 
+    private alertService: AlertService) {
     this.dataSource = new MatTableDataSource<QuestionModel>();
   }
 
@@ -94,8 +99,15 @@ export class QuestionsTableComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.questionsService.deleteQuestion(e._id).subscribe(res => {});
-        this.reloadTable();
+        this.questionsService.deleteQuestion(e._id).subscribe({
+          next: success => {
+            this.alertService.success("Otázka bola úspešne odstránená.", "Výborne!");
+            this.reloadTable();
+          },
+          error: err => {
+            this.alertService.error("Nepodarilo sa odstrániť otázku.", "Nastala chyba!")
+          }
+        });
       }
     });
   }
