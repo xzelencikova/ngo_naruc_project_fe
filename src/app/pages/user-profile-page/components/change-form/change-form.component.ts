@@ -32,11 +32,6 @@ export class ChangeFormComponent {
     private alertService: AlertService
   ) 
   {
-    this.changeForm.setValue({
-      name: this.user.name,
-      surname: this.user.surname
-    });
-    
     this.userService.selectedUser$.subscribe(selection => {
       this.user = selection;
       this.changeForm.setValue({
