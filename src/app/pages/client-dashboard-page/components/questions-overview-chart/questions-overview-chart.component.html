@@ -2,9 +2,12 @@
     <a (click)="backToOverview.emit(true)"><i class="fa fa-chevron-left fa-lg fa-light"></i> Späť na prehľad</a>
     <div class="col-md-3"></div>
     <div class="col-md-9 rating-icons-layout">
-        <fa-icon [icon]="['fas', 'face-frown']" class="rating-icon rating-icon--red"></fa-icon>
+        <i class="fas fa-face-frown rating-icon rating-icon--red"></i>
+        <i class="fas fa-face-meh rating-icon rating-icon--yellow"></i>
+        <i class="fas fa-face-smile rating-icon rating-icon--green"></i>
+        <!-- <fa-icon [icon]="['fas', 'face-frown']" class="rating-icon rating-icon--red"></fa-icon>
         <fa-icon [icon]="['fas', 'face-meh']" class="rating-icon rating-icon--yellow"></fa-icon>
-        <fa-icon [icon]="['fas', 'face-smile']" class="rating-icon rating-icon--green"></fa-icon>
+        <fa-icon [icon]="['fas', 'face-smile']" class="rating-icon rating-icon--green"></fa-icon> -->
     </div>
     <ng-template ngFor let-question [ngForOf]="ratingCategory" let-i="index">
         <div class="col-md-2" style="margin:auto">

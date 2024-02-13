@@ -80,3 +80,20 @@ select {
 :host ::ng-deep .mat-mdc-dialog-container, .mat-mdc-dialog-container .mdc-dialog__container, .mat-mdc-dialog-container .mdc-dialog__surface {
     width: 1000px !important;
 }
+
+.welcome {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 58px;
+    padding-bottom: 0.5rem;
+
+    color: #000000;
+} 
+
+.name {
+    font-size: 48px;
+    font-weight: bold;
+    line-height: 50px;
+    /* padding-bottom: 5rem; */
+}

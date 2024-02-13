@@ -30,12 +30,12 @@
                     <button role="button" class="questionnaire-button" (click)="openHistoryModal()">História pozorovacích hárkov</button>
                 </div>
             </ng-template>
-            <div>
+            <div *ngIf="isData">
                 <button role="button" class="download-button" (click)="downloadOverview() ">Stiahnuť prehľad</button>
             </div>
         </div>
     </div>
-    <div #dataToExport>
+    <div #dataToExport *ngIf="isData;else noData">
         <div *ngIf="isOverview; else categoryChart">
             <div style="padding-top: 1.5rem;">
                 <app-categories-overview-chart [ratingOverview]="ratingOverview" [categoryColors]="categoryColors" (selectedCategory)="getCategoryRating($event)"></app-categories-overview-chart>
@@ -47,4 +47,7 @@
             </div>
         </ng-template>
     </div>
+    <ng-template #noData>
+        <app-no-data></app-no-data>
+    </ng-template>
 </div>
