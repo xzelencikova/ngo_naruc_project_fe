@@ -1,7 +1,20 @@
 <alert [maxItems]="3" [delay]="0"></alert>
 <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-5 form-col">
+            <img src="/assets/images/create_client.svg"  class="img-fluid form-img" alt="Responsive image">
+        </div>
 
-    <h1 mat-dialog-title>{{data.formType}}</h1>
+        <div class="col-md-7 form-col2" style="margin: auto;">
+            <div>
+                <h1 class="font-weight-normal welcome">{{data.formType}}</h1>
+                <h1 class="font-weight-bold name">OTÁZKU</h1>
+                <p>Vyplň formulár a vytvor tak novú otázku do pozorovacích hárkov!</p> 
+            </div>
+        </div>
+
+        <hr/>
+    </div>
 
     <mat-dialog-content class="dialog-text">
         <div class="form-group row">

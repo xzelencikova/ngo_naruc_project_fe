@@ -22,7 +22,7 @@
             <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <li><a ngbDropdownItem class="dropdown-item" [routerLink]="['/user-profile']">Profil</a></li>
               <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" [routerLink]="['/user-management']">Správa zamestnancov</a></li>
-              <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" [routerLink]="['/questions-management']">Správa dotazníka</a></li>
+              <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" [routerLink]="['/questions-management']">Správa pozorovacích hárkov</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

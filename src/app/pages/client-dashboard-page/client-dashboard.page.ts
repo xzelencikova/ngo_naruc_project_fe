@@ -26,6 +26,7 @@ export class ClientDashboardPage {
   category: string = "";
   colors: string[] = ['FFA539', 'FF4219', '19BAFF', '1E19FF', '27CD9B'];
   categoryColors: any[] = [];
+  isData: boolean = false;
 
   colorScheme: Color = {
     name: "myScheme",
@@ -47,14 +48,18 @@ export class ClientDashboardPage {
     }
 
     this.ratingService.getRatingOverviewForClient(this.client?._id ? this.client._id : client_id!).subscribe(overview => {
-      this.ratingOverview = overview;
-      this.categoryColors = JSON.parse(JSON.stringify(overview.bar_overview));
+      if (overview.bar_overview.length > 0) {
+        this.ratingOverview = overview;
+        this.categoryColors = JSON.parse(JSON.stringify(overview.bar_overview));
 
-      for (let index = 0; index < this.categoryColors.length; index++) {
-        this.categoryColors[index].series[0].value = `#${this.colors[index]}80`;
-        this.categoryColors[index].series[1].value = `#${this.colors[index]}BF`;
-        this.categoryColors[index].series[2].value = `#${this.colors[index]}FF`;
+        for (let index = 0; index < this.categoryColors.length; index++) {
+          this.categoryColors[index].series[0].value = `#${this.colors[index]}80`;
+          this.categoryColors[index].series[1].value = `#${this.colors[index]}BF`;
+          this.categoryColors[index].series[2].value = `#${this.colors[index]}FF`;
+        }
+        this.isData = true;
       }
+      else this.isData = false;
 
     });
     this.ratingService.getRatingsByClientId(this.client?._id ? this.client._id : client_id!).subscribe(ratingsList => {
@@ -147,31 +152,34 @@ export class ClientDashboardPage {
   @ViewChild('dataToExport', { static: false }) public dataToExport: ElementRef;
 
   public downloadOverview(): void {
-  const width = Math.max(this.dataToExport.nativeElement.clientWidth, 
-    this.dataToExport.nativeElement.scrollWidth, 
-    this.dataToExport.nativeElement.offsetWidth);
 
-  const height = Math.max(this.dataToExport.nativeElement.clientHeight, 
-    this.dataToExport.nativeElement.scrollHeight, 
-    this.dataToExport.nativeElement.offsetHeight);
-  domToImage
-  .toPng(this.dataToExport.nativeElement, {
-    width: width,
-    height: height,
-  })
-  .then(result => {
-    const pdf = new jsPDF('l','mm','a4');
-    pdf.setFontSize(20);
-    pdf.setTextColor('#5C5C5C');
-    pdf.text(this.client!.name +'_' +this.client!.surname!, 10, 10);
-    pdf.addImage(result, 'PNG', 5, 20, 287, height*(287/width));
-    pdf.save(this.client!.name +'_' +this.client!.surname! + '_prehlad' + '.pdf');
-    this.alertService.success("Prehľad klienta bol úspešne stiahnutý.", "Výborne!");
-  })
-  .catch(error => {
-    this.alertService.error("Nebolo možné stiahnuť prehľad klienta.", "Nastala chyba!")
-  });
-}
+    const width = Math.max(this.dataToExport.nativeElement.clientWidth, 
+      this.dataToExport.nativeElement.scrollWidth, 
+      this.dataToExport.nativeElement.offsetWidth);
+
+    const height = Math.max(this.dataToExport.nativeElement.clientHeight, 
+      this.dataToExport.nativeElement.scrollHeight, 
+      this.dataToExport.nativeElement.offsetHeight);
+
+    domToImage
+    .toPng(this.dataToExport.nativeElement, {
+      width: width,
+      height: height,
+    })
+    .then(result => {
+      const pdf = new jsPDF('l','mm','a4');
+      pdf.setFontSize(20);
+      pdf.setTextColor('#5C5C5C');
+      pdf.text(this.client!.name +'_' +this.client!.surname!, 10, 10);
+      pdf.addImage(result, 'PNG', 5, 20, 287, height*(287/width));
+      pdf.save(this.client!.name +'_' +this.client!.surname! + '_prehlad' + '.pdf');
+      this.alertService.success("Prehľad klienta bol úspešne stiahnutý.", "Výborne!");
+    })
+    .catch(error => {
+      console.log(error);
+      this.alertService.error("Nebolo možné stiahnuť prehľad klienta.", "Nastala chyba!")
+    });
+  }
 
 openHistoryModal() {
   const dialogRef = this.dialog.open(HistoryModalWindowComponent);

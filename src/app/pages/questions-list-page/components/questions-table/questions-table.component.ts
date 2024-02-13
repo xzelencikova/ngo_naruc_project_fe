@@ -62,7 +62,7 @@ export class QuestionsTableComponent implements OnInit, AfterViewInit {
   openQuestionForm() {
     const dialogRef = this.dialog.open(AddQuestionFormComponent, {
       data: {
-        formType: "PRIDAŤ NOVÚ OTÁZKU",
+        formType: "PRIDAŤ NOVÚ",
         question: {}
       }
     });
@@ -78,7 +78,7 @@ export class QuestionsTableComponent implements OnInit, AfterViewInit {
     console.log(e);
     const dialogRef = this.dialog.open(AddQuestionFormComponent, {
       data: {
-        formType: "UPRAVIŤ OTÁZKU",
+        formType: "UPRAVIŤ",
         question: e
       }
     });

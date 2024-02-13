@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { AlertModule } from "src/app/components/alert";
+import { NoDataComponent } from './components/no-data/no-data.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AlertModule } from "src/app/components/alert";
         ClientDashboardPage,
         CategoriesOverviewChartComponent,
         QuestionsOverviewChartComponent,
-        HistoryModalWindowComponent
+        HistoryModalWindowComponent,
+        NoDataComponent
     ],
     imports: [
         CommonModule,
