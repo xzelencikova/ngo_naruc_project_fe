@@ -1,36 +1,37 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-red static-top">
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">
-        <img src="/assets/images/logo.png" alt="logo" height="36">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" [routerLink]="['/']">Domov</a>
+<nav class="navbar navbar-expand-lg navbar-red static-top header-container">
+  <div>
+    <a class="navbar-brand" [routerLink]="['/']">
+      <img src="/assets/images/logo.png" alt="logo" height="36">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" [routerLink]="['/']">Domov</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/clients-list']">Zoznam klientov</a>
+      </li>
+      <li ngbDropdown class="nav-item dropdown">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{user}}
+        </a>
+        <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <li><a ngbDropdownItem class="dropdown-item" [routerLink]="['/user-profile']">Profil</a></li>
+          <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" [routerLink]="['/user-management']">Správa zamestnancov</a></li>
+          <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" [routerLink]="['/questions-management']">Správa pozorovacích hárkov</a></li>
+          <li>
+            <hr class="dropdown-divider">
           </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/clients-list']">Zoznam klientov</a>
-          </li>
-          <li ngbDropdown class="nav-item dropdown">
-            <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {{user}}
-            </a>
-            <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li><a ngbDropdownItem class="dropdown-item" [routerLink]="['/user-profile']">Profil</a></li>
-              <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" [routerLink]="['/user-management']">Správa zamestnancov</a></li>
-              <li *ngIf="user_role == 'admin'"><a ngbDropdownItem class="dropdown-item" [routerLink]="['/questions-management']">Správa pozorovacích hárkov</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a ngbDropdownItem class="dropdown-item" (click)="logout()">Odhlásiť sa</a></li>
-            </ul>
-          </li>
+          <li><a ngbDropdownItem class="dropdown-item" (click)="logout()">Odhlásiť sa</a></li>
         </ul>
-      </div>
-    </div>
-  </nav>
+      </li>
+    </ul>
+  </div>
+</nav>
   

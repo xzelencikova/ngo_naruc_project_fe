@@ -16,8 +16,7 @@
 }
 
 .navbar-nav > li{
-    padding-left:25px;
-    padding-right:25px;
+    padding: 0 1rem;
   }
 
 .navbar-brand > img{
@@ -31,4 +30,10 @@
 
 a {
     cursor: pointer;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10%;
 }

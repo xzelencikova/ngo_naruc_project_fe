@@ -1,16 +1,23 @@
 <alert [maxItems]="3" [delay]="0"></alert>
 
 <form [formGroup]="questForm" (ngSubmit)="onSubmit()">
-                    
-    <div>
-        <h1 class="font-weight-normal welcome">Vytvoriť</h1>
-        <h1 class="font-weight-bold name">nového zamestnanca</h1>
-    </div>
+    <div class="row">
+        <div class="col-md-5 form-col">
+            <img src="/assets/images/add_user.svg"  class="img-fluid form-img" alt="Responsive image">
+        </div>
     
-    <div class="main-description-form">
-        <p class="description-form">
-            Vyplň formulár a vytvor tak účet novému zamestnancovi!
-        </p> 
+        <div class="col-md-7 form-col2" style="margin: auto;">              
+            <div>
+                <h1 class="font-weight-normal welcome">Vytvoriť</h1>
+                <h1 class="font-weight-bold name">nového zamestnanca</h1>
+            </div>
+            
+            <div class="main-description-form">
+                <p class="description-form">
+                    Vyplň formulár a vytvor tak účet novému zamestnancovi!
+                </p> 
+            </div>
+        </div>
     </div>
     <hr/>
 

@@ -27,3 +27,7 @@ p {
     text-align: left;
     padding: 3rem 0 ;
 }
+
+img {
+    max-width: 30vw;
+}
