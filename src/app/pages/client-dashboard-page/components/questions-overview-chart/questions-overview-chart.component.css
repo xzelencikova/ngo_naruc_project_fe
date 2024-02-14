@@ -50,3 +50,23 @@ p {
     max-width: 1rem;
     padding: 0;
   }
+
+@media screen and (max-width: 1280px) {
+    p {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    p {
+        font-size: 12px;
+    }
+
+    .col-md-1 {
+        width: 20px;
+    }
+
+    .col-md-9 {
+        width: 80%;
+    }
+}
