@@ -4,7 +4,8 @@ h1 {
 }
 
 .layout {
-    background: linear-gradient(0.25turn, #f7fbff, #f7fbff, #fff);;
+    background: linear-gradient(0.25turn, #f7fbff, #f7fbff, #fff);
+    padding: 0 10%;
 }
 
 .page-explanation {
@@ -35,5 +36,55 @@ p {
 }
 
 img {
-    max-width: 30vw;
+    width: 100%;
 }
+
+@media screen and (max-width: 1280px) {
+    p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .page-explanation {
+        text-align: center;
+        padding: 3rem 10% 0;
+    }
+    
+    .col-md-4, .col-md-8 {
+        width: 100%;
+    }
+
+    img {
+        display: none;
+    }
+  
+    .layout {
+        background: none;
+        padding: 0;
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .page-explanation {
+        text-align: center;
+        padding: 3rem 10% 0;
+    }
+
+    .col-md-4 {
+        width: 100%;
+    }
+
+    img {
+        display: none;
+    }
+
+    .layout {
+        background: none;
+        padding: 0;
+    }
+  }

@@ -60,3 +60,20 @@ input {
     border-radius: 80px !important;
     margin: 5%;
 }
+
+@media screen and (max-width: 1280px) {
+  }
+  
+  @media screen and (max-width: 720px) {
+    table {
+        width: fit-content !important;
+    }
+
+    th, td {
+        font-size: 10px;
+    }
+
+    td {
+        width: 50%;
+    }
+  }
