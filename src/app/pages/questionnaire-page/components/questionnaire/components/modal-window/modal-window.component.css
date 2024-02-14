@@ -31,3 +31,20 @@
     color: white;
 }
 
+@media screen and (max-width: 720px) {
+    img {
+        display: none;
+    }
+
+    .submit-button, .cancel-button {
+        padding: 1rem 2rem;
+    }
+
+    .mdc-dialog__title {
+        font-size: 30px !important;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}

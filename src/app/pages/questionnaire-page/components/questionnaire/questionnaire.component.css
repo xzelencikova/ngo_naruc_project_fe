@@ -144,3 +144,55 @@ input[type="radio"]:checked + .xbutton-label {
 :host ::ng-deep .mat-mdc-snack-bar-container .mdc-snackbar__surface {
     background-color: lightgreen !important;
 }
+
+@media screen and (max-width: 1280px) {
+    .stepper-position {
+        display: none;
+    }
+
+    .col-md-2 {
+        display: none;
+    }
+
+    .col-md-10 {
+        width: 100%;
+    }
+
+    .rating-icon {
+        font-size: 35px;
+    }
+
+    td {
+        font-size: 15px !important;
+    }
+
+    .submit-position {
+        justify-content: space-around;
+    }
+
+    .submit-button, .save-button {
+        padding: 1rem 2rem;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .stepper-position {
+        display: none;
+    }
+
+    .rating-icon {
+        font-size: 30px;
+    }
+
+    td {
+        font-size: 15px !important;
+    }
+
+    .submit-position {
+        justify-content: space-around;
+    }
+
+    .submit-button, .save-button {
+        padding: 1rem 2rem;
+    }
+}

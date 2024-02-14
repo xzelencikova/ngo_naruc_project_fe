@@ -1,9 +1,5 @@
 .sent-card {
-    border-radius: 32px;
-    border: 1px solid #D1D1D1;
-    background-color: white;
-    box-shadow: 0px 6.5px 16px 0px rgba(0, 0, 0, 0.15);
-    padding: 3rem;
+    text-align: center;
 }
 
 .sent-card__body {
@@ -17,7 +13,7 @@
 }
 
 .download-button {
-    padding: 1rem 4rem;
+    padding: 1rem 2rem;
     border-radius: 50px;
     font-weight: 600;
     color: white;
@@ -26,7 +22,7 @@
 }
 
 .overview-button {
-    padding: 1rem 4rem;
+    padding: 1rem 2rem;
     border-radius: 50px;
     font-weight: 600;
     color: #FF4D00;
@@ -42,4 +38,45 @@
 
 .download-button:hover {
     background: linear-gradient(88deg, #D44900 -0.01%, #FF6C1D 100.02%);
+}
+
+@media screen and (max-width: 1280px) {
+
+    .col-md-6 {
+        width: 100%;
+    }
+
+    .overview-button, .download-button {
+        padding: 1rem 2rem;
+    }
+
+    .title {
+        font-size: 48px;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .col-md-6 {
+        width: 100%;
+    }
+
+    .overview-button, .download-button {
+        padding: 1rem 2rem;
+    }
+
+    .title {
+        font-size: 35px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+
+    .overview-button, .download-button {
+        padding: 1rem;
+        font-size: 12px;
+    }
+
+    .title {
+        font-size: 35px;
+    }
 }
