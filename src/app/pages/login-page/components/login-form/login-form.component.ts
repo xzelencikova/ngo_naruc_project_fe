@@ -18,7 +18,17 @@ export class LoginFormComponent {
   });
   Position = PositiionType;
 
-  constructor(private userService: UserService, private fb: FormBuilder, private router: Router, private alertService: AlertService) {}
+  public showPassword: boolean = false;
+  public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  constructor(
+    private userService: UserService, 
+    private fb: FormBuilder, 
+    private router: Router, 
+    private alertService: AlertService, ) {}
+
 
   onSubmit() {
     let user: any = {

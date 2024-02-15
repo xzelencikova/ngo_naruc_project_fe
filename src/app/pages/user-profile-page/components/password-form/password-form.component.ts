@@ -7,6 +7,7 @@ import { PasswordModel } from 'src/app/models/password.model';
 import { UserDataService } from 'src/app/services/user-data.service';
 import { AlertService } from 'src/app/components/alert';
 
+
 @Component({
   selector: 'app-password-form',
   templateUrl: './password-form.component.html',
@@ -20,6 +21,16 @@ export class PasswordFormComponent {
   // Define a BehaviorSubject to hold user data
   private userDataSubject = new BehaviorSubject<UserModel | null>(null);
   userData$ = this.userDataSubject.asObservable();
+
+  public showPasswordnew: boolean = false;
+  public togglePasswordVisibilitynew(): void {
+    this.showPasswordnew = !this.showPasswordnew;
+  }
+
+  public showPasswordconfirm: boolean = false;
+  public togglePasswordVisibilityconfirm(): void {
+    this.showPasswordconfirm = !this.showPasswordconfirm;
+  }
 
   public passwordForm: FormGroup;
 
@@ -59,6 +70,8 @@ export class PasswordFormComponent {
   onSubmit() {
     const newPasswordControl = this.passwordForm.get('newPassword');
     const confirmPasswordControl = this.passwordForm.get('confirmPassword');
+    console.log(newPasswordControl);
+    console.log(confirmPasswordControl);
   
     if (!newPasswordControl || !confirmPasswordControl) {
       return;
