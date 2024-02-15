@@ -25,8 +25,27 @@ h1 {
 }
 
 .download-button {
-    padding: 1rem 4rem;
+    padding: 1rem 2rem;
     border-radius: 50px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius:  5px;
+    font-weight: 600;
+    color: #FF4D00;
+    background: white;
+    border: 1px solid #FF4D00;
+    margin-right: 0rem;
+}
+
+.download-button:hover {
+    background: linear-gradient(90deg, #FF4D00 0%, #FC7900 99.99%);
+    color: white;
+}
+
+.download-csv-button {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius:  5px;
     font-weight: 600;
     color: #FF4D00;
     background: white;
@@ -34,7 +53,7 @@ h1 {
     margin-right: 1rem;
 }
 
-.download-button:hover {
+.download-csv-button:hover {
     background: linear-gradient(90deg, #FF4D00 0%, #FC7900 99.99%);
     color: white;
 }

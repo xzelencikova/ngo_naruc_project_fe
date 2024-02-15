@@ -72,7 +72,7 @@ export class ClientDashboardPage {
             }
           }
         })
-        console.log(this.ratingOverview);
+        // console.log(this.ratingOverview);
         this.categoryColors = JSON.parse(JSON.stringify(overview.bar_overview));
 
         for (let index = 0; index < this.categoryColors.length; index++) {
@@ -171,16 +171,7 @@ export class ClientDashboardPage {
     this.router.navigate(["questionnaire"]);
   }
 
-  columns = [] as string[];
-
   exportToCSV(jsonData: any[], fileName: string): void {
-
-    // // Replace 'client_id' and 'date_rated' with actual values from your JSON data
-    // const clientId = jsonData[0].client_id;
-    // const dateRated = jsonData[0].date_rated;
-
-    // // Construct filename
-    // const filename = `client_${clientId}_rated_${dateRated}`;
 
     const csvData: string = this.convertArrayToCSV(jsonData);
   
@@ -201,7 +192,7 @@ export class ClientDashboardPage {
     // Construct the CSV header
     const headers = ['Question ID'];
     const phases = new Set<number>();
-    console.log('json nula', jsonData[0]);
+    
     jsonData[0].forEach((item: any) => {
       // Ensure each item has the necessary properties
       if (item.questions_rating && Array.isArray(item.questions_rating)) {
@@ -223,13 +214,15 @@ export class ClientDashboardPage {
       if (item.questions_rating && Array.isArray(item.questions_rating)) {
         item.questions_rating.forEach((question: any) => {
           const rowValues: any[] = [question.question_id];
+
           phases.forEach((phase: number) => {
-            const rating = jsonData[0].find((item: any) => item.phase_no === phase)?.questions_rating.find((question: any) => question.question_id === question.question_id)?.rating || '';
+            const rating = jsonData[0].find((item: any) => item.phase_no === phase)?.questions_rating.find((question_item: any) => question_item.question_id === question.question_id)?.rating || '';      
             rowValues.push(rating);
           });
 
           rowValues.push(question.category, question.question);
           csv += rowValues.join(',') + '\n';
+          
         });
       } else {
         console.error('Invalid item:', item);
@@ -239,19 +232,19 @@ export class ClientDashboardPage {
     return csv;
   }
   
-  
-  
   // @ts-ignore
   @ViewChild('dataToExport', { static: false }) public dataToExport: ElementRef;
 
-
-  public downloadOverview(): void {
+  public downloadCSVOverview(): void {
 
     // export in CSV
     const jsonData = [this.ratings];
-    console.log(jsonData);
+    console.log('Data from API', jsonData);
     this.exportToCSV(jsonData, (this.client!.name +'_' +this.client!.surname! + '_hodnotenie'));
-    
+  }
+
+
+  public downloadOverview(): void {
     
     const width = Math.max(this.dataToExport.nativeElement.clientWidth, 
       this.dataToExport.nativeElement.scrollWidth, 
