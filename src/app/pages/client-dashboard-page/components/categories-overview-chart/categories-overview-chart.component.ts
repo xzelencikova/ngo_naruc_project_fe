@@ -19,6 +19,11 @@ export class CategoriesOverviewChartComponent {
   @Input() isOverview: boolean = true;
   @Output() selectedCategory = new EventEmitter<string>();
   @Input() categoryColors: any[] = [];
+  @Input() isPieData: any = {
+    "pie_1": false, 
+    "pie_2": false, 
+    "pie_3": false
+  };
 
   view: number[] = [800, 400];
 
@@ -38,6 +43,7 @@ export class CategoriesOverviewChartComponent {
   schemeType = ScaleType.Linear;
 
   constructor() {
+    // if (window.innerWidth <= 720) this.legendPosition = LegendPosition.Below; 
   }
 
   onSelect(data: any): void {

@@ -32,6 +32,12 @@
   width: 100% !important;
 } */
 
+.xaxis-line {
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-between;
+}
+
 :host ::ng-deep .chart-legend .legend-labels {
   width: auto;
 }
@@ -65,7 +71,48 @@ p {
   width: 100%;
 }
 
+hr {
+  display: none;
+}
+
 a {
   cursor: pointer;
   text-decoration: none;
+}
+
+@media screen and (max-width: 1280px) {
+  p {
+      font-size: 12px;
+  }
+
+}
+
+@media screen and (max-width: 780px) {
+  p {
+      font-size: 12px;
+  }
+
+  .col-md-1 {
+      width: 10px;
+  }
+
+  .col-md-9 {
+      width: 90%;
+  }
+
+  hr {
+    display: block;
+  }
+
+  .col-md-3 {
+    width: 50%;
+  }
+
+  .chart-legend {
+    display: none !important;
+  }
+
+  .xaxis-line {
+    display: none;
+  }
 }

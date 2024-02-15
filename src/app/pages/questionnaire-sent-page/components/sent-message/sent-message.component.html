@@ -1,16 +1,22 @@
 <!-- <div class="sent-card"> -->
-    <div style="padding: 3rem 0;">
-        <div>
-            <h1 class="title">Váš pozorovací hárok bol</h1>
-            <h1 class="title"><b>úspešne odoslaný!</b></h1>
+    <div class="row">
+        <div class="col-md-6 sent-card" style="margin: auto;">
+            <div>
+                <h1 class="title">Váš pozorovací hárok bol</h1>
+                <h1 class="title"><b>úspešne odoslaný!</b></h1>
+            </div>
+            <div class="sent-card__body">
+                <p>Fáza č. {{client!.last_phase}} pre klienta {{client?.name}} {{client?.surname}} bola ukončená.</p>
+                <p>Pozorovacie hárky môžete znova vidieť a upraviť v histórií pozorovacích hárkov klienta.</p>
+            </div>
+            <div class="sent-card__footer">
+                <button role="button" class="overview-button" (click)="showClient()"><i class="fa fa-xl fa-solid fa-chart-line"></i> &nbsp;&nbsp;Prehľad klienta</button>
+                <button role="button" class="download-button"><i class="fa fa-xl fa-solid fa-download"></i>&nbsp;&nbsp;Stiahnuť pozorovací hárok</button>
+            </div>
         </div>
-        <div class="sent-card__body">
-            <p>Fáza č. {{client!.last_phase}} pre klienta {{client?.name}} {{client?.surname}} bola ukončená.</p>
-            <p>Pozorovacie hárky môžete znova vidieť a upraviť v histórií pozorovacích hárkov klienta.</p>
-        </div>
-        <div class="sent-card__footer">
-            <button role="button" class="overview-button" (click)="showClient()"><i class="fa fa-xl fa-solid fa-chart-line"></i> &nbsp;&nbsp;Prehľad klienta</button>
-            <button role="button" class="download-button"><i class="fa fa-xl fa-solid fa-download"></i>&nbsp;&nbsp;Stiahnuť pozorovací hárok</button>
+
+        <div class="col-md-6" style="margin: auto;">
+            <img src="/assets/images/questionnaire_sent.svg" alt="Responsive image">
         </div>
     </div>
 <!-- </div> -->

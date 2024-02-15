@@ -28,6 +28,12 @@ export class ClientDashboardPage {
   categoryColors: any[] = [];
   isData: boolean = false;
 
+  isPieDataArray: any = {
+    "pie_1": false, 
+    "pie_2": false, 
+    "pie_3": false
+  };
+
   colorScheme: Color = {
     name: "myScheme",
     selectable: true,
@@ -50,6 +56,18 @@ export class ClientDashboardPage {
     this.ratingService.getRatingOverviewForClient(this.client?._id ? this.client._id : client_id!).subscribe(overview => {
       if (overview.bar_overview.length > 0) {
         this.ratingOverview = overview;
+
+        Object.keys(this.ratingOverview).forEach(key => {
+          if (key.includes("pie")) {
+            for (let index = 0; index < Object.keys(this.ratingOverview[key]).length; index++) {
+              if (this.ratingOverview[key][index].value === 0) continue;
+              
+              this.isPieDataArray[key] = true;
+              break;
+            }
+          }
+        })
+        console.log(this.ratingOverview);
         this.categoryColors = JSON.parse(JSON.stringify(overview.bar_overview));
 
         for (let index = 0; index < this.categoryColors.length; index++) {

@@ -1,5 +1,5 @@
 img {
-    height: 100%;
+    width: 70%;
 }
 
 .no-data-container {
@@ -12,4 +12,10 @@ img {
 h1 {
     font-size: 36px;
     font-weight: 600;
+}
+
+@media screen and (max-width: 720px) {
+    h1 {
+        font-size: 30px;
+    }
 }

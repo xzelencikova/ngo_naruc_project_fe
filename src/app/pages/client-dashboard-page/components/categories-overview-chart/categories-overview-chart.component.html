@@ -1,6 +1,6 @@
 
 <div class="row col-md-12">
-  <div class="col-md-8">
+  <div class="col-md-7">
     <ng-template ngFor let-category [ngForOf]="ratingOverview.bar_overview" let-i="index" class="row">
       <a (click)="onSelect(category)">
         <div class="row col-md-12">
@@ -37,10 +37,10 @@
       </a>
     </ng-template>
     <div class="row col-md-12">
-      <div class="col-md-3" style="margin:auto">
+      <div class="col-md-3">
         <p></p>
       </div>
-      <div class="row col-md-9" style="display: flex; flex-direction: row; justify-content: space-between">
+      <div class="row col-md-9 xaxis-line">
         <p class="xaxis">0%</p>
         <p class="xaxis">20%</p>
         <p class="xaxis">40%</p>
@@ -50,8 +50,9 @@
       </div>
     </div>
   </div>
+  <hr>
   <div class="col-md-3">
-    <div>
+    <div *ngIf="isPieData.pie_1">
       <ngx-charts-pie-chart
         [view]="[390, 200]"
         [scheme]="colorScheme"
@@ -68,7 +69,7 @@
       </ngx-charts-pie-chart>
     </div>
 
-    <div>
+    <div *ngIf="isPieData.pie_2">
       <ngx-charts-pie-chart
         [view]="[390, 200]"
         [scheme]="colorScheme"
@@ -84,7 +85,7 @@
       </ngx-charts-pie-chart>
     </div>
 
-    <div width="100%">
+    <div *ngIf="isPieData.pie_3" width="100%" >
       <ngx-charts-pie-chart
         [view]="[390, 200]"
         [scheme]="colorScheme"

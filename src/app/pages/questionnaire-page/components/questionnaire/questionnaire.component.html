@@ -2,7 +2,7 @@
 
 <form [formGroup]="questForm" (ngSubmit)="onSubmit()">
     <div class="row col-md-12">
-        <div class="col-md-2">
+        <div id="stepper_div" class="col-md-2">
             <mat-vertical-stepper #stepper [selectedIndex]="currentStep" class="stepper-position">
 
                 <ng-template matStepperIcon="number" let-index="index">
@@ -70,8 +70,10 @@
             </ul>
             <!-- </mat-vertical-stepper> -->
             <div class="submit-position">
-                <button type="button" class="save-button" (click)="saveFormData()">ULOŽIŤ</button>
-                <button *ngIf="!isHistory" type="submit" class="submit-button">VYHODNOTIŤ</button>
+                <div>
+                    <button type="button" class="save-button" (click)="saveFormData()">ULOŽIŤ</button>
+                    <button *ngIf="!isHistory" type="submit" class="submit-button">VYHODNOTIŤ</button>
+                </div>
             </div>
         </div>
     </div>

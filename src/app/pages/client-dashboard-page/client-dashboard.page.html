@@ -19,7 +19,7 @@
 
        <div style="display: flex">
             <div *ngIf="client.last_phase < 3; else userInactive">
-                <button mat-button role="button" class="questionnaire-button"  [matMenuTriggerFor]="questionnaire">Pozorovacie hárky <i class="fa fa-solid fa-chevron-down"></i></button>
+                <button mat-button role="button" class="questionnaire-button"  [matMenuTriggerFor]="questionnaire"><i class="fa fa-solid fa-file-pen fa-lg"></i> <i class="fa fa-solid fa-chevron-down"></i></button>
                 <mat-menu #questionnaire="matMenu">
                     <button mat-menu-item (click)="loadQuestionnaire()">Vyplniť {{ client.last_phase + 1 }}. fázu</button>
                     <button mat-menu-item (click)="openHistoryModal()">História pozorovacích hárkov</button>
@@ -27,18 +27,18 @@
             </div>
             <ng-template #userInactive>
                 <div>
-                    <button role="button" class="questionnaire-button" (click)="openHistoryModal()">História pozorovacích hárkov</button>
+                    <button role="button" class="questionnaire-button" (click)="openHistoryModal()"><i class="fa fa-solid fa-file-pen fa-lg"></i></button>
                 </div>
             </ng-template>
             <div *ngIf="isData">
-                <button role="button" class="download-button" (click)="downloadOverview() ">Stiahnuť prehľad</button>
+                <button role="button" class="download-button" (click)="downloadOverview() "><i class="fa fa-solid fa-download fa-lg"></i></button>
             </div>
         </div>
     </div>
     <div #dataToExport *ngIf="isData;else noData">
         <div *ngIf="isOverview; else categoryChart">
             <div style="padding-top: 1.5rem;">
-                <app-categories-overview-chart [ratingOverview]="ratingOverview" [categoryColors]="categoryColors" (selectedCategory)="getCategoryRating($event)"></app-categories-overview-chart>
+                <app-categories-overview-chart [isPieData]="isPieDataArray" [ratingOverview]="ratingOverview" [categoryColors]="categoryColors" (selectedCategory)="getCategoryRating($event)"></app-categories-overview-chart>
             </div>
         </div>
         <ng-template #categoryChart>
