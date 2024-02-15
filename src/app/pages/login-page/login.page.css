@@ -10,8 +10,8 @@ html, body {
 }
 
 .container-blue{
-    display:block;
-    height: 100%;
+    /* display:block; */
+    
     background-color: #F7FBFF;
     width: 40%;
 }
@@ -75,7 +75,28 @@ html, body {
     display: flex;
 }
 
+@media screen and (max-width: 1280px) {
+    .container-blue, .container-white {
+        width: 50%;
+        padding: 2rem;
+    }
+}
+  
+  @media screen and (max-width: 767px) {
+    img {
+        display: none;
+    }
 
+    .wrapper {
+        display: block;
+    }
+  
+    .container-blue, .container-white {
+        width: 100%;
+        padding: 2rem;
+    }
 
-
-
+    .page-content-logo {
+        display: none;
+    }
+  }
