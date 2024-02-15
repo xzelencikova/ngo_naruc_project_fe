@@ -12,6 +12,7 @@ import { UserModel } from 'src/app/models/user.model';
 export class HeaderComponent implements OnDestroy {
   user: string = localStorage.getItem('user_name') + ' ' + localStorage.getItem('user_surname');
   user_role: string = localStorage.getItem('user_role') + '';
+  navbarOpen = false;
 
   private userDataSubscription: Subscription;
 
@@ -30,6 +31,10 @@ export class HeaderComponent implements OnDestroy {
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']);
+  }
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
   }
 
   ngOnDestroy() {
