@@ -10,15 +10,6 @@
     font-weight: bold;
 }
 
-.input-position{
-    margin: auto;
-    width: 85%;
-}
-
-.input-position> input{
-    height: 56.6px;
-}
-
 .login-form-input{
     display: flex;
     justify-content: center;
@@ -29,7 +20,6 @@
 :host ::ng-deep .mdc-text-field--outlined {
     --mdc-outlined-text-field-container-shape: 28px;
     border: none !important;
-    
   }
   /* 
 :host ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input {

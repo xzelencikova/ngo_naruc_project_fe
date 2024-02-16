@@ -54,6 +54,7 @@ export class ClientDashboardPage {
     if (this.client._id === 0) {   
       this.clientService.getClientById(client_id!).subscribe(res => {
         this.client = res;
+
         this.clientService.selectedClient$.emit(res);
       });
     }
@@ -72,7 +73,7 @@ export class ClientDashboardPage {
             }
           }
         })
-
+        // console.log(this.ratingOverview);
         this.categoryColors = JSON.parse(JSON.stringify(overview.bar_overview));
 
         for (let index = 0; index < this.categoryColors.length; index++) {
@@ -242,6 +243,7 @@ export class ClientDashboardPage {
     const jsonData = [this.ratings];
     console.log('Data from API', jsonData);
     this.exportToCSV(jsonData, (this.client!.name +'_' +this.client!.surname! + '_hodnotenie'));
+
   }
 
 

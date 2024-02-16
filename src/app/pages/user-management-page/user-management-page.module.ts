@@ -16,6 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AlertModule } from "src/app/components/alert";
 import { MatDialogModule } from "@angular/material/dialog";
 import { DeleteWindowComponent } from "./components/delete-window/delete-window.component";
+import { MatButtonModule } from '@angular/material/button';
  
 
 
@@ -41,7 +42,8 @@ import { DeleteWindowComponent } from "./components/delete-window/delete-window.
     MatIconModule,
     MatCheckboxModule,
     AlertModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
   ]
 })
 export class UserManagementPageModule { }

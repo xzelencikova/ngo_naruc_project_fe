@@ -29,6 +29,11 @@ export class AddNewUserComponent implements OnInit {
   ngOnInit() {
   }
 
+  public showPassword: boolean = false;
+  public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
   onSubmit(): void {
     const formData = this.questForm.value;
     console.log(formData);

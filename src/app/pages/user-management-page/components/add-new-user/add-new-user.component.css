@@ -1,3 +1,31 @@
+:host ::ng-deep .mdc-text-field--outlined {
+    --mdc-outlined-text-field-container-shape: 24px;
+    border: none !important; 
+}
+    
+
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+:host ::ng-deep .mdc-text-field--outlined {
+    padding-left: 0;
+}
+
+.form-control:focus {
+    border-color: white;
+    box-shadow:  0 0 8px white; 
+}
+
+.form-group .form-control {
+    padding-left: 5%;
+}
+
 .btn-orange{
     filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.1));
     width: 12.5rem;
@@ -34,13 +62,6 @@
 
 .main-description-form{
     padding-top: 5%;
-    /* width: 80%; */
-}
-
-.modal-form-body{
-    width: 100%;
-    padding-top: 4%;
-    height: 50%;
 }
 
 hr{
@@ -132,12 +153,13 @@ p {
 }
 
 .col-sm-10> input{
-    border-radius: 24px;
+    outline: none !important;
 }
+
+
 .col-sm-10{
     width: 50%;
     padding-left: 5%;
-    height: 120%;
 }
 
 .form-group > label{
