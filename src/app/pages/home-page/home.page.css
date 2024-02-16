@@ -1,6 +1,6 @@
 .wrapper{
-    margin: 0 10%;
-    padding: 2rem 5rem;
+    padding: 0 10%;
+    /* padding: 2rem 5rem; */
 }
 
 .page-content{
@@ -145,3 +145,46 @@ hr{
     display: none; /* making it hidden by default */
 }
 
+@media screen and (max-width: 1280px) {
+    p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    img {
+        display: none;
+    }
+
+    .main-description {
+        width: 100%;
+        text-align: center;
+        padding: 10%;
+    }
+
+    .main-image {
+        display: none;
+    }
+
+  }
+  
+  @media screen and (max-width: 767px) {
+    p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    img {
+        display: none;
+    }
+
+    .main-description {
+        width: 100%;
+        text-align: center;
+        padding: 10%;
+    }
+
+    .main-image {
+        display: none;
+    }
+
+  }

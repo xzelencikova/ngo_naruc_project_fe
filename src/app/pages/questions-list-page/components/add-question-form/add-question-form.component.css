@@ -97,3 +97,47 @@ select {
     line-height: 50px;
     /* padding-bottom: 5rem; */
 }
+
+img {
+    width: 100%;
+}
+
+@media screen and (max-width: 1280px) {
+    p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    img {
+        display: none;
+    }
+
+    .col-md-5 {
+        display: none;
+    }
+
+    .col-md-7 {
+        width: 100%;
+    }
+  
+  }
+  
+  @media screen and (max-width: 767px) {
+    p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    img {
+        display: none;
+    }
+
+    .col-md-5 {
+        display: none;
+    }
+
+    .col-md-7 {
+        width: 100%;
+    }
+
+  }
