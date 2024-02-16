@@ -261,3 +261,47 @@ label {
     padding: 2rem 0 2rem 0;
     overflow: visible;
 }
+
+@media screen and (max-width: 1280px) {
+    p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    img {
+        display: none;
+    }
+
+    .col-md-5 {
+        display: none;
+    }
+
+    .col-md-7 {
+        width: 100%;
+    }
+  
+  }
+  
+  @media screen and (max-width: 767px) {
+    p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    img {
+        display: none;
+    }
+
+    .col-md-5 {
+        display: none;
+    }
+
+    .col-md-7 {
+        width: 100%;
+    }
+
+    .submit-button, .cancel-button {
+        padding: 1rem 2rem;
+    }
+
+  }

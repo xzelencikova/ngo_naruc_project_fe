@@ -37,3 +37,14 @@ a {
     justify-content: space-between;
     padding: 0 10%;
 }
+
+@media screen and (max-width: 991px) {
+    ul {
+        box-shadow:2px 2px 2px 2px #C1c0c0;
+        background-color: white;
+    }
+
+    img {
+        display: none;
+    }
+}

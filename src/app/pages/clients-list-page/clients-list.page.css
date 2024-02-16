@@ -9,6 +9,7 @@ h1 {
 }
 
 .page-explanation {
+    display: block;
     background-color: #f7fbff;
     padding: 3rem 3rem 0 0;
     width: 100%;
