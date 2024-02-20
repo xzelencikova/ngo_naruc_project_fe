@@ -33,6 +33,9 @@
             <div *ngIf="isData">
                 <button role="button" class="download-button" (click)="downloadOverview() "><i class="fa fa-solid fa-download fa-lg"></i></button>
             </div>
+            <div *ngIf="isData">
+                <button role="button" class="download-csv-button" (click)="downloadCSVOverview() "><i class="fa fa-file-excel-o"></i></button>
+            </div>
         </div>
     </div>
     <div #dataToExport *ngIf="isData;else noData">

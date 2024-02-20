@@ -10,9 +10,12 @@
         <div class="label-position">
             <label for="email">Zadaj svoj pracovný email</label>
         </div>
-        <div class="input-position">
-            <input type="email" class="form-control" formControlName="email" aria-describedby="emailHelp" placeholder="Email">
+        <div class="login-form-input">
+            <mat-form-field appearance="outline" class="input-position">
+                <input matInput type="email" class="form-control" formControlName="email" aria-describedby="emailHelp" placeholder="Email">
+            </mat-form-field>
         </div>
+        
     </div>
 
     <div class="form-group">
@@ -20,11 +23,15 @@
         <div class="label-position">
             <label for="password">Zadaj svoje heslo</label>
         </div>
-        <div class="input-position">
-            <input type="password" class="form-control" formControlName="password" placeholder="Heslo">
-        </div>  
-        
+        <div class="login-form-input">
+            <mat-form-field appearance="outline" class="input-position">
+                <input matInput [type]="showPassword ? 'text' : 'password'" class="form-control" formControlName="password" placeholder="Heslo">
+                <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword?'visibility_off':'visibility'}}</mat-icon>
+            </mat-form-field>  
+        </div>
     </div>
+
+    <div class="spacer3"></div>
 
     <div class="button-position">
         <button class="btn btn-orange-form" type="submit">

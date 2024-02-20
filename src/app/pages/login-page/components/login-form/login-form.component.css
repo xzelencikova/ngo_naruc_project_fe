@@ -10,17 +10,21 @@
     font-weight: bold;
 }
 
-.input-position{
-    margin: auto;
-    width: 85%;
+.login-form-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.input-position> input{
-    border-radius: 80px;
-    height: 56.6px;
-}
-
-
+:host ::ng-deep .mdc-text-field--outlined {
+    --mdc-outlined-text-field-container-shape: 28px;
+    border: none !important;
+  }
+  /* 
+:host ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    caret-color: black;
+} */
 input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     /* Email */
     font-style: normal;

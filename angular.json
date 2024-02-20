@@ -95,7 +95,9 @@
               "src/styles.css",
               "../node_modules/bootstrap/dist/css/boostrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/file-saver/dist/FileSaver.js"
+            ]
           }
         }
       }

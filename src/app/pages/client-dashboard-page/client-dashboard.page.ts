@@ -10,6 +10,10 @@ import { MatDialog } from '@angular/material/dialog';
 import domToImage from 'dom-to-image';
 import jsPDF from 'jspdf';
 import { AlertService, Alert } from 'src/app/components/alert';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
+import * as CSV from 'xlsx';
+
 
 @Component({
   selector: 'app-client-dashboard-page',
@@ -27,6 +31,7 @@ export class ClientDashboardPage {
   colors: string[] = ['FFA539', 'FF4219', '19BAFF', '1E19FF', '27CD9B'];
   categoryColors: any[] = [];
   isData: boolean = false;
+  
   clientName: string = '';
 
   isPieDataArray: any = {
@@ -49,6 +54,7 @@ export class ClientDashboardPage {
     if (this.client._id === 0) {   
       this.clientService.getClientById(client_id!).subscribe(res => {
         this.client = res;
+
         this.clientService.selectedClient$.emit(res);
       });
     }
@@ -67,7 +73,7 @@ export class ClientDashboardPage {
             }
           }
         })
-
+        // console.log(this.ratingOverview);
         this.categoryColors = JSON.parse(JSON.stringify(overview.bar_overview));
 
         for (let index = 0; index < this.categoryColors.length; index++) {
@@ -167,11 +173,82 @@ export class ClientDashboardPage {
     this.router.navigate(["questionnaire"]);
   }
 
+  exportToCSV(jsonData: any[], fileName: string): void {
+
+    const csvData: string = this.convertArrayToCSV(jsonData);
+  
+    // Save the CSV data to a file
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' });
+    FileSaver.saveAs(blob, fileName + '.csv');
+  }
+  
+  convertArrayToCSV(jsonData: any[]): string {
+    let csv = '';
+
+    // Ensure jsonData is an array and not undefined
+    if (!Array.isArray(jsonData)) {
+      console.error('JSON data is not an array.');
+      return csv;
+    }
+
+    // Construct the CSV header
+    const headers = ['Question ID'];
+    const phases = new Set<number>();
+    
+    jsonData[0].forEach((item: any) => {
+      // Ensure each item has the necessary properties
+      if (item.questions_rating && Array.isArray(item.questions_rating)) {
+        phases.add(item.phase_no);
+      } else {
+        console.error('Invalid item:', item);
+      }
+    });
+
+    phases.forEach((phase: number) => {
+      headers.push(`Rating Phase ${phase}`);
+    });
+    headers.push('Category', 'Question');
+
+    csv += headers.join(',') + '\n';
+
+    // Populate CSV rows
+    jsonData[0].forEach((item: any) => {
+      if (item.questions_rating && Array.isArray(item.questions_rating)) {
+        item.questions_rating.forEach((question: any) => {
+          const rowValues: any[] = [question.question_id];
+
+          phases.forEach((phase: number) => {
+            const rating = jsonData[0].find((item: any) => item.phase_no === phase)?.questions_rating.find((question_item: any) => question_item.question_id === question.question_id)?.rating || '';      
+            rowValues.push(rating);
+          });
+
+          rowValues.push(question.category, question.question);
+          csv += rowValues.join(',') + '\n';
+          
+        });
+      } else {
+        console.error('Invalid item:', item);
+      }
+    });
+
+    return csv;
+  }
+  
   // @ts-ignore
   @ViewChild('dataToExport', { static: false }) public dataToExport: ElementRef;
 
-  public downloadOverview(): void {
+  public downloadCSVOverview(): void {
 
+    // export in CSV
+    const jsonData = [this.ratings];
+    console.log('Data from API', jsonData);
+    this.exportToCSV(jsonData, (this.client!.name +'_' +this.client!.surname! + '_hodnotenie'));
+
+  }
+
+
+  public downloadOverview(): void {
+    
     const width = Math.max(this.dataToExport.nativeElement.clientWidth, 
       this.dataToExport.nativeElement.scrollWidth, 
       this.dataToExport.nativeElement.offsetWidth);

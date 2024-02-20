@@ -13,6 +13,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { ChangeFormComponent } from './components/change-form/change-form.component';
 import {PasswordFormComponent} from './components/password-form/password-form.component';
 import { AlertModule } from "src/app/components/alert";
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AlertModule } from "src/app/components/alert";
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
-    AlertModule
+    AlertModule,
+    MatButtonModule
   ]
 })
 export class UserProfilePageModule { }
