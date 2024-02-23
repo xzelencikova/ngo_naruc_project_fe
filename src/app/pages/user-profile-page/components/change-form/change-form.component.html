@@ -3,15 +3,27 @@
 <form class="change" [formGroup]="changeForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
-        <label for="name">Meno</label>
-        <input type="text" class="form-control" formControlName="name" placeholder="Meno">
+        <div class="label-position">
+            <label for="name">Meno</label>
+        </div>
+        <div class="change-input">
+            <mat-form-field appearance="outline" class="input-position">
+                <input matInput type="text" class="form-control" formControlName="name" placeholder="Meno">
+            </mat-form-field>
+        </div>
     </div>
 
     <!-- <div *ngIf="message" [class.message-bar-success]="!error" [class.message-bar-error]="error">{{ message }}</div> -->
 
     <div class="form-group">
-        <label for="surname">Priezvisko</label>
-        <input type="text" class="form-control" formControlName="surname" placeholder="Priezvisko">
+        <div class="label-position">
+            <label for="surname">Priezvisko</label>
+        </div>
+        <div class="change-input">
+            <mat-form-field appearance="outline" class="input-position">
+                <input matInput type="text" class="form-control" formControlName="surname" placeholder="Priezvisko">
+            </mat-form-field>
+        </div>
     </div>
 
     <div class="button-position">

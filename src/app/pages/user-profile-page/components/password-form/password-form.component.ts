@@ -74,6 +74,7 @@ export class PasswordFormComponent {
     console.log(confirmPasswordControl);
   
     if (!newPasswordControl || !confirmPasswordControl) {
+      this.alertService.error("Nespr8vne vyplnené heslá.", "Nastala chyba!")
       return;
     }
   
@@ -98,9 +99,12 @@ export class PasswordFormComponent {
         .updateUserPassword(this.user._id!, updatedPassword)
         .subscribe({
           next: (success) => {
-            this.user = { ...this.user, password: newPassword }; 
+            console.log(this.user);
+            this.user = { ...this.user, password: newPassword };
+            console.log(this.user);
             this.userDataService.updateUserData(this.user);
-            this.userService.selectedUser$.emit(success);
+            this.userService.selectedUser$.emit(this.user);
+
             this.alertService.success("Heslo bolo úspešne zmenené.", "Výborne!");
           },
           error: (err) => {
