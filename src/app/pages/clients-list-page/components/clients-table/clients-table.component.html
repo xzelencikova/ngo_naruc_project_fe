@@ -28,7 +28,7 @@
   
     <ng-container matColumnDef="registration_date">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Rok</th>
-      <td mat-cell *matCellDef="let element"> {{element.registration_date | date: 'yyyy'}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.contract_no.split('-')[1]}} </td>
     </ng-container>
 
     <ng-container matColumnDef="last_phase">
