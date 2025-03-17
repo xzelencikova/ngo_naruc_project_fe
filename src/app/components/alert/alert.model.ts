@@ -3,7 +3,7 @@ export class Alert {
     message?: string;
     title?: string;
     id: string = "";
-    delay: number = 0;
+    delay: number = 3000;
     keepAfterRouteChange: boolean = true;
     isVisible?: boolean;
     userData: any;
