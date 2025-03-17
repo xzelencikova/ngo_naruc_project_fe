@@ -87,6 +87,11 @@ export class ClientDashboardPage {
 
     });
     this.ratingService.getRatingsByClientId(this.client?._id ? this.client._id : client_id!).subscribe(ratingsList => {
+      for (let i = 0; i < ratingsList.length; i++) {
+        for (let j = 0; j < ratingsList[i].questions_rating.length; j++) {
+          ratingsList[i].questions_rating[j].rating = ratingsList[i].questions_rating[j].rating + 1;
+        }
+      }
       this.ratings = ratingsList;
     });
   }

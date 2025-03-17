@@ -27,4 +27,8 @@ export class QuestionsOverviewChartComponent {
     library.addIconPacks(fas, far); 
   }
 
+  formatXAxis(value: number): string {
+    return value === 0 ? '0' : value.toString();
+  }
+
 }

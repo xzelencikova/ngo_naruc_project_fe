@@ -39,6 +39,9 @@
                                     <th style="text-align: center">
                                         <fa-icon [icon]="['fas', 'face-smile']" class="rating-icon rating-icon--green"></fa-icon>
                                     </th>
+                                    <th style="text-align: center">
+                                        <fa-icon [icon]="['far', 'square']" class="rating-icon"></fa-icon>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,20 +49,26 @@
                                     <td style="font-size: 18px">{{ question.question }}</td>
                                     <td style="text-align: center">                            
                                         <label style="width: 100%; cursor: pointer">
-                                            <input type="radio" name="{{question._id}}" formControlName="{{question._id}}" value="1"/>
+                                            <input type="radio" name="{{question._id}}" formControlName="{{question._id}}" value="0"/>
                                             <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--red"></fa-icon></span>
                                         </label>
                                     </td>
                                     <td style="text-align: center">
                                         <label style="width: 100%; cursor: pointer">
-                                            <input type="radio" name="{{question._id}}" formControlName="{{question._id}}" value="2"/>
+                                            <input type="radio" name="{{question._id}}" formControlName="{{question._id}}" value="1"/>
                                             <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--yellow"></fa-icon></span>
                                         </label>
                                     </td>
                                     <td style="text-align: center">
                                         <label style="width: 100%; cursor: pointer">
-                                            <input type="radio" name="{{question._id}}" formControlName="{{question._id}}" value="3"/>
+                                            <input type="radio" name="{{question._id}}" formControlName="{{question._id}}" value="2"/>
                                             <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--green"></fa-icon></span>
+                                        </label>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <label style="width: 100%; cursor: pointer">
+                                            <input type="radio" name="{{question._id}}" formControlName="{{question._id}}" value="null"/>
+                                            <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon"></fa-icon></span>
                                         </label>
                                     </td>
                                 </tr>

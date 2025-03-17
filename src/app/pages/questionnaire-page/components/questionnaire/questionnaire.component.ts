@@ -86,7 +86,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
           for (let i = 0; i < this.questionnaire.length; i++) {
             this.questionnaire[i].questions.forEach(question => {
               if (this.prefill_questionnaire === undefined)
-                group[question._id] = ['0']
+                group[question._id] = [null]
               else {
                 group[question._id] = [String(this.prefill_questionnaire.questions_rating.filter(q => q.question_id == question._id)[0].rating)];
               }
@@ -158,7 +158,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
       this.client!.last_phase = this.client!.last_phase + 1;
     else this.client!.active = false;
 
-
+    console.log(this.questForm.value)
     this.questionnaire.forEach(category => {
       category.questions.forEach(question => {
         rating.questions_rating.push({
@@ -196,7 +196,7 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   countUnansweredQuestions(questions: any): number {
     let counter = 0;
     for (let k in questions) {
-      if (questions[k] === "0") counter++;
+      if (questions[k] === null) counter++;
     }
     
     return counter;

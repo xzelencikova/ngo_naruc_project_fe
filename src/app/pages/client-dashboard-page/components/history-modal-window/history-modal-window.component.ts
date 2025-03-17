@@ -31,7 +31,7 @@ export class HistoryModalWindowComponent {
         resultsTable.push({
           _id: result._id,
           phase: result.phase_no,
-          answered_questions_count: result.questions_rating.filter(questions => questions.rating !== 0).length,
+          answered_questions_count: result.questions_rating.filter(questions => questions.rating !== null).length,
           all_questions_count: result.questions_rating.length,
           last_updated_by: result.rated_by_user_id,
           last_update: result.date_rated,

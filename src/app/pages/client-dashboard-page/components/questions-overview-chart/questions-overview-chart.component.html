@@ -22,6 +22,7 @@
             <div class="chart-wrapper">
                 <ngx-charts-bar-horizontal-2d
                     [customColors]="customColors[i].series"
+                    [xAxisTickFormatting]="formatXAxis"
                     [results]="[question]"
                     [gradient]="false"
                     [xAxis]="showXAxis"
@@ -35,7 +36,7 @@
                     [showYAxisLabel]="false"
                     [barPadding]=20
                     [groupPadding]=0
-                    [xAxisTicks]="[0, 1, 2, 3]"
+                    [xAxisTicks]="['0', '1', '2', '3']"
                 >
                 </ngx-charts-bar-horizontal-2d>
             </div>
