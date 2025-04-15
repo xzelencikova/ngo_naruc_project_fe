@@ -40,4 +40,7 @@ export class ClientService {
   postNewClient(body: ClientModel): Observable<ClientModel> {
     return this.http.post<ClientModel>(`${this.baseUrl}/ngo/clients`, body);
   }
+  deleteClient(client_id: number): Observable<ClientModel> {
+    return this.http.delete<ClientModel>(`${this.baseUrl}/ngo/client/${client_id}`);
+  }
 }

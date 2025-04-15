@@ -77,3 +77,10 @@ input {
         width: 50%;
     }
   }
+
+.delete-button{
+    background: none;
+    border: none;
+    width: 2.5rem;
+}
+

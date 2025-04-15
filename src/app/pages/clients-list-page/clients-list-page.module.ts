@@ -11,12 +11,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatIconModule} from '@angular/material/icon';
+import { MatDialogModule } from "@angular/material/dialog";
+import { DeleteClientWindowComponent } from "./components/delete-window/delete-window.component";
 
 
 @NgModule({
     declarations: [
         ClientsListPage,
-        ClientsTableComponent
+        ClientsTableComponent,
+        DeleteClientWindowComponent
     ],
     imports: [
         CommonModule,
@@ -29,7 +32,8 @@ import {MatIconModule} from '@angular/material/icon';
         MatSortModule,
         MatInputModule,
         MatFormFieldModule,
-        MatIconModule
+        MatIconModule,
+        MatDialogModule
     ],
     providers: [],
     schemas: []
