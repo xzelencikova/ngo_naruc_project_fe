@@ -74,3 +74,15 @@ h1 {
         padding: 1rem 2rem !important;
     }
 }
+
+.active-icon {
+    font-size: small;
+}
+
+.active-icon--green {
+    color: #189D5F;
+}
+
+.active-icon--red {
+    color: #FF5800;
+}

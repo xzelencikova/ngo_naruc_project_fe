@@ -13,6 +13,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatIconModule} from '@angular/material/icon';
 import { MatDialogModule } from "@angular/material/dialog";
 import { DeleteClientWindowComponent } from "./components/delete-window/delete-window.component";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { DeleteClientWindowComponent } from "./components/delete-window/delete-w
         MatInputModule,
         MatFormFieldModule,
         MatIconModule,
-        MatDialogModule
+        MatDialogModule,
+        MatCheckboxModule
     ],
     providers: [],
     schemas: []

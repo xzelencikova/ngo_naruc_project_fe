@@ -43,4 +43,8 @@ export class ClientService {
   deleteClient(client_id: number): Observable<ClientModel> {
     return this.http.delete<ClientModel>(`${this.baseUrl}/ngo/client/${client_id}`);
   }
+
+  lockClients(body: any): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/ngo/clients`, body);
+  }
 }
