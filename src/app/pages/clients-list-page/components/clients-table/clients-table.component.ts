@@ -16,8 +16,9 @@ import { DeleteClientWindowComponent } from '../delete-window/delete-window.comp
   styleUrls: ['./clients-table.component.css']
 })
 export class ClientsTableComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['name', 'surname', 'contract_no', 'registration_date', 'last_phase', 'details', 'delete'];
+  displayedColumns: string[] = ['lock-selection', 'active', 'name', 'surname', 'contract_no', 'registration_date', 'last_phase', 'details', 'delete'];
   public dataSource: MatTableDataSource<ClientModel>;
+  public lock: Boolean = true;
 
   // @ts-ignore
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,13 +36,15 @@ export class ClientsTableComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+    if (!this.lock) this.displayedColumns = ['lock-selection', 'name', 'surname', 'contract_no', 'registration_date', 'last_phase', 'details', 'delete'];
+    else this.displayedColumns = ['active', 'name', 'surname', 'contract_no', 'registration_date', 'last_phase', 'details', 'delete'];
+    
     this.clientService.getClientsList().subscribe(res => {
       this.dataSource = new MatTableDataSource<ClientModel>(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
   }
-
 
   reloadTable() {
     this.clientService.getClientsList().subscribe(res => {
@@ -88,6 +91,29 @@ export class ClientsTableComponent implements OnInit, AfterViewInit {
         });
       }
     });
+  }
+
+  lockClients() {
+    this.lock = !this.lock;
+
+    if (!this.lock) this.displayedColumns = ['lock-selection', 'name', 'surname', 'contract_no', 'registration_date', 'last_phase', 'details', 'delete'];
+    else this.displayedColumns = ['active', 'name', 'surname', 'contract_no', 'registration_date', 'last_phase', 'details', 'delete'];
+
+    if (this.lock) {
+      let body = {
+        "lock_clients": this.dataSource.data.filter(client => !client.active).map(client => client._id),
+        "unlock_clients": this.dataSource.data.filter(client => client.active).map(client => client._id)
+      }
+      this.clientService.lockClients(body).subscribe({
+        next: success => {
+          this.alertService.success("Zvolení používatelia boli úspešne odstránení.", "Výborne!");
+          this.reloadTable();
+        },
+        error: err => {
+          this.alertService.error("Nepodarilo sa uzamknúť používateľov.", "Nastala chyba!")
+        }
+      });
+    }
   }
 
 

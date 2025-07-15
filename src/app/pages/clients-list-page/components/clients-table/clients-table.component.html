@@ -2,14 +2,48 @@
   <input matInput #searchVal placeholder="Vyhľadaj klienta" (keyup)="applyFilter(searchVal.value)">
   <mat-icon matSuffix>search</mat-icon>
 </mat-form-field> -->
-<div class="form-group row" style="width: 70%;">
-  <div class="col-sm-10 size-input-wrapper">
-      <input #searchVal placeholder="Vyhľadaj klienta" type="text" class="form-control" (keyup)="applyFilter(searchVal.value)">
-      <span><i class="fas fa-search"></i></span>
+<div style="padding: 5rem 1rem 2rem; display: flex; justify-content: space-between;">
+  <div style="width: 70%;">
+    <div class="form-group row" >
+      <div class="col-sm-10 size-input-wrapper">
+        <input #searchVal placeholder="Vyhľadaj klienta" type="text" class="form-control" (keyup)="applyFilter(searchVal.value)">
+        <span><i class="fas fa-search"></i></span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button class="detail-button" type="button" (click)="lockClients()">
+      <div *ngIf="lock; else confirm_lock">
+        <i class="fas fa-lock"></i> Uzamknúť klientov
+      </div>
+      <ng-template #confirm_lock>
+        <i class="fas fa-check"></i> Potvrdiť uzamknutie
+      </ng-template>
+    </button>
   </div>
 </div>
 
 <table mat-table [dataSource]="dataSource" class="clients-table" matSort>
+
+    <ng-container matColumnDef="lock-selection">
+        <th mat-header-cell *matHeaderCellDef>Výber</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <mat-checkbox [ngModel] = "!element.active" (change)="element.active = !element.active"></mat-checkbox>
+        </td>
+        <!-- <td mat-cell *matCellDef="let element" [hidden]="lock"><mat-checkbox></mat-checkbox></td> -->
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Aktívny</th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="!element.active;else active">
+          <i class="fas fa-lock active-icon--red"></i>
+        </div>
+        <ng-template #active>
+          <i class="fas fa-circle active-icon--green"></i>
+        </ng-template>
+      </td>
+    </ng-container>
 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Meno</th>

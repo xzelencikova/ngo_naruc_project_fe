@@ -9,7 +9,15 @@
             <ng-template #notOverview>
                 <h1>{{category}}</h1>
             </ng-template>
-            <h1><b>{{ client.name }} {{ client.surname }}</b></h1>
+            <h1 style="display: flex;"><b>{{ client.name }} {{ client.surname }}</b>
+                <div style="padding-left: 5px;">
+                    <div *ngIf="!client.active">
+                        <i class="fas fa-lock active-icon active-icon--red"></i>
+                      </div>
+                </div>
+                
+            </h1>
+            <p>* Pre zobrazenie grafu jednotlivých otázok pre kategóriu klikni na vizualizáciu zvolenej kategórie v čiarovom alebo koláčovom grafe.</p>
         </div>
         <!-- </div>
         <ng-template #notOverview>
@@ -18,7 +26,7 @@
         </ng-template> -->
 
        <div style="display: flex">
-            <div *ngIf="client.last_phase < 3; else userInactive">
+            <div *ngIf="client.last_phase < 3 && client.active; else userInactive">
                 <button mat-button role="button" class="questionnaire-button"  [matMenuTriggerFor]="questionnaire"><i class="fa fa-solid fa-file-pen fa-lg"></i> <i class="fa fa-solid fa-chevron-down"></i></button>
                 <mat-menu #questionnaire="matMenu">
                     <button mat-menu-item (click)="loadQuestionnaire()">Vyplniť {{ client.last_phase + 1 }}. fázu</button>
