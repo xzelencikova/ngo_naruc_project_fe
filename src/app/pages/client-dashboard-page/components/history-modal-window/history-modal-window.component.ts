@@ -5,6 +5,8 @@ import { ClientModel } from 'src/app/models/client.model';
 import { RatingModel } from 'src/app/models/rating.model';
 import { ClientService } from 'src/app/services/client.service';
 import { RatingService } from 'src/app/services/rating.service';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Inject } from '@angular/core';
 
 @Component({
   selector: 'app-history-modal-window',
@@ -17,13 +19,12 @@ export class HistoryModalWindowComponent {
   displayedColumns: string[] = ['phase', 'answered_questions_count', 'all_questions_count', 'last_update', 'last_updated_by', 'edit'];
   public dataSource: MatTableDataSource<any>;
 
-  constructor(private clientService: ClientService, private ratingService: RatingService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private clientService: ClientService, private ratingService: RatingService, private activatedRoute: ActivatedRoute, private router: Router, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.client = this.clientService.getSelectedClient();
     this.dataSource = new MatTableDataSource<any>();
   }
 
   ngOnInit(): void {
-
     this.ratingService.getRatingsByClientId(this.client?._id!).subscribe(results => {
       let resultsTable: any[] = [];
 

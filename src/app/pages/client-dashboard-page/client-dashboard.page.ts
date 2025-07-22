@@ -58,15 +58,16 @@ export class ClientDashboardPage {
         this.clientService.selectedClient$.emit(res);
       });
     }
-
+    console.log(this.client)
     this.ratingService.getRatingOverviewForClient(this.client?._id ? this.client._id : client_id!).subscribe(overview => {
+      console.log(overview)
       if (overview.bar_overview.length > 0) {
         this.ratingOverview = overview;
 
         Object.keys(this.ratingOverview).forEach(key => {
           if (key.includes("pie")) {
             for (let index = 0; index < Object.keys(this.ratingOverview[key]).length; index++) {
-              if (this.ratingOverview[key][index].value === 0) continue;
+              if (this.ratingOverview[key][index].value === null) continue;
               
               this.isPieDataArray[key] = true;
               break;
@@ -87,6 +88,7 @@ export class ClientDashboardPage {
 
     });
     this.ratingService.getRatingsByClientId(this.client?._id ? this.client._id : client_id!).subscribe(ratingsList => {
+      console.log(ratingsList)
       for (let i = 0; i < ratingsList.length; i++) {
         for (let j = 0; j < ratingsList[i].questions_rating.length; j++) {
           ratingsList[i].questions_rating[j].rating = ratingsList[i].questions_rating[j].rating + 1;
@@ -165,7 +167,7 @@ export class ClientDashboardPage {
         }
       }
     }
-
+    console.log(this.ratingCategory)
     this.isOverview = false;
   }
 
@@ -283,7 +285,13 @@ export class ClientDashboardPage {
   }
 
 openHistoryModal() {
-  const dialogRef = this.dialog.open(HistoryModalWindowComponent);
+  const dialogRef = this.dialog.open(HistoryModalWindowComponent,
+    {
+      data: {
+        results: this.ratings
+      }
+    }
+  );
 }
 
 }
