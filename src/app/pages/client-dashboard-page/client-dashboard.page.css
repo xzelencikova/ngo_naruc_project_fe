@@ -1,88 +1,137 @@
-h1 {
-    color: #5c5c5c;
-    font-size: 48px;
-}
-
 .overview-header {
-    padding: 3rem 1rem 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  padding: 1rem 1rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .questionnaire-button {
-    margin-right: 1rem;
-    padding: 1rem 4rem !important;
-    border-radius: 50px;
-    font-weight: 600;
-    color: white !important;
-    background: linear-gradient(0.25turn, #FF4D00, #FC7900);
-    border: none;
+  padding: 0 2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(0.25turn, #ff4d00, #fc7900);
+  border: none;
+  margin-right: 1rem;
+}
+.questionnaire-button.i {
+  color: #ff4d00;
 }
 
 .questionnaire-button:hover {
-    background: linear-gradient(88deg, #D44900 -0.01%, #FF6C1D 100.02%);
+  background: linear-gradient(88deg, #d44900 -0.01%, #ff6c1d 100.02%);
 }
 
 .download-button {
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius:  5px;
-    font-weight: 600;
-    color: #FF4D00;
-    background: white;
-    border: 1px solid #FF4D00;
-    margin-right: 0rem;
+  padding: 0 2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #ff4d00;
+  background: white;
+  border: 1px solid #ff4d00;
 }
 
 .download-button:hover {
-    background: linear-gradient(90deg, #FF4D00 0%, #FC7900 99.99%);
-    color: white;
+  background: linear-gradient(90deg, #ff4d00 0%, #fc7900 99.99%);
+  color: white;
 }
 
-.download-csv-button {
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius:  5px;
-    font-weight: 600;
-    color: #FF4D00;
-    background: white;
-    border: 1px solid #FF4D00;
-    margin-right: 1rem;
+.client-name {
+  color: #5c5c5c;
+  font-size: 34px;
+  font-weight: 600;
 }
 
-.download-csv-button:hover {
-    background: linear-gradient(90deg, #FF4D00 0%, #FC7900 99.99%);
-    color: white;
+.status-badge {
+  font-size: 14px;
+  padding: 0.25rem 0.4rem;
+  border-radius: 1rem;
+  margin-left: 0.5rem;
+  font-weight: 500;
+  vertical-align: text-top;
+}
+
+.status-badge.active {
+  background-color: #2e9e4f;
+  color: white;
+}
+
+.status-badge.inactive {
+  background-color: #e0e0e0;
+  color: white;
 }
 
 @media screen and (max-width: 1280px) {
-    h1 {
-        font-size: 35px !important;
-    }
+  .client-name {
+    font-size: 30px;
+  }
 }
 
 @media screen and (max-width: 720px) {
-    h1 {
-        font-size: 30px !important;
-    }
+  h1 {
+    font-size: 2px;
+  }
 
-    .questionnaire-button, .download-button {
-        font-size: 12px !important;
-        padding: 1rem 2rem !important;
-    }
+  .questionnaire-button,
+  .download-button {
+    font-size: 12px !important;
+    padding: 1rem 2rem !important;
+  }
 }
 
-.active-icon {
-    font-size: small;
+.phase-progress {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  position: relative;
 }
 
-.active-icon--green {
-    color: #189D5F;
+.phase-progress .phase-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border-radius: 50%;
+  border: 3px solid #dfdfdf;
+  font-weight: 600;
+  z-index: 1;
 }
 
-.active-icon--red {
-    color: #FF5800;
+.phase-progress .phase-item.active {
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 50%;
+  border: 3px solid #2e9e4f;
+  color: #2e9e4f;
+}
+
+.phase-progress .phase-item.complete {
+  background: #2e9e4f;
+  border-radius: 50%;
+  border: 3px solid #2e9e4f;
+  color: #fff;
+}
+
+.phase-progress .progress {
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: #dfdfdf;
+  margin-top: 20px;
+}
+
+.progress .indicator {
+  position: absolute;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(88deg, #2e9e4f -0.01%, #88efa7 100.02%);
+}
+
+.phase-progress .score {
+  padding: 1rem 0;
+  font-size: 48px;
+  color: #5c5c5c;
 }

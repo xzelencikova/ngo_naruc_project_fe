@@ -4,9 +4,10 @@ import { UserModel } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-user-profile-page',
-  templateUrl: './user-profile.page.html',
-  styleUrls: ['./user-profile.page.css']
+    selector: 'app-user-profile-page',
+    templateUrl: './user-profile.page.html',
+    styleUrls: ['./user-profile.page.css'],
+    standalone: false
 })
 export class UserProfilePage implements OnInit {
   activeForm: 'change' | 'password' = 'change';

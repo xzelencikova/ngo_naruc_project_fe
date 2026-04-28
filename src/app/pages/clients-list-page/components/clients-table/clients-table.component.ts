@@ -11,9 +11,10 @@ import { DeleteClientWindowComponent } from '../delete-window/delete-window.comp
 
 
 @Component({
-  selector: 'app-clients-table',
-  templateUrl: './clients-table.component.html',
-  styleUrls: ['./clients-table.component.css']
+    selector: 'app-clients-table',
+    templateUrl: './clients-table.component.html',
+    styleUrls: ['./clients-table.component.css'],
+    standalone: false
 })
 export class ClientsTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['lock-selection', 'active', 'name', 'surname', 'contract_no', 'registration_date', 'last_phase', 'details', 'delete'];

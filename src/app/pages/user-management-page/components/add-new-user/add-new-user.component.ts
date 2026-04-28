@@ -6,9 +6,10 @@ import { AlertService } from 'src/app/components/alert';
 
 
 @Component({
-  selector: 'app-add-new-user',
-  templateUrl: './add-new-user.component.html',
-  styleUrls: ['./add-new-user.component.css']
+    selector: 'app-add-new-user',
+    templateUrl: './add-new-user.component.html',
+    styleUrls: ['./add-new-user.component.css'],
+    standalone: false
 })
 export class AddNewUserComponent implements OnInit {
 

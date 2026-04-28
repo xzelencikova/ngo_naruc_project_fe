@@ -1,23 +1,27 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user.model';
 import { PasswordModel } from '../models/password.model';
-import { data } from 'jquery';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
   private baseUrl: string = environment.baseUrl;
 
   public selectedUser$: EventEmitter<UserModel> = new EventEmitter<UserModel>();
-  public user: UserModel = {_id: 0, name: "", surname: "", email: "", role: ""};
+  public user: UserModel = {
+    _id: 0,
+    name: '',
+    surname: '',
+    email: '',
+    role: '',
+  };
 
-  constructor(private http: HttpClient) { 
-    this.selectedUser$.subscribe(selection => {
+  constructor(private http: HttpClient) {
+    this.selectedUser$.subscribe((selection) => {
       this.user = selection;
     });
   }
@@ -35,8 +39,11 @@ export class UserService {
     return this.http.delete<UserModel>(`${this.baseUrl}/ngo/user/${user_id}`);
   }
 
-  updateUser(user_id: number, data:UserModel): Observable<UserModel> {
-    return this.http.put<UserModel>(`${this.baseUrl}/ngo/user/${user_id}`, data);
+  updateUser(user_id: number, data: UserModel): Observable<UserModel> {
+    return this.http.put<UserModel>(
+      `${this.baseUrl}/ngo/user/${user_id}`,
+      data,
+    );
   }
 
   loginUser(data: UserModel): Observable<UserModel> {
@@ -44,10 +51,16 @@ export class UserService {
   }
 
   postNewUser(body: UserModel): Observable<UserModel[]> {
-    return this.http.post<UserModel[]>(`${this.baseUrl}/ngo/user/register`, body);
+    return this.http.post<UserModel[]>(
+      `${this.baseUrl}/ngo/user/register`,
+      body,
+    );
   }
 
-  updateUserPassword(userId: number, newPassword: PasswordModel): Observable<any> {
+  updateUserPassword(
+    userId: number,
+    newPassword: PasswordModel,
+  ): Observable<any> {
     const url = `${this.baseUrl}/ngo/user/update_password/${userId}`;
     return this.http.put(url, newPassword);
   }
@@ -56,7 +69,6 @@ export class UserService {
     return this.http.get<UserModel>(`${this.baseUrl}/ngo/user/${user_id}`);
   }
 }
-
 
 //   editClient(client: ClientModel): Observable<any> {
 //     return this.http.put<any>(`${this.baseUrl}/ngo/client/update_client/${client._id}`, client);
@@ -74,4 +86,3 @@ export class UserService {
 //     console.log(body);
 //     return this.http.post<ClientModel[]>(`${this.baseUrl}/ngo/client/add_new_client`, body);
 //   }
-

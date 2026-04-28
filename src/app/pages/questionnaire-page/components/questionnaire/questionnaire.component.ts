@@ -21,9 +21,10 @@ import { AlertService } from 'src/app/components/alert';
 
 
 @Component({
-  selector: 'app-questionnaire',
-  templateUrl: './questionnaire.component.html',
-  styleUrls: ['./questionnaire.component.css']
+    selector: 'app-questionnaire',
+    templateUrl: './questionnaire.component.html',
+    styleUrls: ['./questionnaire.component.css'],
+    standalone: false
 })
 export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit {
 

@@ -9,9 +9,10 @@ import * as FileSaver from 'file-saver';
 import * as CSV from 'xlsx';
 
 @Component({
-  selector: 'app-sent-message',
-  templateUrl: './sent-message.component.html',
-  styleUrls: ['./sent-message.component.css']
+    selector: 'app-sent-message',
+    templateUrl: './sent-message.component.html',
+    styleUrls: ['./sent-message.component.css'],
+    standalone: false
 })
 export class SentMessageComponent {
   ratings: RatingModel[] = [];

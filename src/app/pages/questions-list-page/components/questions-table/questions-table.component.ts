@@ -13,9 +13,10 @@ import { AlertService } from 'src/app/components/alert';
 
 
 @Component({
-  selector: 'app-questions-table',
-  templateUrl: './questions-table.component.html',
-  styleUrls: ['./questions-table.component.css']
+    selector: 'app-questions-table',
+    templateUrl: './questions-table.component.html',
+    styleUrls: ['./questions-table.component.css'],
+    standalone: false
 })
 export class QuestionsTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['question', 'category', 'edit', 'delete'];

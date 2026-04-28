@@ -7,9 +7,10 @@ import { QuestionModel } from 'src/app/models/question.model';
 import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
-  selector: 'app-add-question-form',
-  templateUrl: './add-question-form.component.html',
-  styleUrls: ['./add-question-form.component.css']
+    selector: 'app-add-question-form',
+    templateUrl: './add-question-form.component.html',
+    styleUrls: ['./add-question-form.component.css'],
+    standalone: false
 })
 export class AddQuestionFormComponent {
   questionForm = this.fb.group({

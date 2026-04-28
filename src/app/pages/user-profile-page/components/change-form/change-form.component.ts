@@ -7,9 +7,10 @@ import { UserDataService } from 'src/app/services/user-data.service';
 import { AlertService } from 'src/app/components/alert';
 
 @Component({
-  selector: 'app-change-form',
-  templateUrl: './change-form.component.html',
-  styleUrls: ['./change-form.component.css']
+    selector: 'app-change-form',
+    templateUrl: './change-form.component.html',
+    styleUrls: ['./change-form.component.css'],
+    standalone: false
 })
 export class ChangeFormComponent {
   public user: UserModel = this.userService.getLoggedInUser();

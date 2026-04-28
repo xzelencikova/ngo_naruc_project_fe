@@ -4,9 +4,10 @@ import { Inject } from '@angular/core';
 import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
-  selector: 'app-delete-window',
-  templateUrl: './delete-window.component.html',
-  styleUrls: ['./delete-window.component.css']
+    selector: 'app-delete-window',
+    templateUrl: './delete-window.component.html',
+    styleUrls: ['./delete-window.component.css'],
+    standalone: false
 })
 export class DeleteClientWindowComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}

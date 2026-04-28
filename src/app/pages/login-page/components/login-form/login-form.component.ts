@@ -6,9 +6,10 @@ import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
-  selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css']
+    selector: 'app-login-form',
+    templateUrl: './login-form.component.html',
+    styleUrls: ['./login-form.component.css'],
+    standalone: false
 })
 export class LoginFormComponent {
 

@@ -13,9 +13,10 @@ import { DeleteWindowComponent } from '../delete-window/delete-window.component'
 import { AddNewUserComponent } from '../add-new-user/add-new-user.component';
 
 @Component({
-  selector: 'app-user-table',
-  templateUrl: './user-table.component.html',
-  styleUrls: ['./user-table.component.css']
+    selector: 'app-user-table',
+    templateUrl: './user-table.component.html',
+    styleUrls: ['./user-table.component.css'],
+    standalone: false
 })
 export class UserTableComponent implements OnInit, AfterViewInit{
   displayedColumns: string[] = ['name', 'surname', 'email', 'role', 'delete'];

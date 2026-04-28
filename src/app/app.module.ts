@@ -7,7 +7,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { FormsModule } from '@angular/forms';
 
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SpinnerComponent } from './components/spinner/spinner.component';
@@ -15,30 +19,40 @@ import { SpinnerWrapperComponent } from './components/spinner-wrapper/spinner-wr
 import { SpinnerInterceptorService } from './services/spinner-interceptor.service';
 import { PortalModule } from '@angular/cdk/portal';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SpinnerComponent,
-    SpinnerWrapperComponent
+    SpinnerWrapperComponent,
   ],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule,
     FontAwesomeModule,
     FormsModule,
-  //  ReactiveFormsModule,
+    //  ReactiveFormsModule,
     BrowserAnimationsModule,
-    PortalModule
+    PortalModule,
+    PlotlyModule.forRoot(PlotlyJS),
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptorService, multi: true }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptorService,
+      multi: true,
+    },
+    provideHttpClient(withInterceptorsFromDi()),
   ],
-  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

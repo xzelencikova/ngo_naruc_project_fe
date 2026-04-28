@@ -1,0 +1,127 @@
+/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+@include mat.core();
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  --primary-start: #ff5800;
+  --primary-end: #ff8b00;
+  --primary-hover-start: #d44900;
+  --primary-hover-end: #ff6c1d;
+
+  --primary-solid: #ff4d00;
+  --primary-solid-light: #fc7900;
+
+  --text-on-primary: #ffffff;
+  --text-primary: #ff4d00;
+
+  --border-radius-pill: 50px;
+}
+
+body {
+  color: #5c5c5c;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.btn {
+  padding: 1rem 3rem;
+  border-radius: var(--border-radius-pill);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  color: var(--text-on-primary);
+  background: linear-gradient(
+    0.25turn,
+    var(--primary-start),
+    var(--primary-end)
+  );
+}
+
+.btn-primary:hover {
+  background: linear-gradient(
+    88deg,
+    var(--primary-hover-start),
+    var(--primary-hover-end)
+  );
+}
+
+.btn-outline {
+  color: var(--text-primary);
+  background: white;
+  border: 1px solid var(--text-primary);
+}
+
+.btn-outline:hover {
+  color: var(--text-on-primary);
+  background: linear-gradient(
+    90deg,
+    var(--primary-solid),
+    var(--primary-solid-light)
+  );
+}
+
+.mat-step-header {
+  background-color: #07c496 !important;
+}
+
+.mat-step-header {
+  background-color: transparent !important;
+}
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: lightgreen !important;
+  --mdc-snackbar-supporting-text-color: green !important;
+  --mat-snack-bar-button-color: green !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 80px !important;
+  padding: 2rem 5rem !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__title {
+  color: #929090 !important;
+  text-align: center !important;
+  font-size: 40px !important;
+  font-weight: bold !important;
+}
+
+.mat-mdc-menu-content {
+  margin: 0 0.8rem !important;
+  padding: 1rem 0 !important;
+}
+
+.mat-mdc-button {
+  height: auto !important;
+}
+
+.mdc-text-field {
+  border: 1px solid #e7e7e7 !important;
+}
+/* 
+.mat-text-field--focused {
+    background: white !important;
+} */
+
+.overlay {
+  z-index: 100000 !important;
+}
+
+.cdk-overlay-container {
+  z-index: 100000 !important;
+}

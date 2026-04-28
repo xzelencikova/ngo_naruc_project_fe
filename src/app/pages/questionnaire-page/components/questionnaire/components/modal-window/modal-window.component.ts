@@ -5,9 +5,10 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 
 @Component({
-  selector: 'app-modal-window',
-  templateUrl: './modal-window.component.html',
-  styleUrls: ['./modal-window.component.css']
+    selector: 'app-modal-window',
+    templateUrl: './modal-window.component.html',
+    styleUrls: ['./modal-window.component.css'],
+    standalone: false
 })
 export class ModalWindowComponent {
   client?: ClientModel;

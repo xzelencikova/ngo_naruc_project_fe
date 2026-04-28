@@ -6,9 +6,10 @@ import { ClientService } from 'src/app/services/client.service';
 import { RatingService } from 'src/app/services/rating.service';
 
 @Component({
-  selector: 'app-questionnaire-page',
-  templateUrl: './questionnaire.page.html',
-  styleUrls: ['./questionnaire.page.css']
+    selector: 'app-questionnaire-page',
+    templateUrl: './questionnaire.page.html',
+    styleUrls: ['./questionnaire.page.css'],
+    standalone: false
 })
 export class QuestionnairePage {
   public client: ClientModel = {_id: 0, name: "", surname: "", last_phase: 1, registration_date: new Date(), active: true};

@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Phase } from 'src/app/models/phase.model';
 
 @Component({
-  selector: 'app-phases-progressbar',
-  templateUrl: './phases-progressbar.component.html',
-  styleUrls: ['./phases-progressbar.component.css']
+    selector: 'app-phases-progressbar',
+    templateUrl: './phases-progressbar.component.html',
+    styleUrls: ['./phases-progressbar.component.css'],
+    standalone: false
 })
 export class PhasesProgressbarComponent {
   public phasesList: Phase[] = [

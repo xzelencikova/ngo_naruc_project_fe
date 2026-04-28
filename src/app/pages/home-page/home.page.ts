@@ -6,9 +6,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewClientFormComponent } from './components/new-client-form/new-client-form.component';
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.css']
+    selector: 'app-home-page',
+    templateUrl: './home.page.html',
+    styleUrls: ['./home.page.css'],
+    standalone: false
 })
 export class HomePage{
 

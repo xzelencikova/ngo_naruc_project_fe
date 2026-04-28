@@ -9,9 +9,10 @@ import { AlertService } from 'src/app/components/alert';
 
 
 @Component({
-  selector: 'app-password-form',
-  templateUrl: './password-form.component.html',
-  styleUrls: ['./password-form.component.css']
+    selector: 'app-password-form',
+    templateUrl: './password-form.component.html',
+    styleUrls: ['./password-form.component.css'],
+    standalone: false
 })
 export class PasswordFormComponent {
   public user: UserModel = this.userService.getLoggedInUser();
