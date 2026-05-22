@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HistoryModalWindowComponent } from './history-modal-window.component';
+import { HistoryModalWindowComponent } from './ratings-history.component';
 
 describe('HistoryModalWindowComponent', () => {
   let component: HistoryModalWindowComponent;
@@ -8,7 +8,7 @@ describe('HistoryModalWindowComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HistoryModalWindowComponent]
+      declarations: [HistoryModalWindowComponent],
     });
     fixture = TestBed.createComponent(HistoryModalWindowComponent);
     component = fixture.componentInstance;

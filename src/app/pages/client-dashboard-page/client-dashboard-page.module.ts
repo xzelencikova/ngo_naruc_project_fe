@@ -8,7 +8,6 @@ import { ClientDashboardRoutingModule } from './client-dashboard-routing.module'
 import { CategoriesOverviewChartComponent } from './components/categories-overview-chart/categories-overview-chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { QuestionsOverviewChartComponent } from './components/questions-overview-chart/questions-overview-chart.component';
-import { HistoryModalWindowComponent } from './components/history-modal-window/history-modal-window.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
@@ -21,13 +20,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { RatingsHistoryComponent } from './components/ratings-history/ratings-history.component';
 
 @NgModule({
   declarations: [
     ClientDashboardPage,
     CategoriesOverviewChartComponent,
     QuestionsOverviewChartComponent,
-    HistoryModalWindowComponent,
+    RatingsHistoryComponent,
     NoDataComponent,
   ],
   imports: [

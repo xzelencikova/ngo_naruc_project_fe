@@ -37,9 +37,16 @@
         mat-dialog-close
         role="button"
         class="detail-button"
-        (click)="updateQuestionnaire(element.questions)"
+        (click)="updateQuestionnaire(element.data)"
       >
         <i class="fas fa-xl fa-edit"></i>
+      </button>
+      <button
+        role="button"
+        class="detail-button"
+        (click)="deletePhase(element._id)"
+      >
+        <i class="fas fa-xl fa-trash-can"></i>
       </button>
     </td>
   </ng-container>

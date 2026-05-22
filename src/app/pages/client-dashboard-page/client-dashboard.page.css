@@ -84,6 +84,7 @@
   width: 100%;
   justify-content: space-evenly;
   position: relative;
+  padding: 0.5rem;
 }
 
 .phase-progress .phase-item {
@@ -104,14 +105,14 @@
   height: 50px;
   background: #fff;
   border-radius: 50%;
-  border: 3px solid #2e9e4f;
-  color: #2e9e4f;
+  border: 3px solid #ff6c1d;
+  color: #ff6c1d;
 }
 
 .phase-progress .phase-item.complete {
-  background: #2e9e4f;
+  background: #ff6c1d;
   border-radius: 50%;
-  border: 3px solid #2e9e4f;
+  border: 3px solid #ff6c1d;
   color: #fff;
 }
 
@@ -127,11 +128,35 @@
   position: absolute;
   height: 100%;
   width: 0;
-  background: linear-gradient(88deg, #2e9e4f -0.01%, #88efa7 100.02%);
+  background: linear-gradient(88deg, #d44900 -0.01%, #ff6c1d 100.02%);
 }
 
 .phase-progress .score {
   padding: 1rem 0;
   font-size: 48px;
-  color: #5c5c5c;
+  color: #ff6c1d;
+}
+
+.score-card {
+  text-align: center;
+  padding: 1rem;
+}
+
+.score-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.score-number {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.score-label {
+  font-size: 20px;
+  font-weight: 500;
+  color: #666;
 }

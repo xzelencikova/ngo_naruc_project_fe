@@ -5,7 +5,6 @@ import { ClientModel } from 'src/app/models/client.model';
 import { RatingModel } from 'src/app/models/rating.model';
 import { ClientService } from 'src/app/services/client.service';
 import { RatingService } from 'src/app/services/rating.service';
-import { HistoryModalWindowComponent } from './components/history-modal-window/history-modal-window.component';
 import { MatDialog } from '@angular/material/dialog';
 import domToImage from 'dom-to-image';
 import jsPDF from 'jspdf';
@@ -30,8 +29,7 @@ export class ClientDashboardPage {
     registration_date: new Date(),
     active: true,
   };
-  ratingOverview: any = {};
-  ratingCategory: any[] = [];
+
   ratings: RatingModel[] = [];
   customColors: any[] = [];
   isOverview: boolean = true;
@@ -41,6 +39,7 @@ export class ClientDashboardPage {
   isData: boolean = false;
 
   phasesData: any[] = [];
+  totalPhasesAvgScore: number = 0;
   progressbarColor: string = '#fff';
 
   clientName: string = '';
@@ -77,15 +76,13 @@ export class ClientDashboardPage {
           const maxPhaseScore =
             ratingsList[i].questions_rating.filter((r: any) => r.rating >= 0)
               .length * 2;
-          const avgPhaseScore = Math.round(
+          const avgPhaseScore =
             (ratingsList[i].questions_rating.reduce(
               (acc: any, curr: any) => acc + curr.rating,
               0,
             ) /
               maxPhaseScore) *
-              100,
-          );
-          console.log(maxPhaseScore, avgPhaseScore);
+            100;
 
           this.phasesData.push({
             phase: `Fáza ${ratingsList[i].phase_no}`,
@@ -115,15 +112,15 @@ export class ClientDashboardPage {
           }
         }
         console.log(this.phasesData);
-        const phasesAvgScore =
+        this.totalPhasesAvgScore =
           this.phasesData.reduce((acc, curr) => acc + curr.score, 0) /
           ratingsList.length;
         this.progressbarColor =
-          phasesAvgScore > 67
+          this.totalPhasesAvgScore > 67
             ? '#2e9e4f'
-            : phasesAvgScore > 33
+            : this.totalPhasesAvgScore > 33
               ? '#ff9a65'
-              : '#f03c6c';
+              : '#d8200f';
         this.ratings = ratingsList;
       });
   }
@@ -131,6 +128,23 @@ export class ClientDashboardPage {
   loadQuestionnaire() {
     this.ratingService.isHistory$.emit({ isHistory: false, questionnaire: {} });
     this.router.navigate(['questionnaire']);
+  }
+
+  calculateAverageScore(arr: any[]): number {
+    return (
+      arr?.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0,
+      ) / arr.filter((a: any) => a.score > 0).length
+    );
+  }
+
+  getScoreLabel(score: number): string {
+    if (score >= 80) return 'Výborné';
+    if (score >= 60) return 'Dobré';
+    if (score >= 40) return 'Priemerné';
+    if (score >= 20) return 'Slabé';
+    return 'Veľmi slabé';
   }
 
   exportToCSV(jsonData: any[], fileName: string): void {
@@ -259,13 +273,5 @@ export class ClientDashboardPage {
           'Nastala chyba!',
         );
       });
-  }
-
-  openHistoryModal() {
-    const dialogRef = this.dialog.open(HistoryModalWindowComponent, {
-      data: {
-        results: this.ratings,
-      },
-    });
   }
 }
