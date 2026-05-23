@@ -1,36 +1,5 @@
-:host ::ng-deep .ngx-charts .grid-panel.odd rect {
-  fill: white !important;
-}
-
-.chart-wrapper {
-  height: 100px;
-  width: 100%;
-}
-
-:host ::ng-deep .ngx-charts text {
-  fill: #fff;
-}
-
 .rating-icon {
   font-size: 40px;
-}
-
-.rating-icon--green {
-  color: #189d5f;
-}
-
-.rating-icon--yellow {
-  color: #ff9a65;
-}
-
-.rating-icon--red {
-  color: #d8200f;
-}
-
-.rating-icons-layout {
-  display: flex;
-  justify-content: space-around;
-  padding: 1.5rem 0;
 }
 
 a {
@@ -69,17 +38,6 @@ p {
   .col-md-9 {
     width: 80%;
   }
-}
-
-.chart-container {
-  width: 100%;
-  height: 80vh;
-}
-
-.plot {
-  width: 100%;
-  height: 100%;
-  display: block;
 }
 
 .tabs {

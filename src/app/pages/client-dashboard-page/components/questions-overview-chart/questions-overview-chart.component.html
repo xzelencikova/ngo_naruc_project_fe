@@ -1,3 +1,4 @@
+<!-- Displaying all tables as tabs for web view -->
 @if (!isDownload) {
   <mat-tab-group class="tabs">
     @for (tab of tables; track tab) {
@@ -49,13 +50,16 @@
       </mat-tab>
     }
   </mat-tab-group>
-} @else {
+}
+<!-- Displaying all tables as cards for PDF export -->
+@else {
   @for (tab of tables; track tab) {
     <div style="padding: 1rem">
       <mat-card appearance="outlined">
         <mat-card-header>
           <mat-card-title>{{ tab.category }}</mat-card-title>
         </mat-card-header>
+
         <mat-card-content>
           <table mat-table [dataSource]="tab.data">
             <ng-container matColumnDef="id">

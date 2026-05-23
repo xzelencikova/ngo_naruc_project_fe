@@ -159,3 +159,7 @@
   font-weight: 500;
   color: #666;
 }
+
+.mat-mdc-card {
+  margin: 1rem 0;
+}

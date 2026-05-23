@@ -34,6 +34,7 @@ export class RatingsHistoryComponent {
     this.dataSource = new MatTableDataSource<any>();
   }
 
+  // Fill the ratings into a history table
   @Input() set ratings(value: any[]) {
     this._ratings = value;
 
@@ -60,6 +61,7 @@ export class RatingsHistoryComponent {
     return this._ratings;
   }
 
+  // Function to open a specified rating as a questionnaire
   updateQuestionnaire(questionnaire: RatingModel) {
     this.ratingService.isHistory$.emit({
       isHistory: true,
@@ -68,6 +70,7 @@ export class RatingsHistoryComponent {
     this.router.navigate(['questionnaire']);
   }
 
+  // Function to delete a specified rating
   deletePhase(id: number) {
     this.ratingService.deleteRating(id).subscribe();
     this.ratingService

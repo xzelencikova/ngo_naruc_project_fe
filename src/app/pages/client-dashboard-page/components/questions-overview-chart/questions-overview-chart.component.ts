@@ -1,7 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { far } from '@fortawesome/free-regular-svg-icons';
-import { fas } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-questions-overview-chart',
@@ -10,11 +7,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
   standalone: false,
 })
 export class QuestionsOverviewChartComponent {
-  colorScheme: any[] = ['#FF5800', '#FF9A65', '#189D5F'];
+  colorScheme: any[] = ['#d8200f', '#ff6c1d', '#189d5f', '#dbdbdb'];
 
-  constructor(library: FaIconLibrary) {
-    library.addIconPacks(fas, far);
-  }
+  constructor() {}
 
   private _ratings: any[] = [];
   public tables: any = [];
@@ -81,13 +76,14 @@ export class QuestionsOverviewChartComponent {
     }));
   }
 
-  getColor(n: number): string {
-    return n === 1
-      ? '#d8200f'
-      : n === 2
-        ? '#ff6c1d'
-        : n === 3
-          ? '#189d5f'
-          : '#dbdbdb';
+  // Function to identify rating color
+  getColor(rating: number): string {
+    return rating === 1
+      ? this.colorScheme[0]
+      : rating === 2
+        ? this.colorScheme[1]
+        : rating === 3
+          ? this.colorScheme[2]
+          : this.colorScheme[3];
   }
 }
