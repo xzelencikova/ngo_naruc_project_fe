@@ -1,77 +1,110 @@
-<mat-tab-group class="tabs">
+@if (!isDownload) {
+  <mat-tab-group class="tabs">
+    @for (tab of tables; track tab) {
+      <mat-tab [label]="tab.category">
+        <table mat-table [dataSource]="tab.data">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>No.</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="question">
+            <th mat-header-cell *matHeaderCellDef>Otázka</th>
+            <td mat-cell *matCellDef="let element">{{ element.question }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="phase_1">
+            <th mat-header-cell *matHeaderCellDef>Fáza 1</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                class="fa-solid fa-square fa-2xl"
+                [ngStyle]="{ color: getColor(element.phase_1) }"
+              ></i>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phase_2">
+            <th mat-header-cell *matHeaderCellDef>Fáza 2</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                class="fa-solid fa-square fa-2xl"
+                [ngStyle]="{ color: getColor(element.phase_2) }"
+              ></i>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phase_3">
+            <th mat-header-cell *matHeaderCellDef>Fáza 3</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                class="fa-solid fa-square fa-2xl"
+                [ngStyle]="{ color: getColor(element.phase_3) }"
+              ></i>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </mat-tab>
+    }
+  </mat-tab-group>
+} @else {
   @for (tab of tables; track tab) {
-    <mat-tab [label]="tab.category">
-      <table mat-table [dataSource]="tab.data">
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>No.</th>
-          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-        </ng-container>
+    <div style="padding: 1rem">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>{{ tab.category }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table mat-table [dataSource]="tab.data">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+            </ng-container>
 
-        <ng-container matColumnDef="question">
-          <th mat-header-cell *matHeaderCellDef>Otázka</th>
-          <td mat-cell *matCellDef="let element">{{ element.question }}</td>
-        </ng-container>
+            <ng-container matColumnDef="question">
+              <th mat-header-cell *matHeaderCellDef>Otázka</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.question }}
+              </td>
+            </ng-container>
 
-        <ng-container matColumnDef="phase_1">
-          <th mat-header-cell *matHeaderCellDef>Fáza 1</th>
-          <td mat-cell *matCellDef="let element">
-            <i
-              class="fa-solid fa-square"
-              [ngStyle]="{
-                color:
-                  element.phase_1 === 1
-                    ? '#d8200f'
-                    : element.phase_1 === 2
-                      ? '#ff6c1d'
-                      : element.phase_1 === 3
-                        ? '#189d5f'
-                        : '#dbdbdb',
-              }"
-            ></i>
-          </td>
-        </ng-container>
+            <ng-container matColumnDef="phase_1">
+              <th mat-header-cell *matHeaderCellDef>Fáza 1</th>
+              <td mat-cell *matCellDef="let element">
+                <i
+                  class="fa-solid fa-square fa-2xl"
+                  [ngStyle]="{ color: getColor(element.phase_1) }"
+                ></i>
+              </td>
+            </ng-container>
 
-        <ng-container matColumnDef="phase_2">
-          <th mat-header-cell *matHeaderCellDef>Fáza 2</th>
-          <td mat-cell *matCellDef="let element">
-            <i
-              class="fa-solid fa-square"
-              [ngStyle]="{
-                color:
-                  element.phase_2 === 1
-                    ? '#d8200f'
-                    : element.phase_2 === 2
-                      ? '#ff6c1d'
-                      : element.phase_2 === 3
-                        ? '#189d5f'
-                        : '#dbdbdb',
-              }"
-            ></i>
-          </td>
-        </ng-container>
+            <ng-container matColumnDef="phase_2">
+              <th mat-header-cell *matHeaderCellDef>Fáza 2</th>
+              <td mat-cell *matCellDef="let element">
+                <i
+                  class="fa-solid fa-square fa-2xl"
+                  [ngStyle]="{ color: getColor(element.phase_2) }"
+                ></i>
+              </td>
+            </ng-container>
 
-        <ng-container matColumnDef="phase_3">
-          <th mat-header-cell *matHeaderCellDef>Fáza 3</th>
-          <td mat-cell *matCellDef="let element">
-            <i
-              class="fa-solid fa-square"
-              [ngStyle]="{
-                color:
-                  element.phase_3 === 1
-                    ? '#d8200f'
-                    : element.phase_3 === 2
-                      ? '#ff6c1d'
-                      : element.phase_3 === 3
-                        ? '#189d5f'
-                        : '#dbdbdb',
-              }"
-            ></i>
-          </td>
-        </ng-container>
+            <ng-container matColumnDef="phase_3">
+              <th mat-header-cell *matHeaderCellDef>Fáza 3</th>
+              <td mat-cell *matCellDef="let element">
+                <i
+                  class="fa-solid fa-square fa-2xl"
+                  [ngStyle]="{ color: getColor(element.phase_3) }"
+                ></i>
+              </td>
+            </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-    </mat-tab>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
   }
-</mat-tab-group>
+}

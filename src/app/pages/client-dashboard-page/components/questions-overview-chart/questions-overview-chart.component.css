@@ -93,3 +93,18 @@ p {
 .tabs ::ng-deep .mat-mdc-tab-body {
   height: 100%;
 }
+
+.mat-column-id {
+  width: 5%;
+}
+
+.mat-column-question {
+  width: 71%;
+}
+
+.mat-column-phase_1,
+.mat-column-phase_2,
+.mat-column-phase_3 {
+  width: 8%;
+  text-align: center;
+}

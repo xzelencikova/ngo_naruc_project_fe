@@ -20,7 +20,7 @@ export class CategoriesOverviewChartComponent {
   public data: any = [];
   public layout: any = {
     barmode: 'group',
-    showlegend: false,
+    showlegend: true,
     autosize: true,
     xaxis: {
       range: [0, 1],

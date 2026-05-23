@@ -1,178 +1,140 @@
-<div style="margin: 0 10%">
-  <div class="overview-header">
-    <h1 class="client-name">
-      {{ client.name }} {{ client.surname }} @if (client.active) {
-      <span class="status-badge active">Aktívny</span>
-      } @else {
-      <span class="status-badge inactive">Neaktívny</span>
-      }
-    </h1>
+<div id="pdf-page" #pdfPage>
+  <div style="margin: 0 10%">
+    @if (client._id && client._id > 0) {
+    <div class="overview-header">
+      <div>
+        <h1 class="client-name">
+          {{ client.name }} {{ client.surname }} @if (client.active) {
+          <span class="status-badge active">Aktívny</span>
+          } @else {
+          <span class="status-badge inactive">Neaktívny</span>
+          }
+        </h1>
+        <h3>Číslo zmluvy: {{client.contract_no}}</h3>
+      </div>
 
-    <div style="display: flex">
-      @if (client.last_phase < 3) {
-      <button
-        matButton
-        role="button"
-        class="questionnaire-button"
-        (click)="loadQuestionnaire()"
-        [disabled]="!client.active"
-      >
-        Vyplniť dotazník
-        <i class="fa fa-solid fa-file-pen fa-lg"></i>
-      </button>
-      } @if (isData) {
-      <button
-        matButton
-        role="button"
-        class="download-button"
-        (click)="downloadOverview()"
-      >
-        Stiahnuť prehľad
-        <i class="fa fa-solid fa-download fa-lg"></i>
-      </button>
+      @if (!isDownload) {
+      <div style="display: flex">
+        @if (ratings.length < 3) {
+        <button
+          matButton
+          role="button"
+          class="questionnaire-button"
+          (click)="loadQuestionnaire()"
+          [disabled]="!client.active"
+        >
+          <i class="fa fa-solid fa-file-pen fa-2xl"></i>
+        </button>
+        } @if (ratings.length > 0) {
+        <div style="display: grid">
+          <button
+            matButton
+            role="button"
+            class="download-button"
+            (click)="prepareExportToPDF()"
+          >
+            PDF
+            <i class="fa fa-solid fa-download fa-lg"></i>
+          </button>
+          <button
+            matButton
+            role="button"
+            class="download-button"
+            (click)="exportToExcel()"
+          >
+            Excel
+            <i class="fa fa-table fa-lg"></i>
+          </button>
+        </div>
+        }
+      </div>
       }
     </div>
-  </div>
-
-  <mat-card appearance="outlined" class="row">
-    <mat-card-header>
-      <mat-card-title>Priebeh hodnotenia</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="col-md-12 row">
-        <div class="col-md-4">
-          <div class="col-md-12">
-            <div class="phase-progress">
-              @for(phase of phasesData; track phase; let idx = $index) {
-              <span class="phase-item" [ngClass]="phase.state">
-                {{idx + 1}}
-              </span>
-              }
-              <div class="progress">
-                <span
-                  class="indicator"
-                  [ngStyle]="{'width': `${ratings.length * 25}%`}"
-                ></span>
+    } @if (ratings.length > 0) {
+    <mat-card appearance="outlined" class="row">
+      <mat-card-header>
+        <mat-card-title>Priebeh hodnotenia</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="col-md-12 row">
+          <div class="col-md-4">
+            <div class="col-md-12">
+              <div class="phase-progress">
+                @for(phase of phasesData; track phase; let idx = $index) {
+                <span class="phase-item" [ngClass]="phase.state">
+                  {{idx + 1}}
+                </span>
+                }
+                <div class="progress">
+                  <span
+                    class="indicator"
+                    [ngStyle]="{'width': `${25 + ratings.length * 25}%`}"
+                  ></span>
+                </div>
               </div>
-            </div>
-            <div class="phase-progress">
-              @for(phase of phasesData; track phase) {
-              <div class="col-md-2" style="text-align: center">
-                {{phase.phase}} @if(phase.score > 0) {
-                <div class="score">{{phase.score | number : '1.1-1'}}%</div>
+              <div class="phase-progress">
+                @for(phase of phasesData; track phase) {
+                <div class="col-md-2" style="text-align: center">
+                  {{phase.phase}} @if(phase.score > 0) {
+                  <div class="score">{{phase.score | number : '1.1-1'}}%</div>
+                  }
+                </div>
                 }
               </div>
-              }
+            </div>
+            <div class="col-md-12" style="padding-top: 1rem">
+              <mat-card appearance="outlined" class="score-card">
+                <mat-card-content>
+                  <div
+                    class="score-wrapper"
+                    [ngStyle]="{'color': progressbarColor }"
+                  >
+                    <div class="score-number">
+                      {{ totalPhasesAvgScore | number : '1.1-1' }}%
+                    </div>
+                    <div class="score-label">
+                      {{ getScoreLabel(totalPhasesAvgScore) }}
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
             </div>
           </div>
-          <div class="col-md-12" style="padding-top: 1rem">
-            <mat-card appearance="outlined" class="score-card">
-              <mat-card-content>
-                <div
-                  class="score-wrapper"
-                  [ngStyle]="{'color': progressbarColor }"
-                >
-                  <div class="score-number">
-                    {{ totalPhasesAvgScore | number : '1.1-1' }}%
-                  </div>
-                  <div class="score-label">
-                    {{ getScoreLabel(totalPhasesAvgScore) }}
-                  </div>
-                </div>
-              </mat-card-content>
-            </mat-card>
+          <div class="col-md-8">
+            <app-categories-overview-chart
+              [ratings]="ratings"
+            ></app-categories-overview-chart>
           </div>
         </div>
-        <div class="col-md-8">
-          <app-categories-overview-chart
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card appearance="outlined" class="row">
+      <mat-card-header>
+        <mat-card-title>Detail hodnotenia podľa kategórie</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="col-md-12 row">
+          <app-questions-overview-chart
+            [isDownload]="isDownload"
             [ratings]="ratings"
-          ></app-categories-overview-chart>
+          ></app-questions-overview-chart>
         </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
+      </mat-card-content>
+    </mat-card>
 
-  <mat-card appearance="outlined" class="row">
-    <mat-card-header>
-      <mat-card-title>Detail hodnotenia podľa kategórie</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="col-md-12 row">
-        <app-questions-overview-chart
-          [ratings]="ratings"
-        ></app-questions-overview-chart>
-      </div>
-    </mat-card-content>
-  </mat-card>
-  <!-- <div style="display: flex">
-    <div *ngIf="client.last_phase < 3 && client.active; else userInactive"> -->
-  <!-- <button
-          mat-button
-          role="button"
-          class="questionnaire-button"
-          [matMenuTriggerFor]="questionnaire"
-        >
-          <i class="fa fa-solid fa-file-pen fa-lg"></i>
-          <i class="fa fa-solid fa-chevron-down"></i>
-        </button> -->
-  <!-- <mat-menu #questionnaire="matMenu"> -->
-  <!-- <button
-        mat-button
-        role="button"
-        (click)="loadQuestionnaire()"
-        class="questionnaire-button"
-      >
-        Vyplniť {{ client.last_phase + 1 }}. fázu
-      </button> -->
-  <!-- <button mat-menu-item (click)="openHistoryModal()">
-            História pozorovacích hárkov
-          </button> -->
-  <!-- </mat-menu> -->
-  <!-- </div>
-    <ng-template #userInactive>
-      <div>
-        <button
-          role="button"
-          class="questionnaire-button"
-          (click)="openHistoryModal()"
-        >
-          <i class="fa fa-solid fa-file-pen fa-lg"></i>
-        </button>
-      </div>
-    </ng-template>
-    <div *ngIf="isData">
-      <button
-        role="button"
-        class="download-button"
-        (click)="downloadOverview() "
-      >
-        <i class="fa fa-solid fa-download fa-lg"></i>
-      </button>
-    </div>
-    <div *ngIf="isData">
-      <button
-        role="button"
-        class="download-csv-button"
-        (click)="downloadCSVOverview() "
-      >
-        <i class="fa fa-file-excel-o"></i>
-      </button>
-    </div>
-  </div> -->
-
-  <mat-card appearance="outlined" class="row">
-    <mat-card-header>
-      <mat-card-title>História pozorovacích hárkov</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="col-md-12 row">
-        <app-ratings-history [ratings]="ratings"></app-ratings-history>
-      </div>
-    </mat-card-content>
-  </mat-card>
-
-  <!-- <ng-template #noData>
+    <mat-card appearance="outlined" class="row">
+      <mat-card-header>
+        <mat-card-title>História pozorovacích hárkov</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="col-md-12 row">
+          <app-ratings-history [ratings]="ratings"></app-ratings-history>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    } @else {
     <app-no-data></app-no-data>
-  </ng-template>
-</div> -->
+    }
+  </div>
 </div>
