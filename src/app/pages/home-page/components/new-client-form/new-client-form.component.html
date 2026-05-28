@@ -72,9 +72,9 @@
 
           <div class="col-sm-6">
             <mat-select class="form-control" formControlName="contractYear">
-              <ng-container *ngFor="let year of years">
+              @for (year of years; track year) {
                 <mat-option [value]="year">{{ year }}</mat-option>
-              </ng-container>
+              }
             </mat-select>
           </div>
         </div>
