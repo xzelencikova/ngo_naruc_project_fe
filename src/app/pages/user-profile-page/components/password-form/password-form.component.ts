@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { BehaviorSubject } from 'rxjs';  
+import { BehaviorSubject } from 'rxjs';
 import { UserModel } from 'src/app/models/user.model';
 import { PasswordModel } from 'src/app/models/password.model';
 import { UserDataService } from 'src/app/services/user-data.service';
 import { AlertService } from 'src/app/components/alert';
 
-
 @Component({
-    selector: 'app-password-form',
-    templateUrl: './password-form.component.html',
-    styleUrls: ['./password-form.component.css'],
-    standalone: false
+  selector: 'app-password-form',
+  templateUrl: './password-form.component.html',
+  styleUrls: ['./password-form.component.css'],
+  standalone: false,
 })
 export class PasswordFormComponent {
   public user: UserModel = this.userService.getLoggedInUser();
@@ -39,9 +38,9 @@ export class PasswordFormComponent {
     private userService: UserService,
     private fb: FormBuilder,
     private userDataService: UserDataService,
-    private alertService: AlertService
+    private alertService: AlertService,
   ) {
-    this.userService.selectedUser$.subscribe(selection => {
+    this.userService.selectedUser$.subscribe((selection) => {
       this.user = selection;
     });
 
@@ -53,51 +52,49 @@ export class PasswordFormComponent {
 
   ngOnInit(): void {
     this.passwordForm.setValue({
-      newPassword: '',  // Set default value or leave it empty
-      confirmPassword: '',  // Set default value or leave it empty
+      newPassword: '', // Set default value or leave it empty
+      confirmPassword: '', // Set default value or leave it empty
     });
   }
 
-  activeForm: 'change' | 'password' = 'change';  // Set default form
+  activeForm: 'change' | 'password' = 'change'; // Set default form
 
   setActiveForm(form: 'change' | 'password') {
-      this.activeForm = form;
+    this.activeForm = form;
   }
 
   sanitizeValue(value: string | null | undefined): string {
-    return (value !== null && value !== undefined) ? value : '';
+    return value !== null && value !== undefined ? value : '';
   }
-  
+
   onSubmit() {
     const newPasswordControl = this.passwordForm.get('newPassword');
     const confirmPasswordControl = this.passwordForm.get('confirmPassword');
-    console.log(newPasswordControl);
-    console.log(confirmPasswordControl);
-  
+
     if (!newPasswordControl || !confirmPasswordControl) {
-      this.alertService.error("Nespr8vne vyplnené heslá.", "Nastala chyba!")
+      this.alertService.error('Nespr8vne vyplnené heslá.', 'Nastala chyba!');
       return;
     }
-  
+
     const newPassword: string = newPasswordControl.value;
     const confirmPassword: string = confirmPasswordControl.value;
-  
+
     if (
       newPassword === undefined ||
       confirmPassword === undefined ||
       newPassword !== confirmPassword
     ) {
-      this.alertService.error("Heslá sa nezhodujú.", "Nastala chyba!")
+      this.alertService.error('Heslá sa nezhodujú.', 'Nastala chyba!');
       return;
     }
-  
+
     const updatedPassword: PasswordModel = {
       password: newPassword,
     };
-  
+
     if (newPassword !== undefined) {
       this.userService
-        .updateUserPassword(this.user._id!, updatedPassword)
+        .updateUserPassword(this.user.id!, updatedPassword)
         .subscribe({
           next: (success) => {
             console.log(this.user);
@@ -106,10 +103,16 @@ export class PasswordFormComponent {
             this.userDataService.updateUserData(this.user);
             this.userService.selectedUser$.emit(this.user);
 
-            this.alertService.success("Heslo bolo úspešne zmenené.", "Výborne!");
+            this.alertService.success(
+              'Heslo bolo úspešne zmenené.',
+              'Výborne!',
+            );
           },
           error: (err) => {
-            this.alertService.error("Nepodarilo sa zmeniť heslo.", "Nastala chyba!");
+            this.alertService.error(
+              'Nepodarilo sa zmeniť heslo.',
+              'Nastala chyba!',
+            );
           },
         });
     }

@@ -26,17 +26,17 @@ export class RatingService {
     });
   }
 
-  private baseUrl: string = environment.baseUrl;
+  private baseUrl: string = `${environment.baseUrl}/ratings`;
 
-  postRating(rating: RatingModel): Observable<RatingModel> {
+  addNewRating(rating: RatingModel): Observable<RatingModel> {
     return this.http
-      .post<RatingModel>(`${this.baseUrl}/ngo/ratings`, rating)
+      .post<RatingModel>(`${this.baseUrl}`, rating)
       .pipe(catchError(this.errorHandlerService.handleError));
   }
 
   getRatingsByClientId(clientId: number): Observable<RatingModel[]> {
     return this.http.get<RatingModel[]>(
-      `${this.baseUrl}/ngo/ratings/for_client/${clientId}`,
+      `${this.baseUrl}/client-id/${clientId}`,
     );
   }
 
@@ -48,7 +48,7 @@ export class RatingService {
     return this.selectedQuestionnaire;
   }
 
-  deleteRating(rating_id: number): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/ngo/rating/${rating_id}`);
+  deleteRatingById(rating_id: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${rating_id}`);
   }
 }

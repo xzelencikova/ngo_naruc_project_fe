@@ -21,6 +21,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
+import { ContractNumberFormatterDirective } from './shared/directives/contract-number-formatter.directive';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { PlotlyModule } from 'angular-plotly.js';
     BrowserAnimationsModule,
     PortalModule,
     PlotlyModule.forRoot(PlotlyJS),
+    ContractNumberFormatterDirective,
   ],
   providers: [
     {

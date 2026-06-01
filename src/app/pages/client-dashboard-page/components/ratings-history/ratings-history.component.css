@@ -1,48 +1,52 @@
 .dialog-text {
-    text-align: center;
-    padding: 2rem 0 5rem 0;
+  text-align: center;
+  padding: 2rem 0 5rem 0;
 }
 
 .submit-button {
-    padding: 1rem 4rem !important;
-    border-radius: 50px;
-    font-weight: 600;
-    color: white !important;
-    background: linear-gradient(0.25turn, #FF4D00, #FC7900);
-    border: none;
+  padding: 1rem 4rem !important;
+  border-radius: 50px;
+  font-weight: 600;
+  color: white !important;
+  background: linear-gradient(0.25turn, #ff4d00, #fc7900);
+  border: none;
 }
 
 .submit-button:hover {
-    background: linear-gradient(88deg, #D44900 -0.01%, #FF6C1D 100.02%);
+  background: linear-gradient(88deg, #d44900 -0.01%, #ff6c1d 100.02%);
 }
 
 .cancel-button {
-    padding: 1rem 4rem;
-    border-radius: 50px;
-    font-weight: 600;
-    color: #FF4D00 !important;
-    background-color: white !important;
-    border: 1px solid #FF4D00 !important;
-    margin-right: 1rem;
+  padding: 1rem 4rem;
+  border-radius: 50px;
+  font-weight: 600;
+  color: #ff4d00 !important;
+  background-color: white !important;
+  border: 1px solid #ff4d00 !important;
+  margin-right: 1rem;
 }
 
 .cancel-button:hover {
-    background-color: linear-gradient(90deg, #FF4D00 0%, #FC7900 99.99%) !important;
-    color: white !important;
+  background-color: linear-gradient(
+    90deg,
+    #ff4d00 0%,
+    #fc7900 99.99%
+  ) !important;
+  color: white !important;
 }
 
 .detail-button {
-    padding: 0.75rem 3rem;
-    /* border-radius: 50px; */
-    font-size: 16px;
-    font-weight: 700;
-    color: #FC7900;
-    background: none;
-    /* background: linear-gradient(0.25turn, #FF4D00, #FC7900); */
-    border: none;
+  padding: 0.75rem;
+  /* border-radius: 50px; */
+  font-size: 16px;
+  font-weight: 700;
+  color: #fc7900;
+  background: none;
+  /* background: linear-gradient(0.25turn, #FF4D00, #FC7900); */
+  border: none;
 }
 
 .detail-button:hover {
-    color: #D44900;
-    font-weight: bold;
+  color: #d44900;
+  font-weight: bold;
 }

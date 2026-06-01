@@ -59,25 +59,13 @@
         Číslo zmluvy
       </label>
       <div class="col-sm-9">
-        <div class="row">
-          <div class="col-sm-6">
-            <input
-              type="number"
-              class="form-control"
-              id="contract-number"
-              formControlName="contractNumber"
-              placeholder="Poradie"
-            />
-          </div>
-
-          <div class="col-sm-6">
-            <mat-select class="form-control" formControlName="contractYear">
-              @for (year of years; track year) {
-                <mat-option [value]="year">{{ year }}</mat-option>
-              }
-            </mat-select>
-          </div>
-        </div>
+        <input
+          type="text"
+          class="form-control"
+          id="contract-number"
+          formControlName="contractNumber"
+          appContractNumberFormatter
+        />
       </div>
     </div>
   </mat-dialog-content>

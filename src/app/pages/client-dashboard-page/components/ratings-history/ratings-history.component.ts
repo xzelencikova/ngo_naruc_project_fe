@@ -5,6 +5,9 @@ import { ClientModel } from 'src/app/models/client.model';
 import { RatingModel } from 'src/app/models/rating.model';
 import { ClientService } from 'src/app/services/client.service';
 import { RatingService } from 'src/app/services/rating.service';
+import { DeleteWindowComponent } from '../delete-window/delete-window.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertService } from 'src/app/components/alert';
 
 @Component({
   selector: 'app-ratings-history',
@@ -29,6 +32,8 @@ export class RatingsHistoryComponent {
     private clientService: ClientService,
     private ratingService: RatingService,
     private router: Router,
+    private dialog: MatDialog,
+    private alertService: AlertService,
   ) {
     this.client = this.clientService.getSelectedClient();
     this.dataSource = new MatTableDataSource<any>();
@@ -42,14 +47,14 @@ export class RatingsHistoryComponent {
 
     this._ratings.forEach((rating: any) => {
       ratingsTable.push({
-        _id: rating._id,
-        phase: rating.phase_no,
-        answered_questions_count: rating.questions_rating.filter(
+        id: rating.id,
+        phase: rating.phase,
+        answered_questions_count: rating.ratings.filter(
           (questions: any) => questions.rating !== null,
         ).length,
-        all_questions_count: rating.questions_rating.length,
-        last_updated_by: rating.rated_by_user_id,
-        last_update: rating.date_rated,
+        all_questions_count: rating.ratings.length,
+        last_updated_by: rating.last_update_by,
+        last_update: rating.last_update_date,
         data: rating,
       });
     });
@@ -72,11 +77,26 @@ export class RatingsHistoryComponent {
 
   // Function to delete a specified rating
   deletePhase(id: number) {
-    this.ratingService.deleteRating(id).subscribe();
-    this.ratingService
-      .getRatingsByClientId(this.client?._id ? this.client._id : 0)
-      .subscribe((ratingsList: any) => {
-        this.dataSource = ratingsList;
-      });
+    const dialogRef = this.dialog.open(DeleteWindowComponent, {});
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.ratingService.deleteRatingById(id!).subscribe({
+          next: (success) => {
+            this.alertService.success(
+              'Hodnotenie bolo úspešne odstránené.',
+              'Výborne!',
+            );
+            window.location.reload();
+          },
+          error: (err) => {
+            this.alertService.error(
+              'Nepodarilo sa odstrániť hodnotenie.',
+              'Nastala chyba!',
+            );
+          },
+        });
+      }
+    });
   }
 }

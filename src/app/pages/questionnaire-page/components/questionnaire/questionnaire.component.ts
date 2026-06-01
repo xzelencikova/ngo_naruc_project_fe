@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { QuestionnaireCategoryModel } from 'src/app/models/questionnaire-category.model';
-import { QuestionnaireService } from 'src/app/services/questionnaire.service';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 
@@ -29,6 +28,7 @@ import { Router } from '@angular/router';
 import { ClientModel } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/services/client.service';
 import { AlertService } from 'src/app/components/alert';
+import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
   selector: 'app-questionnaire',
@@ -79,7 +79,7 @@ export class QuestionnaireComponent
   }
 
   constructor(
-    private questionnaireService: QuestionnaireService,
+    private questionService: QuestionService,
     private fb: FormBuilder,
     library: FaIconLibrary,
     private ratingService: RatingService,
@@ -97,8 +97,8 @@ export class QuestionnaireComponent
   ngOnInit(): void {
     this.isHistory = this.ratingService.getHistory();
 
-    this.subscription = this.questionnaireService
-      .getQuestionnaire()
+    this.subscription = this.questionService
+      .getAllQuestionsByCategories()
       .subscribe((categories) => {
         this.questionnaire = categories;
         let group: any = {};
@@ -106,12 +106,12 @@ export class QuestionnaireComponent
         for (let i = 0; i < this.questionnaire.length; i++) {
           this.questionnaire[i].questions.forEach((question) => {
             if (this.prefill_questionnaire === undefined)
-              group[question._id] = [null];
+              group[question.id] = [null];
             else {
-              group[question._id] = [
+              group[question.id] = [
                 String(
-                  this.prefill_questionnaire.questions_rating.filter(
-                    (q) => q.question_id == question._id,
+                  this.prefill_questionnaire.ratings.filter(
+                    (q) => q.question_id == question.id,
                   )[0].rating,
                 ),
               ];
@@ -139,31 +139,41 @@ export class QuestionnaireComponent
 
   saveFormData(): void {
     let rating: RatingModel = {
-      date_rated: new Date(),
-      rated_by_user_id:
+      id: this.prefill_questionnaire.id,
+      last_update_date: new Date(),
+      last_update_by:
         localStorage.getItem('user_name') +
         ' ' +
         localStorage.getItem('user_surname'),
-      client_id: this.client?._id ? this.client._id : 0,
-      phase_no: this.prefill_questionnaire
-        ? this.prefill_questionnaire?.phase_no
+      client: this.client?.name
+        ? `${this.client.name} ${this.client.surname}`
+        : '',
+      client_id: this.client?.id ? this.client.id : 0,
+      phase: this.prefill_questionnaire
+        ? this.prefill_questionnaire?.phase
         : this.client?.last_phase! + 1,
-      questions_rating: [],
+      ratings: [],
     };
-
+    console.log(this.questForm);
     this.questionnaire.forEach((category) => {
       category.questions.forEach((question) => {
-        rating.questions_rating.push({
-          question_id: question._id,
-          rating: Number((this.questForm.value as any)[question._id]),
+        const value = (this.questForm.value as any)[question.id];
+        rating.ratings.push({
+          question_id: question.id,
+          rating_id: this.prefill_questionnaire?.id || 0,
+          rating:
+            value === 'null' || value === null || value === '' || value === 0
+              ? null
+              : Number(value),
           question: question.question,
           category: category.category,
+          category_order: category.category_order,
           icon: category.icon,
         });
       });
     });
 
-    this.subscription2 = this.ratingService.postRating(rating).subscribe({
+    this.subscription2 = this.ratingService.addNewRating(rating).subscribe({
       next: (success) => {
         this.alertService.success(
           'Pozorovací hárok bol úspešne uložený.',
@@ -181,14 +191,18 @@ export class QuestionnaireComponent
 
   submitFormData(): boolean {
     let rating: RatingModel = {
-      date_rated: new Date(),
-      rated_by_user_id:
+      id: 0,
+      last_update_date: new Date(),
+      last_update_by:
         localStorage.getItem('user_name') +
         ' ' +
         localStorage.getItem('user_surname'),
-      client_id: this.client?._id ? this.client._id : 0,
-      phase_no: this.client?.last_phase ? this.client.last_phase + 1 : 1,
-      questions_rating: [],
+      client: this.client?.name
+        ? `${this.client.name} ${this.client.surname}`
+        : '',
+      client_id: this.client?.id ? this.client.id : 0,
+      phase: this.client?.last_phase ? this.client.last_phase + 1 : 1,
+      ratings: [],
     };
 
     if (this.client!.last_phase < 3)
@@ -197,17 +211,23 @@ export class QuestionnaireComponent
 
     this.questionnaire.forEach((category) => {
       category.questions.forEach((question) => {
-        rating.questions_rating.push({
-          question_id: question._id,
-          rating: Number((this.questForm.value as any)[question._id]),
+        const value = (this.questForm.value as any)[question.id];
+        rating.ratings.push({
+          question_id: question.id,
+          rating:
+            value === 'null' || value === null || value === '' || value === 0
+              ? null
+              : Number(value),
           question: question.question,
           category: category.category,
+          category_order: category.category_order,
+          rating_id: 0,
           icon: category.icon,
         });
       });
     });
 
-    this.clientService.editClient(this.client!).subscribe({
+    this.clientService.updateClientById(this.client!).subscribe({
       next: (success) => {
         this.alertService.success(
           'Klient bol presunutý do ďalšej fázy programu.',
@@ -223,7 +243,7 @@ export class QuestionnaireComponent
       },
     });
 
-    this.subscription2 = this.ratingService.postRating(rating).subscribe({
+    this.subscription2 = this.ratingService.addNewRating(rating).subscribe({
       next: (success) => {
         this.alertService.success(
           'Pozorovací hárok bol úspešne uložený.',

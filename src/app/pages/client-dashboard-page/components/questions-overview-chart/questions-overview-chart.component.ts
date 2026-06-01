@@ -43,10 +43,10 @@ export class QuestionsOverviewChartComponent {
 
     // Loop through the phases
     for (const phase of input) {
-      const phaseNo = phase.phase_no;
+      const phaseNo = phase.phase;
 
       // Loop through all the questions
-      for (const q of phase.questions_rating) {
+      for (const q of phase.ratings) {
         const category = q.category;
 
         // If the category does not exist, create it

@@ -40,20 +40,17 @@ export class LoginFormComponent {
       password: this.loginForm.get('password')?.value,
     };
 
-    this.userService.loginUser(user).subscribe({
+    this.userService.authenticateUser(user).subscribe({
       next: (success) => {
         this.alertService.success('Prihlásenie prebehlo úspešne.', 'Výborne!');
         localStorage.setItem('user_name', success.name);
         localStorage.setItem('user_surname', success.surname);
-        localStorage.setItem(
-          'user_id',
-          success._id ? String(success._id) : '0',
-        );
+        localStorage.setItem('user_id', success.id ? String(success.id) : '0');
         localStorage.setItem('user_role', success.role);
         localStorage.setItem('token', success.token ? success.token : '');
 
         this.userService.selectedUser$.emit({
-          _id: success._id,
+          id: success.id,
           name: success.name,
           surname: success.surname,
           email: success.email,
@@ -62,10 +59,17 @@ export class LoginFormComponent {
         this.router.navigate(['/']);
       },
       error: (err) => {
-        this.alertService.error(
-          'Nebolo možné prihlásiť používateľa do systému.',
-          'Nastala chyba!',
-        );
+        if (err.status === 401) {
+          this.alertService.error(
+            'Nesprávny email alebo heslo.',
+            'Prihlásenie zlyhalo',
+          );
+        } else {
+          this.alertService.error(
+            'Nastala chyba servera. Skúste to znova neskôr.',
+            'Nastala chyba!',
+          );
+        }
       },
     });
   }

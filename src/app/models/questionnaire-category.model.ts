@@ -1,8 +1,8 @@
-import { QuestionModel } from "./question.model";
+import { QuestionModel } from './question.model';
 
 export interface QuestionnaireCategoryModel {
-    icon: string,
-    order: number,
-    category: string,
-    questions: QuestionModel[]
+  icon: string;
+  category_order: number;
+  category: string;
+  questions: QuestionModel[];
 }

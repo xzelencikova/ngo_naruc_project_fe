@@ -8,9 +8,30 @@ import { Component, Input } from '@angular/core';
 })
 export class CategoriesOverviewChartComponent {
   colorScheme: any[] = [
-    ['#FFA53980', '#FF421980', '#19BAFF80', '#1E19FF80', '#27CD9B80'],
-    ['#FFA539BF', '#FF4219BF', '#19BAFFBF', '#1E19FFBF', '#27CD9BBF'],
-    ['#FFA539FF', '#FF4219FF', '#19BAFFFF', '#1E19FFFF', '#27CD9BFF'],
+    [
+      '#FFA53980',
+      '#FF421980',
+      '#19BAFF80',
+      '#1E19FF80',
+      '#27CD9B80',
+      '#9627cd80',
+    ],
+    [
+      '#FFA539BF',
+      '#FF4219BF',
+      '#19BAFFBF',
+      '#1E19FFBF',
+      '#27CD9BBF',
+      '#9627cdBF',
+    ],
+    [
+      '#FFA539FF',
+      '#FF4219FF',
+      '#19BAFFFF',
+      '#1E19FFFF',
+      '#27CD9BFF',
+      '#9627cdFF',
+    ],
   ];
 
   constructor() {}
@@ -51,17 +72,17 @@ export class CategoriesOverviewChartComponent {
         category: string;
         average: number;
         order: number;
-      }[] = this.calculateCategoryAverages(rating.questions_rating);
+      }[] = this.calculateCategoryAverages(rating.ratings);
       this.data.push({
         y: categoryAverages.map((category) =>
           this.wrapLabel(category.category),
         ),
         x: categoryAverages.map((category) => category.average),
-        name: `Fáza ${rating.phase_no}`,
+        name: `Fáza ${rating.phase}`,
         type: 'bar',
         orientation: 'h',
         marker: {
-          color: this.colorScheme[rating.phase_no - 1],
+          color: this.colorScheme[rating.phase - 1],
         },
         hoverinfo: 'x+name',
       });
@@ -69,7 +90,7 @@ export class CategoriesOverviewChartComponent {
 
     // Fill the missing phases with 0, so the chart is always consistent and doesn't have less than 3 bars for each category
     if (this.data.length > 0 && this.data.length < 3) {
-      for (let index = this.data.length; index <= 3; index++) {
+      for (let index = this.data.length; index < 3; index++) {
         this.data.push({
           y: this.data[0].y,
           x: Array(this.data[0].y.length).fill(0),
@@ -104,7 +125,7 @@ export class CategoriesOverviewChartComponent {
       }
 
       if (item.rating !== null) {
-        groups[cat].sum += item.rating;
+        groups[cat].sum += item.rating - 1;
         groups[cat].count += 1;
       }
     }

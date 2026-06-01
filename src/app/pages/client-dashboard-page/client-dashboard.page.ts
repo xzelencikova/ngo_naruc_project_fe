@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClientModel } from 'src/app/models/client.model';
 import { RatingModel } from 'src/app/models/rating.model';
 import { ClientService } from 'src/app/services/client.service';
@@ -9,6 +9,7 @@ import html2canvas from 'html2canvas-pro';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { QuestionsOverviewChartComponent } from './components/questions-overview-chart/questions-overview-chart.component';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-client-dashboard-page',
@@ -18,7 +19,7 @@ import { QuestionsOverviewChartComponent } from './components/questions-overview
 })
 export class ClientDashboardPage {
   public client: ClientModel = {
-    _id: 0,
+    id: 0,
     name: '',
     contract_no: '',
     surname: '',
@@ -28,7 +29,15 @@ export class ClientDashboardPage {
   };
 
   ratings: RatingModel[] = [];
-  colors: string[] = ['FFA539', 'FF4219', '19BAFF', '1E19FF', '27CD9B'];
+  colors: string[] = [
+    'FFA539',
+    'FF4219',
+    '19BAFF',
+    '1E19FF',
+    '27CD9B',
+    'CD2727',
+    'F556F2',
+  ];
 
   phasesData: any[] = [];
   phasesLabels: string[] = [
@@ -45,24 +54,35 @@ export class ClientDashboardPage {
     private router: Router,
     private clientService: ClientService,
     private ratingService: RatingService,
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnInit() {
-    this.client = this.clientService.getSelectedClient();
+    const client_id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+
+    this.clientService.getClientById(client_id!).subscribe((res) => {
+      this.client = res;
+      this.clientService.selectedClient$.emit(res);
+    });
 
     this.ratingService
-      .getRatingsByClientId(this.client?._id ? this.client._id : 0)
+      .getRatingsByClientId(client_id)
       .subscribe((ratingsList) => {
         for (let i = 0; i < ratingsList.length; i++) {
-          const maxPhaseScore =
-            ratingsList[i].questions_rating.filter((r: any) => r.rating >= 0)
-              .length * 2;
+          const validRatings = ratingsList[i].ratings.filter(
+            (r: any) =>
+              r.rating > 0 && r.rating !== null && r.rating !== undefined,
+          );
+          const maxPhaseScore = validRatings.length * 2;
+          console.log(maxPhaseScore);
           const avgPhaseScore =
             this.calculateAverageScore(
-              ratingsList[i].questions_rating,
+              validRatings,
               'rating',
               maxPhaseScore,
+              true,
             ) * 100;
+          console.log(avgPhaseScore);
 
           this.phasesData.push({
             phase: this.phasesLabels[i],
@@ -81,11 +101,12 @@ export class ClientDashboardPage {
             });
           }
         }
-
+        console.log(this.phasesData);
         this.totalPhasesAvgScore = this.calculateAverageScore(
           this.phasesData,
           'score',
           ratingsList.length,
+          false,
         );
         this.progressbarColor = this.getScoreColor(this.totalPhasesAvgScore);
 
@@ -105,13 +126,21 @@ export class ClientDashboardPage {
   }
 
   // Functions to calculate average score and set label
-  calculateAverageScore(arr: any[], key: string, divider: number): number {
-    return (
-      arr?.reduce(
-        (accumulator, currentValue) => accumulator + currentValue[key],
-        0,
-      ) / divider
-    );
+  calculateAverageScore(
+    arr: any[],
+    key: string,
+    divider: number,
+    isRating: boolean,
+  ): number {
+    return isRating
+      ? arr?.reduce(
+          (accumulator, currentValue) => accumulator + (currentValue[key] - 1),
+          0,
+        ) / divider
+      : arr?.reduce(
+          (accumulator, currentValue) => accumulator + currentValue[key],
+          0,
+        ) / divider;
   }
 
   getScoreLabel(score: number): string {

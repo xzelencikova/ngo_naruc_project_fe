@@ -81,3 +81,8 @@ input {
 .active-icon--red {
   color: #ff5800;
 }
+
+.mat-column-details,
+.mat-column-delete {
+  text-align: center;
+}

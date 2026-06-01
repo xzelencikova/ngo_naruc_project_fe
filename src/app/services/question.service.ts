@@ -3,34 +3,47 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { QuestionModel } from '../models/question.model';
 import { Observable } from 'rxjs';
-
+import { QuestionnaireCategoryModel } from '../models/questionnaire-category.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class QuestionService {
+  private baseUrl: string = `${environment.baseUrl}/questions`;
 
-  private baseUrl: string = environment.baseUrl;
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  getQuestionsList(): Observable<QuestionModel[]> {
-    return this.http.get<QuestionModel[]>(`${this.baseUrl}/ngo/questions`);
+  getAllQuestions(): Observable<QuestionModel[]> {
+    return this.http.get<QuestionModel[]>(this.baseUrl);
   }
 
-  getCategoriesOptions(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/ngo/categories`)
+  getAllQuestionsByCategories(): Observable<QuestionnaireCategoryModel[]> {
+    return this.http.post<QuestionnaireCategoryModel[]>(
+      `${this.baseUrl}/categories`,
+      null,
+    );
   }
 
-  addQuestion(question: QuestionModel): Observable<QuestionModel> {
-    return this.http.post<QuestionModel>(`${this.baseUrl}/ngo/questions`, question);
+  getAllCategories(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/categories`);
   }
 
-  editQuestion(question: any): Observable<QuestionModel> {
-    return this.http.put<QuestionModel>(`${this.baseUrl}/ngo/question/${question._id}`, question);
+  addNewQuestion(question: QuestionModel): Observable<QuestionModel> {
+    return this.http.post<QuestionModel>(`${this.baseUrl}`, question);
   }
 
-  deleteQuestion(question_id: number): Observable<QuestionModel> {
-    return this.http.delete<QuestionModel>(`${this.baseUrl}/ngo/question/${question_id}`);
+  updateQuestionById(question: any): Observable<QuestionModel> {
+    return this.http.put<QuestionModel>(
+      `${this.baseUrl}/${question.id}`,
+      question,
+    );
+  }
+
+  deleteQuestionById(question_id: number): Observable<QuestionModel> {
+    return this.http.delete<QuestionModel>(`${this.baseUrl}/${question_id}`);
+  }
+
+  lockQuestions(data: any): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}`, data);
   }
 }
