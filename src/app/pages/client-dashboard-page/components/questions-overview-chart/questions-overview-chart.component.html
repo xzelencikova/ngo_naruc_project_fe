@@ -1,45 +1,114 @@
-<div class="row col-md-12">
-    <a (click)="backToOverview.emit(true)"><i class="fa fa-chevron-left fa-lg fa-light"></i> Späť na prehľad</a>
-    <div class="col-md-3"></div>
-    <div class="col-md-9 rating-icons-layout">
-        <i class="fas fa-face-frown rating-icon rating-icon--red"></i>
-        <i class="fas fa-face-meh rating-icon rating-icon--yellow"></i>
-        <i class="fas fa-face-smile rating-icon rating-icon--green"></i>
-        <!-- <fa-icon [icon]="['fas', 'face-frown']" class="rating-icon rating-icon--red"></fa-icon>
-        <fa-icon [icon]="['fas', 'face-meh']" class="rating-icon rating-icon--yellow"></fa-icon>
-        <fa-icon [icon]="['fas', 'face-smile']" class="rating-icon rating-icon--green"></fa-icon> -->
+<!-- Displaying all tables as tabs for web view -->
+@if (!isDownload) {
+  <mat-tab-group class="tabs">
+    @for (tab of tables; track tab) {
+      <mat-tab [label]="tab.category">
+        <table mat-table [dataSource]="tab.data">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>No.</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="question">
+            <th mat-header-cell *matHeaderCellDef>Otázka</th>
+            <td mat-cell *matCellDef="let element">{{ element.question }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="phase_1">
+            <th mat-header-cell *matHeaderCellDef>Fáza 1</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                class="fa-solid fa-square fa-2xl"
+                [ngStyle]="{ color: getColor(element.phase_1) }"
+              ></i>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phase_2">
+            <th mat-header-cell *matHeaderCellDef>Fáza 2</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                class="fa-solid fa-square fa-2xl"
+                [ngStyle]="{ color: getColor(element.phase_2) }"
+              ></i>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phase_3">
+            <th mat-header-cell *matHeaderCellDef>Fáza 3</th>
+            <td mat-cell *matCellDef="let element">
+              <i
+                class="fa-solid fa-square fa-2xl"
+                [ngStyle]="{ color: getColor(element.phase_3) }"
+              ></i>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </mat-tab>
+    }
+  </mat-tab-group>
+}
+<!-- Displaying all tables as cards for PDF export -->
+@else {
+  @for (tab of tables; track tab) {
+    <div style="padding: 1rem">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>{{ tab.category }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <table mat-table [dataSource]="tab.data">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="question">
+              <th mat-header-cell *matHeaderCellDef>Otázka</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.question }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="phase_1">
+              <th mat-header-cell *matHeaderCellDef>Fáza 1</th>
+              <td mat-cell *matCellDef="let element">
+                <i
+                  class="fa-solid fa-square fa-2xl"
+                  [ngStyle]="{ color: getColor(element.phase_1) }"
+                ></i>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="phase_2">
+              <th mat-header-cell *matHeaderCellDef>Fáza 2</th>
+              <td mat-cell *matCellDef="let element">
+                <i
+                  class="fa-solid fa-square fa-2xl"
+                  [ngStyle]="{ color: getColor(element.phase_2) }"
+                ></i>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="phase_3">
+              <th mat-header-cell *matHeaderCellDef>Fáza 3</th>
+              <td mat-cell *matCellDef="let element">
+                <i
+                  class="fa-solid fa-square fa-2xl"
+                  [ngStyle]="{ color: getColor(element.phase_3) }"
+                ></i>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
     </div>
-    <ng-template ngFor let-question [ngForOf]="ratingCategory" let-i="index">
-        <div class="col-md-2" style="margin:auto">
-            <p>{{ question.name }}</p>
-        </div>
-        <div class="col-md-1" style="text-align: -webkit-right;">
-            <p class="yaxis">1</p>
-            <p class="yaxis">2</p>
-            <p class="yaxis">3</p>
-          </div>
-        <div class="col-md-9">
-            <div class="chart-wrapper">
-                <ngx-charts-bar-horizontal-2d
-                    [customColors]="customColors[i].series"
-                    [xAxisTickFormatting]="formatXAxis"
-                    [results]="[question]"
-                    [gradient]="false"
-                    [xAxis]="showXAxis"
-                    [yAxis]="false"
-                    [trimYAxisTicks]="true"
-                    [maxYAxisTickLength]="50"
-                    [maxXAxisTickLength]="5"
-                    [xScaleMax]=3
-                    [legend]="false"
-                    [showXAxisLabel]="false"
-                    [showYAxisLabel]="false"
-                    [barPadding]=20
-                    [groupPadding]=0
-                    [xAxisTicks]="['0', '1', '2', '3']"
-                >
-                </ngx-charts-bar-horizontal-2d>
-            </div>
-        </div>
-    </ng-template>
-</div>
+  }
+}

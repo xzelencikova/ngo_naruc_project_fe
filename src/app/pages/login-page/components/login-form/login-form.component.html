@@ -1,52 +1,60 @@
 <div class="page-content-white">
-    <div class="main-text">
-        <h1 class="font-weight-bold welcome">Prihlásenie</h1>
-    </div>
+  <div class="main-text">
+    <h1 class="font-weight-bold welcome">Prihlásenie</h1>
+  </div>
 </div>
 
 <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <alert [position]="Position.BottomRight" [maxItems]="3" [delay]="0"></alert>
-    <div class="form-group">
-        <div class="label-position">
-            <label for="email">Zadaj svoj pracovný email</label>
-        </div>
-        <div class="login-form-input">
-            <mat-form-field appearance="outline" class="input-position">
-                <input matInput type="email" class="form-control" formControlName="email" aria-describedby="emailHelp" placeholder="Email">
-            </mat-form-field>
-        </div>
-        
+  <alert [position]="Position.BottomRight" [maxItems]="3" [delay]="0"></alert>
+  <div class="form-group">
+    <div class="label-position">
+      <label for="email">Zadaj svoj pracovný email</label>
     </div>
-
-    <div class="form-group">
-
-        <div class="label-position">
-            <label for="password">Zadaj svoje heslo</label>
-        </div>
-        <div class="login-form-input">
-            <mat-form-field appearance="outline" class="input-position">
-                <input matInput [type]="showPassword ? 'text' : 'password'" class="form-control" formControlName="password" placeholder="Heslo">
-                <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword?'visibility_off':'visibility'}}</mat-icon>
-            </mat-form-field>  
-        </div>
+    <div class="login-form-input">
+      <mat-form-field appearance="outline" class="input-position">
+        <input
+          matInput
+          type="email"
+          class="form-control"
+          formControlName="email"
+          aria-describedby="emailHelp"
+          placeholder="Email"
+        />
+      </mat-form-field>
     </div>
+  </div>
 
-    <div class="spacer3"></div>
-
-    <div class="button-position">
-        <button class="btn btn-orange-form" type="submit">
-            Prihlásiť sa
-        </button>
+  <div class="form-group">
+    <div class="label-position">
+      <label for="password">Zadaj svoje heslo</label>
     </div>
-    
-  </form>
+    <div class="login-form-input">
+      <mat-form-field appearance="outline" class="input-position">
+        <input
+          matInput
+          [type]="showPassword ? 'text' : 'password'"
+          class="form-control"
+          formControlName="password"
+          placeholder="Heslo"
+        />
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">{{
+          showPassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="spacer3"></div>
+
+  <div class="button-position">
+    <button class="btn btn-orange-form" type="submit">Prihlásiť sa</button>
+  </div>
+</form>
 
 <div class="bottom-description-position">
+  <p class="bottom-description">
+    Nepamätáš si heslo? Klikni sem a pošleme ti nové na email.
+  </p>
 
-    <p class="bottom-description">Nepamätáš si heslo? Klikni sem a pošleme ti nové na email.</p> 
-
-    <button class="btn btn-reset" type="submit">
-        Resetovať heslo
-    </button>
-
+  <button class="btn btn-reset" type="submit">Resetovať heslo</button>
 </div>

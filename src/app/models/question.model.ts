@@ -1,7 +1,8 @@
 export interface QuestionModel {
-    _id: number,
-    question: string,
-    category?: string,
-    icon?: string,
-    order?: string
+  id: number;
+  question: string;
+  category?: string;
+  icon?: string;
+  category_order?: string;
+  is_valid: boolean;
 }

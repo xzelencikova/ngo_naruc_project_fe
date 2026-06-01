@@ -1,13 +1,13 @@
 <div>
-    <div *ngIf="showHeader" class="sticky">
-        <app-header></app-header>
+  @if (showHeader) {
+    <div class="sticky">
+      <app-header></app-header>
     </div>
+  }
 
-    <main>
-        <!-- <app-spinner-wrapper></app-spinner-wrapper> -->
-        <div [ngClass]="showHeader ? 'content' : ''">
-            <router-outlet></router-outlet>
-        </div>
-    </main>
+  <main>
+    <div [ngClass]="showHeader ? 'content' : ''">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
 </div>
-

@@ -8,37 +8,36 @@ import { ErrorHandlerService } from './error-handler.service';
 import { QuestionRatingModel } from '../models/question-rating.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RatingService {
-
   public isHistory$: EventEmitter<any> = new EventEmitter<any>();
   public isHistory: boolean = false;
   public selectedQuestionnaire!: RatingModel;
 
-  constructor(private http: HttpClient, private errorHandlerService: ErrorHandlerService) {
-    this.isHistory$.subscribe(selection => {
+  constructor(
+    private http: HttpClient,
+    private errorHandlerService: ErrorHandlerService,
+  ) {
+    this.isHistory$.subscribe((selection) => {
       this.isHistory = selection.isHistory;
-      this.selectedQuestionnaire = selection.questionnaire
+      this.selectedQuestionnaire = selection.questionnaire;
       console.log(this.selectedQuestionnaire);
     });
   }
 
-  private baseUrl: string = environment.baseUrl;
+  private baseUrl: string = `${environment.baseUrl}/ratings`;
 
-  postRating(rating: RatingModel): Observable<RatingModel> {
-    return this.http.post<RatingModel>(`${this.baseUrl}/ngo/ratings`, rating)
-      .pipe(
-        catchError(this.errorHandlerService.handleError)
-      );
-  }
-
-  getRatingOverviewForClient(clientId: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/ngo/rating_overview/${clientId}`);
+  addNewRating(rating: RatingModel): Observable<RatingModel> {
+    return this.http
+      .post<RatingModel>(`${this.baseUrl}`, rating)
+      .pipe(catchError(this.errorHandlerService.handleError));
   }
 
   getRatingsByClientId(clientId: number): Observable<RatingModel[]> {
-    return this.http.get<RatingModel[]>(`${this.baseUrl}/ngo/ratings/for_client/${clientId}`)
+    return this.http.get<RatingModel[]>(
+      `${this.baseUrl}/client-id/${clientId}`,
+    );
   }
 
   getHistory(): boolean {
@@ -47,5 +46,9 @@ export class RatingService {
 
   getHistoryQuestionnaire(): RatingModel {
     return this.selectedQuestionnaire;
+  }
+
+  deleteRatingById(rating_id: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${rating_id}`);
   }
 }

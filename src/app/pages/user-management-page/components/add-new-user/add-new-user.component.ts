@@ -4,30 +4,28 @@ import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/user.model';
 import { AlertService } from 'src/app/components/alert';
 
-
 @Component({
   selector: 'app-add-new-user',
   templateUrl: './add-new-user.component.html',
-  styleUrls: ['./add-new-user.component.css']
+  styleUrls: ['./add-new-user.component.css'],
+  standalone: false,
 })
 export class AddNewUserComponent implements OnInit {
-
   questForm: FormGroup = this.formBuilder.group({
     userName: [''],
     userSurname: [''],
     userEmail: [''],
-    userRole:[''],
-    userPassword: ['']
+    userRole: [''],
+    userPassword: [''],
   });
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private userService: UserService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+  ) {}
 
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public showPassword: boolean = false;
   public togglePasswordVisibility(): void {
@@ -42,19 +40,22 @@ export class AddNewUserComponent implements OnInit {
       surname: formData.userSurname,
       role: formData.userRole,
       email: formData.userEmail,
-      password:  formData.userPassword 
+      password: formData.userPassword,
     };
 
-    this.userService.postNewUser(user).subscribe({
-      next: success => {
-        this.alertService.success("Používateľ bol úspešne vytvorený.", "Výborne!");
+    this.userService.addNewUser(user).subscribe({
+      next: (success) => {
+        this.alertService.success(
+          'Používateľ bol úspešne vytvorený.',
+          'Výborne!',
+        );
       },
-      error: err => {
-        this.alertService.error("Nepodarilo sa vytvoriť používateľa.", "Nastala chyba!");
-      }
+      error: (err) => {
+        this.alertService.error(
+          'Nepodarilo sa vytvoriť používateľa.',
+          'Nastala chyba!',
+        );
+      },
     });
-
   }
-
-
 }

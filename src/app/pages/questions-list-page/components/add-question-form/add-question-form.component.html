@@ -1,47 +1,82 @@
 <alert [maxItems]="3" [delay]="0"></alert>
 <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-        <div class="col-md-5 form-col">
-            <img src="./assets/images/add_question.svg"  class="img-fluid form-img" alt="Responsive image">
-        </div>
-
-        <div class="col-md-7 form-col2" style="margin: auto;">
-            <div style="text-align: center;">
-                <h1 class="font-weight-normal welcome">{{data.formType}}</h1>
-                <h1 class="font-weight-bold name">OTÁZKU</h1>
-                <p>Vyplň formulár a vytvor tak novú otázku do pozorovacích hárkov!</p> 
-            </div>
-        </div>
-
-        <hr/>
+  <div class="row">
+    <div class="col-md-5 form-col">
+      <img
+        src="./assets/images/add_question.svg"
+        class="img-fluid form-img"
+        alt="Responsive image"
+      />
     </div>
 
-    <mat-dialog-content class="dialog-text">
-        <div class="form-group row">
-            <label for="question" class="col-sm-2 col-form-label">Otázka</label>
-            <div class="col-sm-10">
-                <textarea formControlName="question" rows="2" class="form-control" placeholder="Zadaj otázku" required></textarea>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="category" class="col-sm-2 col-form-label">Kategória</label>
-            <div class="col-sm-10">
-                <select formControlName="category" class="form-control" required (change)="checkCategory($event)">
-                    <option *ngFor="let category of categoryOptions" [value]="category.name">{{category.name}}</option>
-                    <option value="Iná">Iná</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="new_category" class="col-sm-2 col-form-label">Nová kategória</label>
-            <div class="col-sm-10">
-                <input formControlName="new_category" placeholder="Zadaj kategóriu" type="text" class="form-control">
-            </div>
-        </div>
-    </mat-dialog-content>
+    <div class="col-md-7 form-col2" style="margin: auto">
+      <div style="text-align: center">
+        <h1 class="font-weight-normal welcome">{{ data.formType }}</h1>
+        <h1 class="font-weight-bold name">OTÁZKU</h1>
+        <p>Vyplň formulár a vytvor tak novú otázku do pozorovacích hárkov!</p>
+      </div>
+    </div>
 
-    <mat-dialog-actions align="center">
-        <button mat-button mat-dialog-close class="cancel-button">ZRUŠIŤ</button>
-        <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="submit-button" type="submit">{{data.formType.split(' ')[0]}}</button>
-    </mat-dialog-actions>
+    <hr />
+  </div>
+
+  <mat-dialog-content class="dialog-text">
+    <div class="form-group row">
+      <label for="question" class="col-sm-2 col-form-label">Otázka</label>
+      <div class="col-sm-10">
+        <textarea
+          formControlName="question"
+          rows="2"
+          class="form-control"
+          placeholder="Zadaj otázku"
+          required
+        ></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="category" class="col-sm-2 col-form-label">Kategória</label>
+      <div class="col-sm-10">
+        <select
+          formControlName="category"
+          class="form-control"
+          required
+          (change)="checkCategory($event)"
+        >
+          @for (category of categoryOptions; track category) {
+            <option [value]="category.name">
+              {{ category.name }}
+            </option>
+          }
+
+          <option value="Iná">Iná</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="new_category" class="col-sm-2 col-form-label"
+        >Nová kategória</label
+      >
+      <div class="col-sm-10">
+        <input
+          formControlName="new_category"
+          placeholder="Zadaj kategóriu"
+          type="text"
+          class="form-control"
+        />
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="center">
+    <button mat-button mat-dialog-close class="cancel-button">ZRUŠIŤ</button>
+    <button
+      mat-button
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+      class="submit-button"
+      type="submit"
+    >
+      {{ data.formType.split(" ")[0] }}
+    </button>
+  </mat-dialog-actions>
 </form>

@@ -1,89 +1,156 @@
 <alert [maxItems]="3" [delay]="0"></alert>
 
 <form [formGroup]="questForm" (ngSubmit)="onSubmit()">
-    <div class="row col-md-12">
-        <div id="stepper_div" class="col-md-2">
-            <mat-vertical-stepper #stepper [selectedIndex]="currentStep" class="stepper-position">
+  <div class="row col-md-12">
+    <div id="stepper_div" class="col-md-2">
+      <mat-vertical-stepper
+        #stepper
+        [selectedIndex]="currentStep"
+        class="stepper-position"
+      >
+        <ng-template matStepperIcon="number" let-index="index">
+          <i class="fas {{ questionnaire[index].icon }}"></i>
+        </ng-template>
 
-                <ng-template matStepperIcon="number" let-index="index">
-                    <i class="fas {{questionnaire[index].icon}}"></i>
-                </ng-template>
-                
-                <ng-template matStepperIcon="edit" let-index="index">
-                    <i class="fas {{questionnaire[index].icon}}"></i>
-                </ng-template>
-        
-                <ng-template matStepperIcon="done" let-index="index">
-                    <i class="fas {{questionnaire[index].icon}}"></i>
-                </ng-template>
-                
-                <mat-step *ngFor="let category of questionnaire; let i = index" [completed]="i <= currentStep" [editable]="true" state="number"></mat-step>
-        
-            </mat-vertical-stepper>
-        </div>
-        <div class="col-md-10">
-            <ul>
-                <li *ngFor="let category of questionnaire; let i = index" class="list-category">
-                        <h1 #shownCategory id="{{category.icon}}" class="category-space">{{ category.category }}</h1>
-                    <!-- </mat-step>     -->
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th style="width: 60%"></th>
-                                    <th style="text-align: center">
-                                        <fa-icon [icon]="['fas', 'face-frown']" class="rating-icon rating-icon--red"></fa-icon>
-                                    </th>
-                                    <th style="text-align: center">
-                                        <fa-icon [icon]="['fas', 'face-meh']" class="rating-icon rating-icon--yellow"></fa-icon>
-                                    </th>
-                                    <th style="text-align: center">
-                                        <fa-icon [icon]="['fas', 'face-smile']" class="rating-icon rating-icon--green"></fa-icon>
-                                    </th>
-                                    <th style="text-align: center">
-                                        <fa-icon [icon]="['far', 'square']" class="rating-icon"></fa-icon>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let question of category.questions; let i = index">
-                                    <td style="font-size: 18px">{{ question.question }}</td>
-                                    <td style="text-align: center">                            
-                                        <label style="width: 100%; cursor: pointer">
-                                            <input type="radio" name="{{question._id}}" formControlName="{{question._id}}" value="0"/>
-                                            <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--red"></fa-icon></span>
-                                        </label>
-                                    </td>
-                                    <td style="text-align: center">
-                                        <label style="width: 100%; cursor: pointer">
-                                            <input type="radio" name="{{question._id}}" formControlName="{{question._id}}" value="1"/>
-                                            <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--yellow"></fa-icon></span>
-                                        </label>
-                                    </td>
-                                    <td style="text-align: center">
-                                        <label style="width: 100%; cursor: pointer">
-                                            <input type="radio" name="{{question._id}}" formControlName="{{question._id}}" value="2"/>
-                                            <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon rating-icon--green"></fa-icon></span>
-                                        </label>
-                                    </td>
-                                    <td style="text-align: center">
-                                        <label style="width: 100%; cursor: pointer">
-                                            <input type="radio" name="{{question._id}}" formControlName="{{question._id}}" value="null"/>
-                                            <span class="xbutton-label"><fa-icon [icon]="['fas', 'xmark']" class="rating-icon"></fa-icon></span>
-                                        </label>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    <!-- </mat-step> -->
-                </li>
-            </ul>
-            <!-- </mat-vertical-stepper> -->
-            <div class="submit-position">
-                <div>
-                    <button type="button" class="save-button" (click)="saveFormData()">ULOŽIŤ</button>
-                    <button *ngIf="!isHistory" type="submit" class="submit-button">VYHODNOTIŤ</button>
-                </div>
-            </div>
-        </div>
+        <ng-template matStepperIcon="edit" let-index="index">
+          <i class="fas {{ questionnaire[index].icon }}"></i>
+        </ng-template>
+
+        <ng-template matStepperIcon="done" let-index="index">
+          <i class="fas {{ questionnaire[index].icon }}"></i>
+        </ng-template>
+
+        @for (category of questionnaire; track category; let i = $index) {
+          <mat-step
+            [completed]="i <= currentStep"
+            [editable]="true"
+            state="number"
+          ></mat-step>
+        }
+      </mat-vertical-stepper>
     </div>
+    <div class="col-md-10">
+      <ul>
+        @for (category of questionnaire; track category; let i = $index) {
+          <li class="list-category">
+            <h1 #shownCategory id="{{ category.icon }}" class="category-space">
+              {{ category.category }}
+            </h1>
+            <!-- </mat-step>     -->
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 60%"></th>
+                  <th style="text-align: center">
+                    <fa-icon
+                      [icon]="['fas', 'face-frown']"
+                      class="rating-icon rating-icon--red"
+                    ></fa-icon>
+                  </th>
+                  <th style="text-align: center">
+                    <fa-icon
+                      [icon]="['fas', 'face-meh']"
+                      class="rating-icon rating-icon--orange"
+                    ></fa-icon>
+                  </th>
+                  <th style="text-align: center">
+                    <fa-icon
+                      [icon]="['fas', 'face-smile']"
+                      class="rating-icon rating-icon--green"
+                    ></fa-icon>
+                  </th>
+                  <th style="text-align: center">
+                    <fa-icon
+                      [icon]="['far', 'square']"
+                      class="rating-icon"
+                    ></fa-icon>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let question of category.questions; let i = index">
+                  <td style="font-size: 18px">{{ question.question }}</td>
+                  <td style="text-align: center">
+                    <label style="width: 100%; cursor: pointer">
+                      <input
+                        type="radio"
+                        name="{{ question.id }}"
+                        formControlName="{{ question.id }}"
+                        value="1"
+                      />
+                      <span class="xbutton-label"
+                        ><fa-icon
+                          [icon]="['fas', 'xmark']"
+                          class="rating-icon rating-icon--red"
+                        ></fa-icon
+                      ></span>
+                    </label>
+                  </td>
+                  <td style="text-align: center">
+                    <label style="width: 100%; cursor: pointer">
+                      <input
+                        type="radio"
+                        name="{{ question.id }}"
+                        formControlName="{{ question.id }}"
+                        value="2"
+                      />
+                      <span class="xbutton-label"
+                        ><fa-icon
+                          [icon]="['fas', 'xmark']"
+                          class="rating-icon rating-icon--orange"
+                        ></fa-icon
+                      ></span>
+                    </label>
+                  </td>
+                  <td style="text-align: center">
+                    <label style="width: 100%; cursor: pointer">
+                      <input
+                        type="radio"
+                        name="{{ question.id }}"
+                        formControlName="{{ question.id }}"
+                        value="3"
+                      />
+                      <span class="xbutton-label"
+                        ><fa-icon
+                          [icon]="['fas', 'xmark']"
+                          class="rating-icon rating-icon--green"
+                        ></fa-icon
+                      ></span>
+                    </label>
+                  </td>
+                  <td style="text-align: center">
+                    <label style="width: 100%; cursor: pointer">
+                      <input
+                        type="radio"
+                        name="{{ question.id }}"
+                        formControlName="{{ question.id }}"
+                        value="null"
+                      />
+                      <span class="xbutton-label"
+                        ><fa-icon
+                          [icon]="['fas', 'xmark']"
+                          class="rating-icon"
+                        ></fa-icon
+                      ></span>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        }
+      </ul>
+      <div class="submit-position">
+        <div>
+          @if (isHistory) {
+            <button type="button" class="save-button" (click)="saveFormData()">
+              ULOŽIŤ
+            </button>
+          } @else {
+            <button type="submit" class="submit-button">VYHODNOTIŤ</button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
 </form>

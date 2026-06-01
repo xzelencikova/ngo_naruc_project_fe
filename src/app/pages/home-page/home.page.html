@@ -1,75 +1,81 @@
-
 <!-- <div class="container-white" id="container-white"> -->
 <div class="wrapper">
-    <div class="row col-md-12">
-        <div class="page-content">
-            <div class="main-description">
-                <div>
-                    <h1 class="font-weight-normal welcome">Vitaj</h1>
-                    <h1 class="font-weight-bold name">{{user}}!</h1>
-                </div>
-                    
-                <div>    
-                    <p>
-                        Začni cestu vytvorením nového klienta. Po vytvorení možeš 
-                        hneď začať vypĺňať dotazník a vydať sa na cestu 
-                        spolu s klientom.
-                    </p> 
-                </div>
-                
-                <div>
-                    <button class="btn btn-orange" type="button" (click) = "openForm()">
-                        Vytvoriť nového klienta
-                    </button>
-                </div>
-            </div>
-
-            <div class="main-image">
-                <img src="./assets/images/home_create_client.svg"  class="img-fluid" alt="Responsive image">
-            </div>
+  <div class="row col-md-12">
+    <div class="page-content">
+      <div class="main-description">
+        <div>
+          <h1 class="font-weight-normal welcome">Vitaj</h1>
+          <h1 class="font-weight-bold name">{{user}}!</h1>
         </div>
+
+        <div>
+          <p>
+            Začni cestu vytvorením nového klienta. Po vytvorení možeš hneď začať
+            vypĺňať dotazník a vydať sa na cestu spolu s klientom.
+          </p>
+        </div>
+
+        <div>
+          <button class="btn btn-orange" type="button" (click)="openForm()">
+            Vytvoriť nového klienta
+          </button>
+        </div>
+      </div>
+
+      <div class="main-image">
+        <img
+          src="./assets/images/home_create_client.svg"
+          class="img-fluid"
+          alt="Responsive image"
+        />
+      </div>
     </div>
+  </div>
 </div>
 
-    <!-- </div> -->
+<!-- </div> -->
 
-
-
-
-    <div class="container-blue">
-        <div class="wrapper">
-            <div class="row col-md-12">
-                <div class="page-content">
-                    <div>
-                        <img src="./assets/images/home_client_list.svg" class="img-fluid" alt="Responsive image">
-                    </div>
-
-                    <div class="main-description">
-                        <div>
-                            <h1 class="font-weight-normal welcome">Vyplniť</h1>
-                            <h1 class="font-weight-bold name">pozorovacie hárky</h1>
-                        </div>
-
-
-                        <div>
-                            <p>Nájdi v zozname osobu, pre ktorú chceš vyplniť 
-                                pozorovacie hárky a klikni na Zobraziť detaily. 
-                                Budeš presmerovaný na dashboard klienta, kde si možeš pozrieť 
-                                grafické výsledky, vyplniť pozorovacie hárky a vytlačiť 
-                                všetky dokumenty.
-                            </p> 
-                        </div>
-
-                        <div class="clients-list">
-                            <button class="btn btn-orange" type="button" (click)="navigateClientsList()">
-                                Zoznam Klientov
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="container-blue">
+  <div class="wrapper">
+    <div class="row col-md-12">
+      <div class="page-content">
+        <div>
+          <img
+            src="./assets/images/home_client_list.svg"
+            class="img-fluid"
+            alt="Responsive image"
+          />
         </div>
+
+        <div class="main-description">
+          <div>
+            <h1 class="font-weight-normal welcome">Vyplniť</h1>
+            <h1 class="font-weight-bold name">pozorovacie hárky</h1>
+          </div>
+
+          <div>
+            <p>
+              Nájdi v zozname osobu, pre ktorú chceš vyplniť pozorovacie hárky a
+              klikni na Zobraziť detaily. Budeš presmerovaný na dashboard
+              klienta, kde si možeš pozrieť grafické výsledky, vyplniť
+              pozorovacie hárky a vytlačiť všetky dokumenty.
+            </p>
+          </div>
+
+          <div class="clients-list">
+            <button
+              class="btn btn-orange"
+              type="button"
+              (click)="navigateClientsList()"
+            >
+              Zoznam Klientov
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
 
 <!-- <div class="footer">
     <p>Created by Dell Technologies</p>
@@ -77,40 +83,48 @@
 
 <!-- NEW CLIENT FORM -->
 
-<div class="overlay" id="overlay">
-    <div class="modal" tabindex="-1" role="dialog" id="form-new-client">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+<!-- <div class="overlay" id="overlay">
+  <div class="modal" tabindex="-1" role="dialog" id="form-new-client">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeForm()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeForm()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <div class="row">
+          <div class="col-md-5 form-col">
+            <img
+              src="./assets/images/create_client.svg"
+              class="img-fluid form-img"
+              alt="Responsive image"
+            />
+          </div>
 
-                <div class="row">
-
-                    <div class="col-md-5 form-col">
-                        <img src="./assets/images/create_client.svg"  class="img-fluid form-img" alt="Responsive image">
-                    </div>
-
-                    <div class="col-md-7 form-col2">
-
-                        <div>
-                            <h1 class="font-weight-normal welcome">Vytvoriť</h1>
-                            <h1 class="font-weight-bold name">nového klienta</h1>
-                        </div>
-                        
-                        <div class="main-description-form">
-                            <p class="description-form">
-                                Vyplň formulár, my pre teba všetko pripravíme aby si mohol rovno vypĺňať pozorovací hárok !
-                            </p> 
-                        </div>
-                    </div>
-                </div>
-                <hr/>
-                <div class="modal-form-body">
-                    <app-new-client-form></app-new-client-form>
-                </div>
+          <div class="col-md-7 form-col2">
+            <div>
+              <h1 class="font-weight-normal welcome">Vytvoriť</h1>
+              <h1 class="font-weight-bold name">nového klienta</h1>
             </div>
+
+            <div class="main-description-form">
+              <p class="description-form">
+                Vyplň formulár, my pre teba všetko pripravíme aby si mohol rovno
+                vypĺňať pozorovací hárok !
+              </p>
+            </div>
+          </div>
         </div>
+        <hr />
+        <div class="modal-form-body">
+          <app-new-client-form></app-new-client-form>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+</div> -->

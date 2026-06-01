@@ -1,63 +1,163 @@
 import { Component, Input } from '@angular/core';
-import { Color, LegendPosition, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
-import { RatingModel } from 'src/app/models/rating.model';
-import { Output, EventEmitter } from '@angular/core';
-
 
 @Component({
   selector: 'app-categories-overview-chart',
   templateUrl: './categories-overview-chart.component.html',
-  styleUrls: ['./categories-overview-chart.component.css']
+  styleUrls: ['./categories-overview-chart.component.css'],
+  standalone: false,
 })
 export class CategoriesOverviewChartComponent {
-  @Input() ratingOverview: any = {
-    "bar_overview": [],
-    "pie_1": [],
-    "pie_2": [],
-    "pie_3": []
+  colorScheme: any[] = [
+    [
+      '#FFA53980',
+      '#FF421980',
+      '#19BAFF80',
+      '#1E19FF80',
+      '#27CD9B80',
+      '#9627cd80',
+    ],
+    [
+      '#FFA539BF',
+      '#FF4219BF',
+      '#19BAFFBF',
+      '#1E19FFBF',
+      '#27CD9BBF',
+      '#9627cdBF',
+    ],
+    [
+      '#FFA539FF',
+      '#FF4219FF',
+      '#19BAFFFF',
+      '#1E19FFFF',
+      '#27CD9BFF',
+      '#9627cdFF',
+    ],
+  ];
+
+  constructor() {}
+
+  private _ratings: any[] = [];
+
+  public data: any = [];
+  public layout: any = {
+    barmode: 'group',
+    showlegend: true,
+    autosize: true,
+    xaxis: {
+      range: [0, 1],
+      tickformat: ',.0%',
+      standoff: 5,
+      tickfont: {
+        size: 10,
+      },
+    },
+    yaxis: {
+      automargin: true,
+      tickangle: 0,
+      standoff: 5,
+      autorange: 'reversed',
+      tickfont: {
+        size: 11,
+      },
+    },
   };
-  @Input() isOverview: boolean = true;
-  @Output() selectedCategory = new EventEmitter<string>();
-  @Input() categoryColors: any[] = [];
-  @Input() isPieData: any = {
-    "pie_1": false, 
-    "pie_2": false, 
-    "pie_3": false
-  };
 
-  view: number[] = [800, 400];
+  @Input() set ratings(value: any[]) {
+    this._ratings = value;
+    this.data = [];
 
-  // options
-  showXAxis: boolean = true;
-  showYAxis: boolean = true;
-  gradient: boolean = false;
-  showLegend: boolean = true;
-  legendPosition: LegendPosition = LegendPosition.Right;;
+    // Fill the bar chart data with averages for each category per phase
+    this._ratings.map((rating: any) => {
+      const categoryAverages: {
+        category: string;
+        average: number;
+        order: number;
+      }[] = this.calculateCategoryAverages(rating.ratings);
+      this.data.push({
+        y: categoryAverages.map((category) =>
+          this.wrapLabel(category.category),
+        ),
+        x: categoryAverages.map((category) => category.average),
+        name: `Fáza ${rating.phase}`,
+        type: 'bar',
+        orientation: 'h',
+        marker: {
+          color: this.colorScheme[rating.phase - 1],
+        },
+        hoverinfo: 'x+name',
+      });
+    });
 
-  colorScheme: Color = {
-    name: "myScheme",
-    selectable: true,
-    group: ScaleType.Ordinal,
-    domain: ['#FFA539', '#FF4219', '#19BAFF', '#1E19FF', '#27CD9B'] // ['#1E19FF', '#1E19FF', '#1E19FF']
-  };
-  schemeType = ScaleType.Linear;
-
-  constructor() {
-    // if (window.innerWidth <= 720) this.legendPosition = LegendPosition.Below; 
+    // Fill the missing phases with 0, so the chart is always consistent and doesn't have less than 3 bars for each category
+    if (this.data.length > 0 && this.data.length < 3) {
+      for (let index = this.data.length; index < 3; index++) {
+        this.data.push({
+          y: this.data[0].y,
+          x: Array(this.data[0].y.length).fill(0),
+          name: `Fáza ${index + 1}`,
+          type: 'bar',
+          orientation: 'h',
+          marker: {
+            color: this.colorScheme[index],
+          },
+          hoverinfo: 'x+name',
+        });
+      }
+    }
   }
 
-  onSelect(data: any): void {
-    let category = JSON.parse(JSON.stringify(data));
-
-    if (category?.series && typeof category.series === "string") this.selectedCategory.emit(category?.series);
-    else if (category?.name) this.selectedCategory.emit(category?.name);
-    else this.selectedCategory.emit(category);
-
-    this.isOverview = false;
+  get ratings() {
+    return this._ratings;
   }
 
-  formatPercent(val: number) {
-      return val + '%';
-  } 
+  // Helper function to summarize ratings for each category and calculate average
+  calculateCategoryAverages(rating: any[]) {
+    const groups: {
+      [key: string]: { sum: number; count: number; order: number };
+    } = {};
 
+    // Group data by category
+    for (let item of rating) {
+      const cat = item.category;
+
+      if (!groups[cat]) {
+        groups[cat] = { sum: 0, count: 0, order: item.category_order };
+      }
+
+      if (item.rating !== null) {
+        groups[cat].sum += item.rating - 1;
+        groups[cat].count += 1;
+      }
+    }
+
+    // Convert grouped data to an array with averages
+    const categoryAverages = Object.keys(groups).map((category) => ({
+      category,
+      order: groups[category].order,
+      average: groups[category].sum / (groups[category].count * 2),
+    }));
+
+    // Sort categories by order
+    categoryAverages.sort((a, b) => a.order - b.order);
+
+    return categoryAverages;
+  }
+
+  // Helper function to split long yaxis category names for the bar chart
+  wrapLabel(text: string, maxLength = 20) {
+    const words = text.split(' ');
+    let line = '';
+    const lines = [];
+
+    for (let w of words) {
+      if ((line + w).length > maxLength) {
+        lines.push(line);
+        line = '';
+      }
+      line += w + '\u00A0';
+    }
+    if (line) lines.push(line);
+
+    return lines.join('<br>');
+  }
 }

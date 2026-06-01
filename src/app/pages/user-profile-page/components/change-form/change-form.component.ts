@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { BehaviorSubject } from 'rxjs';  
+import { BehaviorSubject } from 'rxjs';
 import { UserModel } from 'src/app/models/user.model';
 import { UserDataService } from 'src/app/services/user-data.service';
 import { AlertService } from 'src/app/components/alert';
@@ -9,7 +9,8 @@ import { AlertService } from 'src/app/components/alert';
 @Component({
   selector: 'app-change-form',
   templateUrl: './change-form.component.html',
-  styleUrls: ['./change-form.component.css']
+  styleUrls: ['./change-form.component.css'],
+  standalone: false,
 })
 export class ChangeFormComponent {
   public user: UserModel = this.userService.getLoggedInUser();
@@ -22,61 +23,65 @@ export class ChangeFormComponent {
 
   public changeForm = this.fb.group({
     name: [''],
-    surname: ['']
+    surname: [''],
   });
 
   constructor(
     private userService: UserService,
     private fb: FormBuilder,
     private userDataService: UserDataService,
-    private alertService: AlertService
-  ) 
-  {
+    private alertService: AlertService,
+  ) {
     this.changeForm.setValue({
       name: this.user.name,
-      surname: this.user.surname
+      surname: this.user.surname,
     });
-    
-    this.userService.selectedUser$.subscribe(selection => {
+
+    this.userService.selectedUser$.subscribe((selection) => {
       this.user = selection;
       this.changeForm.setValue({
         name: selection.name,
-        surname: selection.surname
+        surname: selection.surname,
       });
     });
   }
 
-  activeForm: 'change' | 'password' = 'change';  // Set default form
+  activeForm: 'change' | 'password' = 'change'; // Set default form
 
   setActiveForm(form: 'change' | 'password') {
-      this.activeForm = form;
+    this.activeForm = form;
   }
 
   sanitizeValue(value: string | null | undefined): string {
-    return (value !== null && value !== undefined) ? value : '';
+    return value !== null && value !== undefined ? value : '';
   }
-  
+
   onSubmit() {
     const updatedName = this.sanitizeValue(this.changeForm.get('name')?.value);
-    const updatedSurname = this.sanitizeValue(this.changeForm.get('surname')?.value);
-  
+    const updatedSurname = this.sanitizeValue(
+      this.changeForm.get('surname')?.value,
+    );
+
     const updatedUser: UserModel = {
       ...this.user,
       name: updatedName,
-      surname: updatedSurname
+      surname: updatedSurname,
     };
 
-    this.userService.updateUser(this.user._id!, updatedUser).subscribe({
-      next: success => {
+    this.userService.updateUserById(this.user.id!, updatedUser).subscribe({
+      next: (success) => {
         this.userService.selectedUser$.emit(success);
-        this.alertService.success("Údaje boli úspešne zmenené.", "Výborne!");
+        this.alertService.success('Údaje boli úspešne zmenené.', 'Výborne!');
 
         // Emit the updated user data
         this.userDataService.updateUserData(updatedUser);
       },
-      error: err => {
-        this.alertService.error("Nepodarilo sa zmeniť údaje.", "Nastala chyba!");
-      }
+      error: (err) => {
+        this.alertService.error(
+          'Nepodarilo sa zmeniť údaje.',
+          'Nastala chyba!',
+        );
+      },
     });
   }
 }

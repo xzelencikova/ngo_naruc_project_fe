@@ -6,19 +6,25 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-user-profile-page',
   templateUrl: './user-profile.page.html',
-  styleUrls: ['./user-profile.page.css']
+  styleUrls: ['./user-profile.page.css'],
+  standalone: false,
 })
 export class UserProfilePage implements OnInit {
   activeForm: 'change' | 'password' = 'change';
   public user: UserModel = this.userService.getLoggedInUser();
 
-  constructor(private router: Router, private userService: UserService) {
-    if (this.user._id === 0) {
-      this.userService.getUserById(Number(localStorage.getItem('user_id'))).subscribe(user => {
-        this.userService.selectedUser$.emit(user);
-      });
+  constructor(
+    private router: Router,
+    private userService: UserService,
+  ) {
+    if (this.user.id === 0) {
+      this.userService
+        .getUserById(Number(localStorage.getItem('user_id')))
+        .subscribe((user) => {
+          this.userService.selectedUser$.emit(user);
+        });
 
-      this.userService.selectedUser$.subscribe(selection => {
+      this.userService.selectedUser$.subscribe((selection) => {
         this.user = selection;
       });
     }
@@ -26,7 +32,7 @@ export class UserProfilePage implements OnInit {
 
   ngOnInit() {
     // Subscribe to router events to update activeForm
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // Update activeForm based on the current route
         this.updateActiveForm(event.url);

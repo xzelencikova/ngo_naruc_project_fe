@@ -1,7 +1,17 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewChildren, QueryList, ElementRef, HostListener, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewChildren,
+  QueryList,
+  ElementRef,
+  HostListener,
+  Input,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { QuestionnaireCategoryModel } from 'src/app/models/questionnaire-category.model';
-import { QuestionnaireService } from 'src/app/services/questionnaire.service';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 
@@ -18,15 +28,17 @@ import { Router } from '@angular/router';
 import { ClientModel } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/services/client.service';
 import { AlertService } from 'src/app/components/alert';
-
+import { QuestionService } from 'src/app/services/question.service';
 
 @Component({
   selector: 'app-questionnaire',
   templateUrl: './questionnaire.component.html',
-  styleUrls: ['./questionnaire.component.css']
+  styleUrls: ['./questionnaire.component.css'],
+  standalone: false,
 })
-export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit {
-
+export class QuestionnaireComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   private subscription: any;
   private subscription2: any;
 
@@ -39,21 +51,25 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
   @Input() client: ClientModel | undefined;
   @Input() prefill_questionnaire!: RatingModel;
 
-  @ViewChild("stepper") private stepper!: MatStepper;
+  @ViewChild('stepper') private stepper!: MatStepper;
   @ViewChildren('shownCategory') titles!: QueryList<ElementRef>; // getting your sections here
 
   @HostListener('window:scroll', ['$event'])
-  isScrolledIntoView(event: any){
+  isScrolledIntoView(event: any) {
     // setTimeout(() => {
 
     const currentTime = Date.now();
     const timeSinceLastClick = currentTime - this.lastClickTime;
 
-    if(timeSinceLastClick > 1000) {
+    if (timeSinceLastClick > 1000) {
       for (let index = 0; index < this.titles.length; index++) {
-        const rect = document.getElementById(this.questionnaire[index].icon)?.getBoundingClientRect();
+        const rect = document
+          .getElementById(this.questionnaire[index].icon)
+          ?.getBoundingClientRect();
         const topShown = rect?.top ? rect?.top >= 0 : undefined;
-        const bottomShown = rect?.bottom ? rect?.bottom <= window.innerHeight : undefined;
+        const bottomShown = rect?.bottom
+          ? rect?.bottom <= window.innerHeight
+          : undefined;
         if (topShown && bottomShown) {
           this.currentStep = index;
         }
@@ -62,15 +78,17 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     // }, 3000);
   }
 
-  constructor(private questionnaireService: QuestionnaireService, 
-    private fb: FormBuilder, 
-    library: FaIconLibrary, 
+  constructor(
+    private questionService: QuestionService,
+    private fb: FormBuilder,
+    library: FaIconLibrary,
     private ratingService: RatingService,
-    private clientService: ClientService, 
-    private saveMessageBar: MatSnackBar, 
-    private dialog: MatDialog, 
+    private clientService: ClientService,
+    private saveMessageBar: MatSnackBar,
+    private dialog: MatDialog,
     private router: Router,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+  ) {
     library.addIconPacks(fas, far);
   }
 
@@ -78,25 +96,31 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
 
   ngOnInit(): void {
     this.isHistory = this.ratingService.getHistory();
-    
-    this.subscription = this.questionnaireService.getQuestionnaire().subscribe(categories => {
-          this.questionnaire = categories;
-          let group: any = {};
 
-          for (let i = 0; i < this.questionnaire.length; i++) {
-            this.questionnaire[i].questions.forEach(question => {
-              if (this.prefill_questionnaire === undefined)
-                group[question._id] = [null]
-              else {
-                group[question._id] = [String(this.prefill_questionnaire.questions_rating.filter(q => q.question_id == question._id)[0].rating)];
-              }
+    this.subscription = this.questionService
+      .getAllQuestionsByCategories()
+      .subscribe((categories) => {
+        this.questionnaire = categories;
+        let group: any = {};
+
+        for (let i = 0; i < this.questionnaire.length; i++) {
+          this.questionnaire[i].questions.forEach((question) => {
+            if (this.prefill_questionnaire === undefined)
+              group[question.id] = [null];
+            else {
+              group[question.id] = [
+                String(
+                  this.prefill_questionnaire.ratings.filter(
+                    (q) => q.question_id == question.id,
+                  )[0].rating,
+                ),
+              ];
             }
-          );
+          });
 
           this.questForm = this.fb.group(group);
         }
-      }
-    );
+      });
   }
 
   ngAfterViewInit(): void {
@@ -106,89 +130,133 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
 
       document.getElementById(this.questionnaire[res].icon)?.scrollIntoView({
         behavior: 'auto',
-        block: 'center'
+        block: 'center',
       });
-    })
+    });
   }
-  
+
   ngOnDestroy(): void {}
 
   saveFormData(): void {
-
     let rating: RatingModel = {
-      date_rated: new Date,
-      rated_by_user_id: localStorage.getItem('user_name') + ' ' + localStorage.getItem('user_surname'),
-      client_id: this.client?._id ? this.client._id : 0,
-      phase_no: this.prefill_questionnaire ? this.prefill_questionnaire?.phase_no : this.client?.last_phase! + 1,
-      questions_rating: []
-    }
-
-    this.questionnaire.forEach(category => {
-      category.questions.forEach(question => {
-        rating.questions_rating.push({
-          question_id: question._id,
-          rating: Number((this.questForm.value as any)[question._id]),
+      id: this.prefill_questionnaire.id,
+      last_update_date: new Date(),
+      last_update_by:
+        localStorage.getItem('user_name') +
+        ' ' +
+        localStorage.getItem('user_surname'),
+      client: this.client?.name
+        ? `${this.client.name} ${this.client.surname}`
+        : '',
+      client_id: this.client?.id ? this.client.id : 0,
+      phase: this.prefill_questionnaire
+        ? this.prefill_questionnaire?.phase
+        : this.client?.last_phase! + 1,
+      ratings: [],
+    };
+    console.log(this.questForm);
+    this.questionnaire.forEach((category) => {
+      category.questions.forEach((question) => {
+        const value = (this.questForm.value as any)[question.id];
+        rating.ratings.push({
+          question_id: question.id,
+          rating_id: this.prefill_questionnaire?.id || 0,
+          rating:
+            value === 'null' || value === null || value === '' || value === 0
+              ? null
+              : Number(value),
           question: question.question,
           category: category.category,
-          icon: category.icon
-        })
-      })
-    })
-    
-    this.subscription2 = this.ratingService.postRating(rating).subscribe({
-      next: success => {
-        this.alertService.success("Pozorovací hárok bol úspešne uložený.", "Výborne!");
+          category_order: category.category_order,
+          icon: category.icon,
+        });
+      });
+    });
+
+    this.subscription2 = this.ratingService.addNewRating(rating).subscribe({
+      next: (success) => {
+        this.alertService.success(
+          'Pozorovací hárok bol úspešne uložený.',
+          'Výborne!',
+        );
       },
-      error: err => {
-        this.alertService.error("Nebolo možné presunúť klienta do ďalšej fázy programu.", "Nastala chyba!");
-      }
+      error: (err) => {
+        this.alertService.error(
+          'Nebolo možné presunúť klienta do ďalšej fázy programu.',
+          'Nastala chyba!',
+        );
+      },
     });
   }
 
   submitFormData(): boolean {
     let rating: RatingModel = {
-      date_rated: new Date,
-      rated_by_user_id: localStorage.getItem('user_name') + ' ' + localStorage.getItem('user_surname'),
-      client_id: this.client?._id ? this.client._id : 0,
-      phase_no: this.client?.last_phase ? this.client.last_phase + 1 : 1,
-      questions_rating: []
-    }
+      id: 0,
+      last_update_date: new Date(),
+      last_update_by:
+        localStorage.getItem('user_name') +
+        ' ' +
+        localStorage.getItem('user_surname'),
+      client: this.client?.name
+        ? `${this.client.name} ${this.client.surname}`
+        : '',
+      client_id: this.client?.id ? this.client.id : 0,
+      phase: this.client?.last_phase ? this.client.last_phase + 1 : 1,
+      ratings: [],
+    };
 
     if (this.client!.last_phase < 3)
       this.client!.last_phase = this.client!.last_phase + 1;
     else this.client!.active = false;
 
-    console.log(this.questForm.value)
-    this.questionnaire.forEach(category => {
-      category.questions.forEach(question => {
-        rating.questions_rating.push({
-          question_id: question._id,
-          rating: Number((this.questForm.value as any)[question._id]),
+    this.questionnaire.forEach((category) => {
+      category.questions.forEach((question) => {
+        const value = (this.questForm.value as any)[question.id];
+        rating.ratings.push({
+          question_id: question.id,
+          rating:
+            value === 'null' || value === null || value === '' || value === 0
+              ? null
+              : Number(value),
           question: question.question,
           category: category.category,
-          icon: category.icon
-        })
-      })
-    })
-
-    this.clientService.editClient(this.client!).subscribe({
-      next: success => {
-        this.alertService.success("Klient bol presunutý do ďalšej fázy programu.", "Výborne!");
-      },
-      error: err => {
-        this.alertService.error("Nebolo možné presunúť klienta do ďalšej fázy programu.", "Nastala chyba!");
-        return false;
-      }
+          category_order: category.category_order,
+          rating_id: 0,
+          icon: category.icon,
+        });
+      });
     });
-    
-    this.subscription2 = this.ratingService.postRating(rating).subscribe({
-      next: success => {
-        this.alertService.success("Pozorovací hárok bol úspešne uložený.", "Výborne!");
+
+    this.clientService.updateClientById(this.client!).subscribe({
+      next: (success) => {
+        this.alertService.success(
+          'Klient bol presunutý do ďalšej fázy programu.',
+          'Výborne!',
+        );
       },
-      error: err => {
-        this.alertService.error("Nebolo možné uložiť hodnotenie klienta.", "Nastala chyba!");
+      error: (err) => {
+        this.alertService.error(
+          'Nebolo možné presunúť klienta do ďalšej fázy programu.',
+          'Nastala chyba!',
+        );
         return false;
-      }
+      },
+    });
+
+    this.subscription2 = this.ratingService.addNewRating(rating).subscribe({
+      next: (success) => {
+        this.alertService.success(
+          'Pozorovací hárok bol úspešne uložený.',
+          'Výborne!',
+        );
+      },
+      error: (err) => {
+        this.alertService.error(
+          'Nebolo možné uložiť hodnotenie klienta.',
+          'Nastala chyba!',
+        );
+        return false;
+      },
     });
     return true;
   }
@@ -198,21 +266,20 @@ export class QuestionnaireComponent implements OnInit, OnDestroy, AfterViewInit 
     for (let k in questions) {
       if (questions[k] === null) counter++;
     }
-    
+
     return counter;
   }
 
   onSubmit(): void {
     const dialogRef = this.dialog.open(ModalWindowComponent, {
       data: {
-        unasweredQuestions: this.countUnansweredQuestions(this.questForm.value)
-      }
+        unasweredQuestions: this.countUnansweredQuestions(this.questForm.value),
+      },
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         const sent = this.submitFormData();
-        if (sent)
-          this.router.navigate(['/questionnaire-sent'])
+        if (sent) this.router.navigate(['/questionnaire-sent']);
       }
     });
   }

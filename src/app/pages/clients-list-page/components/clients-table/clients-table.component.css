@@ -1,93 +1,88 @@
 .detail-button {
-    padding: 0.75rem 1rem;
-    /* border-radius: 50px; */
-    font-size: 16px;
-    font-weight: 700;
-    color: #FF4D00;
-    background: none;
-    /* background: linear-gradient(0.25turn, #FF4D00, #FC7900); */
-    border: none;
+  padding: 0.75rem 1rem;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ff4d00;
+  background: none;
+  border: none;
 }
 
 .detail-button:hover {
-    color: #D44900;
-    font-weight: bold;
+  color: #d44900;
+  font-weight: bold;
 }
 
 td {
-    padding: 1rem;
-    color: #929090;
+  padding: 1rem;
+  color: #929090;
 }
 
 th {
-    color: #929090;
+  color: #929090;
 }
 
 table {
-    width: 100%;
+  width: 100%;
 }
 
 table.mat-table {
-    display: table;
+  display: table;
 }
 
-/* :host ::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
-    padding-right: 0 !important;
-    background: white !important;
-    border: 1px solid #E7E7E7 !important;
-    border-radius: 80px !important;
-    width: 50% !important;
-    color: #a3a3a3 !important;
-} */
-
 :host ::ng-deep .mat-mdc-paginator-container {
-    color: #929090;
+  color: #929090;
 }
 
 span {
-    position: absolute;
-    top: 38%;
-    right: 2%;
+  position: absolute;
+  top: 38%;
+  right: 2%;
 }
 
 .size-input-wrapper {
-    max-width: 100%;
-    position: relative;
-    display: inline-block;
+  max-width: 100%;
+  position: relative;
+  display: inline-block;
 }
 
 input {
-    border-radius: 80px !important;
-    margin: 5%;
+  border-radius: 80px !important;
+  margin: 5%;
 }
 
 @media screen and (max-width: 1280px) {
-  }
-  
-  @media screen and (max-width: 720px) {
-    table {
-        width: fit-content !important;
-    }
+}
 
-    th, td {
-        font-size: 10px;
-    }
-
-    td {
-        width: 50%;
-    }
+@media screen and (max-width: 720px) {
+  table {
+    width: fit-content !important;
   }
 
-.delete-button{
-    background: none;
-    border: none;
-    width: 2.5rem;
+  th,
+  td {
+    font-size: 10px;
+  }
+
+  td {
+    width: 50%;
+  }
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  width: 2.5rem;
 }
 
 .active-icon--green {
-    color: #189D5F;
+  color: #189d5f;
 }
 
 .active-icon--red {
-    color: #FF5800;
+  color: #ff5800;
+}
+
+.mat-column-details,
+.mat-column-delete {
+  text-align: center;
 }

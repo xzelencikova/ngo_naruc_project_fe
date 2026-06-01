@@ -1,32 +1,51 @@
-<div class="alert-container {{positionClass}}">
-    <div class="alert-wrapper">
-      <div *ngFor="let alert of alerts; let i = index"   
-      [@anim]="alert.isVisible ? windowPosition : null">      
-        <div class="{{cssClass(alert)}}" *ngIf="alert.isVisible">
-          <div *ngIf="alert.title" class="alert-title">{{alert.title}}</div>
-          <div class="alert-content-container">
-            <div class="alert-icon-container">
-              <div *ngIf="iconTemplate != null; else contentIconTemplate">
-                <ng-container [ngTemplateOutlet]="iconTemplate" [ngTemplateOutletContext]="{data:alert}">
-                </ng-container>
+<div class="alert-container {{ positionClass }}">
+  <div class="alert-wrapper">
+    @for (alert of alerts; track alert; let i = $index) {
+      <div [@anim]="alert.isVisible ? windowPosition : null">
+        @if (alert.isVisible) {
+          <div class="{{ cssClass(alert) }}">
+            @if (alert.title) {
+              <div class="alert-title">{{ alert.title }}</div>
+            }
+            <div class="alert-content-container">
+              <div class="alert-icon-container">
+                @if (iconTemplate != null) {
+                  <div>
+                    <ng-container
+                      [ngTemplateOutlet]="iconTemplate"
+                      [ngTemplateOutletContext]="{ data: alert }"
+                    >
+                    </ng-container>
+                  </div>
+                } @else {
+                  <div class="{{ iconClass(alert.type) }}"></div>
+                }
               </div>
-              <ng-template #contentIconTemplate>
-                <div class="{{iconClass(alert.type)}}"></div>
-            </ng-template>         
-            </div>     
-            <div class="alert-content">       
-              <div *ngIf="contentTemplate != null; else contentTextTemplate">
-                <ng-container [ngTemplateOutlet]="contentTemplate" [ngTemplateOutletContext]="{data:alert}"></ng-container>
+              <div class="alert-content">
+                @if (contentTemplate != null) {
+                  <div>
+                    <ng-container
+                      [ngTemplateOutlet]="contentTemplate"
+                      [ngTemplateOutletContext]="{ data: alert }"
+                    ></ng-container>
+                  </div>
+                } @else {
+                  <div class="content-text-container">
+                    {{ alert.message }}
+                  </div>
+                }
               </div>
-              <ng-template #contentTextTemplate>
-                <div class="content-text-container">{{alert.message}}</div>
-            </ng-template>
+              <div class="alert-close-button">
+                <a
+                  class="{{ closeBtnClass(alert) }}"
+                  (click)="removeAlert(alert)"
+                  >&times;</a
+                >
+              </div>
             </div>
-            <div class="alert-close-button">
-              <a class="{{closeBtnClass(alert)}}" (click)="removeAlert(alert)">&times;</a>
-            </div>  
           </div>
-        </div>
+        }
       </div>
-    </div>
+    }
   </div>
+</div>

@@ -10,36 +10,37 @@ import { AlertService } from './alert.service';
 const fadeAnimationTime: number = 500;
 
 
-@Component({ 
-  selector: 'alert', 
-  templateUrl: 'alert.component.html', 
-  styleUrls: ['alert.component.css'],
-  animations: [
+@Component({
+    selector: 'alert',
+    templateUrl: 'alert.component.html',
+    styleUrls: ['alert.component.css'],
+    animations: [
         trigger('anim', [
-          transition('* => top', [
-            style({ height: '0', opacity: '0', transform: 'translateY(-100%)', 'box-shadow': 'none' }),
-            sequence([
-              animate(".1s ease", style({ height: '*', opacity: '.2', transform: 'translateY(-100%)', 'box-shadow': 'none'  })),
-              animate(fadeAnimationTime + "ms ease", style({ height: '*', opacity: 1, transform: 'translateY(0%)', 'box-shadow': '0 1px 4px 0 rgba(0, 0, 0, 0.3)'  }))
+            transition('* => top', [
+                style({ height: '0', opacity: '0', transform: 'translateY(-100%)', 'box-shadow': 'none' }),
+                sequence([
+                    animate(".1s ease", style({ height: '*', opacity: '.2', transform: 'translateY(-100%)', 'box-shadow': 'none' })),
+                    animate(fadeAnimationTime + "ms ease", style({ height: '*', opacity: 1, transform: 'translateY(0%)', 'box-shadow': '0 1px 4px 0 rgba(0, 0, 0, 0.3)' }))
+                ])
+            ]),
+            transition('* => void', [
+                style({ height: '*', opacity: '1', transform: 'translateY(0)', 'box-shadow': '0 1px 4px 0 rgba(0, 0, 0, 0.3)' }),
+                sequence([
+                    animate(fadeAnimationTime + "ms ease", style({ opacity: '.3', height: '0', 'box-shadow': 'none', transform: 'scale(0.1, 0.1)', })),
+                    animate(".1s ease", style({ height: '0', opacity: 0.1, 'box-shadow': 'none' }))
+                ])
+            ]),
+            transition('* => bottom', [
+                style({ height: '0', opacity: '0', transform: 'translateY(100%)', 'box-shadow': 'none' }),
+                sequence([
+                    animate(".5s ease", style({ height: '*', opacity: '.2', transform: 'translateY(0)', 'box-shadow': 'none' })),
+                    animate(fadeAnimationTime + "ms ease", style({ height: '*', opacity: 1, transform: 'translateY(0%)', 'box-shadow': '0 1px 4px 0 rgba(0, 0, 0, 0.3)' }))
+                ])
             ])
-          ]),
-          transition('* => void', [
-            style({ height: '*', opacity: '1', transform: 'translateY(0)', 'box-shadow': '0 1px 4px 0 rgba(0, 0, 0, 0.3)'}),
-            sequence([
-              animate(fadeAnimationTime + "ms ease", style({ opacity: '.3', height: '0', 'box-shadow': 'none', transform: 'scale(0.1, 0.1)', })),
-              animate(".1s ease", style({ height: '0', opacity: 0.1,  'box-shadow': 'none'  }))
-            ])
-          ]),
-          transition('* => bottom', [
-            style({ height: '0', opacity: '0', transform: 'translateY(100%)', 'box-shadow': 'none' }),
-            sequence([
-              animate(".5s ease", style({ height: '*', opacity: '.2', transform: 'translateY(0)', 'box-shadow': 'none'  })),
-              animate(fadeAnimationTime + "ms ease", style({ height: '*', opacity: 1, transform: 'translateY(0%)', 'box-shadow': '0 1px 4px 0 rgba(0, 0, 0, 0.3)'  }))
-            ])
-          ])
-        ]),  
-      ]    
-    })
+        ]),
+    ],
+    standalone: false
+})
 
 
 export class AlertComponent implements OnInit, OnDestroy {
