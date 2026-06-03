@@ -1,15 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserModel } from 'src/app/models/user.model';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormsModule } from '@angular/forms';
 import { AlertService } from 'src/app/components/alert';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteWindowComponent } from '../delete-window/delete-window.component';
+import { PopupWindowComponent } from 'src/app/components/popup-window/popup-window.component';
 import { AddNewUserComponent } from '../add-new-user/add-new-user.component';
 
 @Component({
@@ -62,7 +60,11 @@ export class UserTableComponent implements OnInit, AfterViewInit {
   }
 
   openAddUserForm() {
-    const dialogRef = this.dialog.open(AddNewUserComponent, {});
+    const dialogRef = this.dialog.open(AddNewUserComponent, {
+      data: {
+        reload: () => this.reloadTable(),
+      },
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -72,9 +74,12 @@ export class UserTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteUserDialog(e: any) {
-    const dialogRef = this.dialog.open(DeleteWindowComponent, {
+    const dialogRef = this.dialog.open(PopupWindowComponent, {
       data: {
-        user: e,
+        img: '../../../../../../../assets/images/delete_popup.svg',
+        footerMessage: 'Po potvrdení už nebude možné tento krok vrátiť späť.',
+        title: 'VYMAZAŤ POUŽÍVATEĽA',
+        message: `Praješ si natrvalo vymazať používateľa ${e.name} ${e.surname}?`,
       },
     });
 

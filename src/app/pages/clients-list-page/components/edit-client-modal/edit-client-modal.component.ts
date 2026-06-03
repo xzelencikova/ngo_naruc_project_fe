@@ -29,7 +29,6 @@ export class EditClientModalComponent {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.data);
     this.clientForm.controls['name'].setValue(this.data.client.name);
     this.clientForm.controls['surname'].setValue(this.data.client.surname);
     this.clientForm.controls['contract_no'].setValue(

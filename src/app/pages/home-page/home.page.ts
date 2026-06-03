@@ -39,17 +39,6 @@ export class HomePage {
     });
   }
 
-  closeForm() {
-    const modelDiv = document.getElementById('form-new-client');
-    const overlayDiv = document.getElementById('overlay');
-    if (modelDiv != null) {
-      modelDiv.style.display = 'none';
-    }
-    if (overlayDiv != null) {
-      overlayDiv.style.display = 'none';
-    }
-  }
-
   navigateClientsList(): void {
     this.router.navigate(['/clients-list']);
   }

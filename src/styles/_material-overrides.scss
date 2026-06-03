@@ -1,0 +1,44 @@
+/* STEPPER */
+
+.mat-step-header {
+  background-color: transparent !important;
+}
+
+/* SNACKBAR */
+
+.mat-mdc-snack-bar-container.success {
+  --mdc-snackbar-container-color: #e8f5e9;
+  --mdc-snackbar-supporting-text-color: #2e7d32;
+  --mat-snack-bar-button-color: #2e7d32;
+}
+
+.mat-mdc-snack-bar-container.error {
+  --mdc-snackbar-container-color: #ffebee;
+  --mdc-snackbar-supporting-text-color: #c62828;
+  --mat-snack-bar-button-color: #c62828;
+}
+
+/* DIALOG */
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  --mat-sys-corner-extra-large: 32px;
+  padding: 2rem 3rem;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__title {
+  --mat-sys-headline-small-size: 30px;
+  --mat-sys-headline-small-weight: 600;
+}
+
+/* BUTTON */
+
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button {
+  --mat-button-text-container-height: auto;
+}
+
+.mat-mdc-icon-button:hover {
+  color: var(--primary-hover-start);
+  background: none;
+}

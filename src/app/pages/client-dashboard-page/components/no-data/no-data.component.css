@@ -1,21 +1,16 @@
 img {
-    width: 70%;
+  width: 70%;
 }
 
 .no-data-container {
-    margin: auto;
-    padding-top: 5%;
-    text-align: center;
-    opacity: 70%;
-}
-
-h1 {
-    font-size: 36px;
-    font-weight: 600;
+  margin: auto;
+  padding-top: 5%;
+  text-align: center;
+  opacity: 70%;
 }
 
 @media screen and (max-width: 720px) {
-    h1 {
-        font-size: 30px;
-    }
+  h1 {
+    font-size: 30px;
+  }
 }

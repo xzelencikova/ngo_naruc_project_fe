@@ -14,16 +14,15 @@ import { QuestionsListRoutingModule } from './questions-list-routing.module';
 import { AddQuestionFormComponent } from './components/add-question-form/add-question-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
-import { DeleteWindowComponent } from './components/modal-window/delete-window.component';
 import { AlertModule } from 'src/app/components/alert';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     QuestionsListPage,
     QuestionsTableComponent,
     AddQuestionFormComponent,
-    DeleteWindowComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +40,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSelectModule,
     MatCheckboxModule,
     AlertModule,
+    MatButtonModule,
   ],
   providers: [],
   schemas: [],

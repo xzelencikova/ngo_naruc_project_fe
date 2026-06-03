@@ -1,72 +1,111 @@
 <alert [maxItems]="3" [delay]="0"></alert>
 
 <form [formGroup]="questForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-        <div class="col-md-5 form-col">
-            <img src="./assets/images/add_user.svg"  class="img-fluid form-img" alt="Responsive image">
-        </div>
-    
-        <div class="col-md-7 form-col2" style="margin: auto;">              
-            <div>
-                <h1 class="font-weight-normal welcome">Vytvoriť</h1>
-                <h1 class="font-weight-bold name">nového zamestnanca</h1>
-            </div>
-            
-            <div class="main-description-form">
-                <p class="description-form">
-                    Vyplň formulár a vytvor tak účet novému zamestnancovi!
-                </p> 
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-md-5">
+      <img
+        src="./assets/images/add_user.svg"
+        class="img-fluid form-img"
+        alt="Responsive image"
+      />
     </div>
-    <hr/>
 
-    <mat-dialog-content class="dialog-text">
-        <div class="form-group row">
-            <label for="user-name" class="col-sm-2 col-form-label">Meno</label>
-            <mat-form-field appearance="outline" class="col-sm-10">
-            <input matInput type="text" class="form-control" id="user-name" formControlName="userName">
-            </mat-form-field>
-        </div>
-        <div class="form-group row">
-            <label for="user-surname" class="col-sm-2 col-form-label">Priezvisko</label>
-            <mat-form-field appearance="outline" class="col-sm-10">
-                <input matInput type="text" class="form-control" id="user-surname" formControlName="userSurname">
-            </mat-form-field>
-        </div>
-        <div class="form-group row">
-            <label for="user-email" class="col-sm-2 col-form-label">Email</label>
-            <mat-form-field appearance="outline" class="col-sm-10">
-                <input matInput type="text" class="form-control" id="user-email"formControlName="userEmail">
-            </mat-form-field>
-        </div>
-        <div class="form-group row">
-            <label for="user-role" class="col-sm-2 col-form-label">Rola</label>
-            <div class="col-sm-10">
-                <div class="form-check-inline">
-                    <label class="form-check-label" for="user-role1">
-                    <input type="radio" class="form-control-radio" id="user-role1"  value="admin" formControlName="userRole" >Admin
-                    </label>
-                </div>
-                <div class="form-check-inline">
-                    <label class="form-check-label" for="user-role2">
-                        <input type="radio" class="form-control-radio" id="user-role2"  value="guest" formControlName="userRole" checked>Hosť   
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="user-password" class="col-sm-2 col-form-label">Heslo</label>
-            <mat-form-field appearance="outline" class="col-sm-10">
-                <input matInput [type]="showPassword ? 'text' : 'password'" class="form-control" formControlName="userPassword" placeholder="Heslo">
-                <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword?'visibility_off':'visibility'}}</mat-icon>
-            </mat-form-field>
-        </div>
-    </mat-dialog-content>
+    <div class="col-md-7" style="margin: auto">
+      <div>
+        <h1>Pridať nového zamestnanca</h1>
+      </div>
+    </div>
+  </div>
+  <hr />
 
-    <mat-dialog-actions align="center">
-        <button mat-button mat-dialog-close class="cancel-button">ZRUŠIŤ</button>
-        <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="submit-button" type="submit">VYTVORIŤ</button>
-    </mat-dialog-actions>
+  <mat-dialog-content class="dialog-text">
+    <div class="form-group row">
+      <label for="user-name" class="col-md-2">Meno</label>
+      <div class="col-md-10">
+        <input
+          type="text"
+          class="form-control"
+          id="user-name"
+          formControlName="userName"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="user-surname" class="col-md-2">Priezvisko</label>
+      <div class="col-md-10">
+        <input
+          type="text"
+          class="form-control"
+          id="user-surname"
+          formControlName="userSurname"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="user-email" class="col-md-2">Email</label>
+      <div class="col-md-10">
+        <input
+          type="text"
+          class="form-control"
+          id="user-email"
+          formControlName="userEmail"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="user-role" class="col-md-2">Rola</label>
+      <div class="col-md-10">
+        <div class="form-check-inline">
+          <label class="form-check-label" for="user-role1">
+            <input
+              type="radio"
+              class="form-control-radio"
+              id="user-role1"
+              value="admin"
+              formControlName="userRole"
+            />Admin
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label" for="user-role2">
+            <input
+              type="radio"
+              class="form-control-radio"
+              id="user-role2"
+              value="guest"
+              formControlName="userRole"
+              checked
+            />Hosť
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="user-password" class="col-md-2">Heslo</label>
+      <div class="col-md-10 password-wrapper">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          class="form-control"
+          formControlName="userPassword"
+          placeholder="Heslo"
+        />
+        <mat-icon class="password-toggle" (click)="togglePasswordVisibility()">
+          {{ showPassword ? "visibility_off" : "visibility" }}
+        </mat-icon>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="center">
+    <button mat-button mat-dialog-close class="cancel-button">ZRUŠIŤ</button>
+    <button
+      mat-button
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+      class="submit-button"
+      type="submit"
+    >
+      VYTVORIŤ
+    </button>
+  </mat-dialog-actions>
 </form>
-

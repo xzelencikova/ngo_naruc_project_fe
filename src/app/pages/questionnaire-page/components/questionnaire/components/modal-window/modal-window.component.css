@@ -1,50 +1,23 @@
 .dialog-text {
-    text-align: center;
-    padding: 2rem 0 2rem 0;
-}
-
-.submit-button {
-    padding: 1rem 4rem;
-    border-radius: 50px;
-    font-weight: 600;
-    color: white;
-    background: linear-gradient(0.25turn, #FF4D00, #FC7900);
-    border: none;
-}
-
-.submit-button:hover {
-    background: linear-gradient(88deg, #D44900 -0.01%, #FF6C1D 100.02%);
-}
-
-.cancel-button {
-    padding: 1rem 4rem;
-    border-radius: 50px;
-    font-weight: 600;
-    color: #FF4D00;
-    background: white;
-    border: 1px solid #FF4D00;
-    margin-right: 1rem;
-}
-
-.cancel-button:hover {
-    background: linear-gradient(90deg, #FF4D00 0%, #FC7900 99.99%);
-    color: white;
+  text-align: center;
+  padding: 2rem 0 2rem 0;
 }
 
 @media screen and (max-width: 720px) {
-    img {
-        display: none;
-    }
+  img {
+    display: none;
+  }
 
-    .submit-button, .cancel-button {
-        padding: 1rem 2rem;
-    }
+  .submit-button,
+  .cancel-button {
+    padding: 1rem 2rem;
+  }
 
-    .mdc-dialog__title {
-        font-size: 30px !important;
-    }
+  .mdc-dialog__title {
+    font-size: 30px !important;
+  }
 
-    p {
-        font-size: 14px;
-    }
+  p {
+    font-size: 14px;
+  }
 }

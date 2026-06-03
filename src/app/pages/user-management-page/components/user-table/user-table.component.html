@@ -1,5 +1,3 @@
-<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous"> -->
-
 <div style="padding: 1rem 2rem; display: flex; justify-content: space-between">
   <div style="width: 70%">
     <div class="form-group row">
@@ -14,13 +12,14 @@
         <span><i class="fas fa-search"></i></span>
       </div>
     </div>
-    <!-- <mat-form-field style="width: 100%;" appearance="outline">
-        <input #searchVal class="form-control" placeholder="Vyhľadaj otázku" (keyup)="applyFilter(searchVal.value)">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field> -->
   </div>
   <div>
-    <button class="detail-button" type="button" (click)="openAddUserForm()">
+    <button
+      mat-button
+      color="primary"
+      type="button"
+      (click)="openAddUserForm()"
+    >
       <i class="fas fa-plus"></i> Pridať zamestnanca
     </button>
   </div>
@@ -60,8 +59,8 @@
     <th mat-header-cell *matHeaderCellDef>Vymazať</th>
     <td mat-cell *matCellDef="let element">
       <button
-        role="button"
-        class="detail-button"
+        mat-icon-button
+        color="primary"
         (click)="deleteUserDialog(element)"
       >
         <i class="fas fa-xl fa-trash-can"></i>

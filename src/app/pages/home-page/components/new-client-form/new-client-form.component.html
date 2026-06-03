@@ -2,7 +2,7 @@
 
 <form [formGroup]="questForm" (ngSubmit)="onSubmit()">
   <div class="row">
-    <div class="col-md-5 form-col">
+    <div class="col-md-5">
       <img
         src="./assets/images/create_client.svg"
         class="img-fluid form-img"
@@ -10,18 +10,8 @@
       />
     </div>
 
-    <div class="col-md-7 form-col2">
-      <div>
-        <h1 class="font-weight-normal welcome">Vytvoriť</h1>
-        <h1 class="font-weight-bold name">nového klienta</h1>
-      </div>
-
-      <div class="main-description-form">
-        <p class="description-form">
-          Vyplň formulár, my pre teba všetko pripravíme aby si mohol rovno
-          vypĺňať pozorovací hárok !
-        </p>
-      </div>
+    <div class="col-md-7">
+      <h1>Pridať nového klienta</h1>
     </div>
   </div>
 
@@ -29,8 +19,8 @@
 
   <mat-dialog-content class="dialog-text">
     <div class="row form-group">
-      <label for="client-name" class="col-sm-3">Meno klienta</label>
-      <div class="col-sm-9">
+      <label for="client-name" class="col-md-3">Meno klienta</label>
+      <div class="col-md-9">
         <input
           type="text"
           class="form-control"
@@ -41,10 +31,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="client-surname" class="col-sm-3 col-form-label">
-        Priezvisko klienta
-      </label>
-      <div class="col-sm-9">
+      <label for="client-surname" class="col-md-3"> Priezvisko klienta </label>
+      <div class="col-md-9">
         <input
           type="text"
           class="form-control"
@@ -55,10 +43,8 @@
     </div>
 
     <div class="form-group row">
-      <label for="contract-number" class="col-sm-3 col-form-label">
-        Číslo zmluvy
-      </label>
-      <div class="col-sm-9">
+      <label for="contract-number" class="col-md-3"> Číslo zmluvy </label>
+      <div class="col-md-9">
         <input
           type="text"
           class="form-control"

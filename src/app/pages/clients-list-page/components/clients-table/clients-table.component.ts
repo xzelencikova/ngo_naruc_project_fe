@@ -7,7 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AlertService } from 'src/app/components/alert';
-import { DeleteClientWindowComponent } from '../delete-window/delete-window.component';
+import { PopupWindowComponent } from 'src/app/components/popup-window/popup-window.component';
 import { EditClientModalComponent } from '../edit-client-modal/edit-client-modal.component';
 
 @Component({
@@ -117,9 +117,12 @@ export class ClientsTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteClientDialog(e: any) {
-    const dialogRef = this.dialog.open(DeleteClientWindowComponent, {
+    const dialogRef = this.dialog.open(PopupWindowComponent, {
       data: {
-        client: e,
+        img: '../../../../../../../assets/images/delete_popup.svg',
+        title: 'VYMAZAŤ KLIENTA',
+        message: `Praješ si natrvalo vymazať klienta ${e.name} ${e.surname} (${e.contract_no})?`,
+        footerMessage: 'Po potvrdení už nebude možné tento krok vrátiť späť.',
       },
     });
 
@@ -182,7 +185,7 @@ export class ClientsTableComponent implements OnInit, AfterViewInit {
       this.clientService.lockClients(body).subscribe({
         next: (success) => {
           this.alertService.success(
-            'Zvolení používatelia boli úspešne odstránení.',
+            'Zvolení používatelia boli úspešne aktualizovaní.',
             'Výborne!',
           );
           this.reloadTable();

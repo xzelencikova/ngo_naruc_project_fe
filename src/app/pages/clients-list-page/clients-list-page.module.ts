@@ -12,16 +12,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DeleteClientWindowComponent } from './components/delete-window/delete-window.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EditClientModalComponent } from './components/edit-client-modal/edit-client-modal.component';
 import { AlertModule } from 'src/app/components/alert';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     ClientsListPage,
     ClientsTableComponent,
-    DeleteClientWindowComponent,
     EditClientModalComponent,
   ],
   imports: [
@@ -39,6 +38,7 @@ import { AlertModule } from 'src/app/components/alert';
     MatDialogModule,
     MatCheckboxModule,
     AlertModule,
+    MatButtonModule,
   ],
   providers: [],
   schemas: [],

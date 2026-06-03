@@ -1,11 +1,18 @@
 <mat-dialog-content align="center">
-  <img src="../../../../../../../assets/images/delete_popup.svg" />
+  <img [src]="data.img" />
 </mat-dialog-content>
 
-<h1 mat-dialog-title>VYMAZAŤ HODNOTENIE?</h1>
+<mat-dialog-content align="center">
+  <h1 mat-dialog-title>{{ data.title }}</h1>
+</mat-dialog-content>
 
 <mat-dialog-content class="dialog-text" align="center">
-  <p>Cheš natrvalo vymazať toto hodnotenie?</p>
+  <p class="submessage">{{ data.message }}</p>
+  @if (data.submessage) {
+    <p class="submessage">
+      {{ data.submessage }}
+    </p>
+  }
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
@@ -21,5 +28,7 @@
 </mat-dialog-actions>
 
 <mat-dialog-content align="center">
-  <p><b>Po potvrdení už nebude možné tento krok vrátiť späť.</b></p>
+  <p>
+    <b>{{ data.footerMessage }}</b>
+  </p>
 </mat-dialog-content>

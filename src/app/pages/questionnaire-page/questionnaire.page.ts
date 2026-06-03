@@ -41,7 +41,6 @@ export class QuestionnairePage {
 
     if (this.ratingService.getHistory()) {
       this.unfinished_rating = this.ratingService.getHistoryQuestionnaire();
-      console.log(this.unfinished_rating);
       this.phase_no = this.unfinished_rating.phase - 1;
     } else {
       this.phase_no = this.client.last_phase;

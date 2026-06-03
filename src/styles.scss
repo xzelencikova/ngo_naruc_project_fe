@@ -1,127 +1,147 @@
-/* You can add global styles to this file, and also import other style files */
+// /* You can add global styles to this file, and also import other style files */
 @use "@angular/material" as mat;
 
-@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./styles/_variables.scss";
+@import "./styles/_material-overrides.scss";
 @import "@fortawesome/fontawesome-free/css/all.css";
 
 @include mat.core();
 
+html {
+  color-scheme: light;
+
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$orange-palette,
+        tertiary: mat.$orange-palette,
+        theme-type: light,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+
+  --mat-sys-primary: var(--primary);
+  --mat-sys-on-primary: var(--text-on-primary);
+  --mat-sys-primary-container: var(--background);
+  --mat-sys-on-primary-container: #2a0d00;
+
+  --mat-sys-surface: var(--background);
+  --mat-sys-on-surface: var(--text-on-surface);
+  --bs-heading-color: var(--text-secondary);
+
+  // ICON BUTTON SETTINGS
+  --mat-icon-button-icon-color: var(--primary);
+  --mat-icon-button-icon-size: 16px;
+  --mat-icon-button-state-layer-color: transparent;
+}
+
 // Customize the entire app. Change :root to your selector if you want to scope the styles.
-:root {
-  --primary-start: #ff5800;
-  --primary-end: #ff8b00;
-  --primary-hover-start: #d44900;
-  --primary-hover-end: #ff6c1d;
-
-  --primary-solid: #ff4d00;
-  --primary-solid-light: #fc7900;
-
-  --text-on-primary: #ffffff;
-  --text-primary: #ff4d00;
-
-  --border-radius-pill: 50px;
-}
 
 body {
-  color: #5c5c5c;
-}
-html,
-body {
-  height: 100%;
-}
-body {
+  color: var(--text-secondary);
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.btn {
-  padding: 1rem 3rem;
-  border-radius: var(--border-radius-pill);
+/* PRIMARY BUTTON*/
+.submit-button.mat-mdc-button {
+  padding: 1rem 4rem;
+  border-radius: 50px;
   font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.btn-primary {
   color: var(--text-on-primary);
   background: linear-gradient(
     0.25turn,
     var(--primary-start),
     var(--primary-end)
   );
+  border: none;
+
+  /* Material text-button tokens */
+  --mat-text-button-label-text-color: var(--text-on-primary);
+  --mat-text-button-state-layer-color: transparent;
 }
 
-.btn-primary:hover {
+.submit-button.mat-mdc-button,
+.submit-button.mat-mdc-button .mdc-button__label,
+.submit-button.mat-mdc-button .mat-icon {
+  color: white;
+}
+
+.submit-button.mat-mdc-button:hover {
   background: linear-gradient(
     88deg,
-    var(--primary-hover-start),
-    var(--primary-hover-end)
+    var(--primary-hover-start) -0.01%,
+    var(--primary-hover-end) 100.02%
   );
 }
 
-.btn-outline {
-  color: var(--text-primary);
+/* SECONDARY BUTTON*/
+.cancel-button.mat-mdc-button {
+  padding: 1rem 4rem;
+  border-radius: 50px;
+  font-weight: 600;
+  color: var(--primary);
   background: white;
-  border: 1px solid var(--text-primary);
+  border: 1px solid var(--primary);
+  margin-right: 1rem;
 }
 
-.btn-outline:hover {
-  color: var(--text-on-primary);
+.cancel-button.mat-mdc-button:hover {
   background: linear-gradient(
     90deg,
-    var(--primary-solid),
-    var(--primary-solid-light)
+    var(--primary-hover-start) 0%,
+    var(--primary-hover-end) 99.99%
   );
+  color: white;
 }
 
-.mat-step-header {
-  background-color: #07c496 !important;
+/* TEXTS */
+h1 {
+  font-size: 40px;
+  padding: 0.5rem 0;
 }
 
-.mat-step-header {
-  background-color: transparent !important;
+p {
+  font-size: 16px;
+  padding: 0;
+  font-weight: 400;
 }
 
-.mat-mdc-snack-bar-container {
-  --mdc-snackbar-container-color: lightgreen !important;
-  --mdc-snackbar-supporting-text-color: green !important;
-  --mat-snack-bar-button-color: green !important;
+label {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+
+  text-align: left;
+  align-self: center;
+
+  color: #929090;
 }
 
-.mat-mdc-dialog-container .mdc-dialog__surface {
-  border-radius: 80px !important;
-  padding: 2rem 5rem !important;
+/* INPUTS */
+.form-control {
+  padding: 1rem;
 }
 
-.mat-mdc-dialog-container .mdc-dialog__title {
-  color: #929090 !important;
-  text-align: center !important;
-  font-size: 40px !important;
-  font-weight: bold !important;
+input {
+  --bs-border-radius: 80px;
+  padding: 0.5rem;
+  margin: 5%;
 }
 
-.mat-mdc-menu-content {
-  margin: 0 0.8rem !important;
-  padding: 1rem 0 !important;
+.password-wrapper {
+  position: relative;
 }
 
-.mat-mdc-button {
-  height: auto !important;
-}
+.password-toggle {
+  position: absolute;
 
-.mdc-text-field {
-  border: 1px solid #e7e7e7 !important;
-}
-/* 
-.mat-text-field--focused {
-    background: white !important;
-} */
+  top: 50%;
+  right: 12px;
 
-.overlay {
-  z-index: 100000 !important;
-}
+  transform: translateY(-50%);
 
-.cdk-overlay-container {
-  z-index: 100000 !important;
+  cursor: pointer;
+  color: #929090;
 }

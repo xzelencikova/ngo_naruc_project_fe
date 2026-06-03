@@ -21,7 +21,6 @@ import { RatingService } from 'src/app/services/rating.service';
 
 import { MatStepper } from '@angular/material/stepper';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Router } from '@angular/router';
@@ -29,6 +28,7 @@ import { ClientModel } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/services/client.service';
 import { AlertService } from 'src/app/components/alert';
 import { QuestionService } from 'src/app/services/question.service';
+import { PopupWindowComponent } from 'src/app/components/popup-window/popup-window.component';
 
 @Component({
   selector: 'app-questionnaire',
@@ -271,9 +271,14 @@ export class QuestionnaireComponent
   }
 
   onSubmit(): void {
-    const dialogRef = this.dialog.open(ModalWindowComponent, {
+    const dialogRef = this.dialog.open(PopupWindowComponent, {
       data: {
-        unasweredQuestions: this.countUnansweredQuestions(this.questForm.value),
+        img: '../../../../../../../assets/images/send_popup.svg',
+        title: 'ULOŽIŤ ZMENY',
+        message: `Praješ si odoslať hodnotenie klienta? Po odoslaní pozorovacích hárkov sa fáza č. ${this.client!.last_phase + 1} uzavrie.`,
+        submessage: `V dotazníku ostalo ${this.countUnansweredQuestions(this.questForm.value)} nezodpovedaných otázok.`,
+        footerMessage:
+          'Hodnotenie je možné upraviť v histórii pozorovacích hárkov.',
       },
     });
     dialogRef.afterClosed().subscribe((result) => {

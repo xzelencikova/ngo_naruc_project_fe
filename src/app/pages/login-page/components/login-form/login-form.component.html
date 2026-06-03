@@ -11,16 +11,15 @@
       <label for="email">Zadaj svoj pracovný email</label>
     </div>
     <div class="login-form-input">
-      <mat-form-field appearance="outline" class="input-position">
+      <div>
         <input
-          matInput
           type="email"
           class="form-control"
           formControlName="email"
           aria-describedby="emailHelp"
           placeholder="Email"
         />
-      </mat-form-field>
+      </div>
     </div>
   </div>
 
@@ -28,26 +27,28 @@
     <div class="label-position">
       <label for="password">Zadaj svoje heslo</label>
     </div>
+
     <div class="login-form-input">
-      <mat-form-field appearance="outline" class="input-position">
+      <div class="password-wrapper">
         <input
-          matInput
           [type]="showPassword ? 'text' : 'password'"
           class="form-control"
           formControlName="password"
           placeholder="Heslo"
         />
-        <mat-icon matSuffix (click)="togglePasswordVisibility()">{{
-          showPassword ? "visibility_off" : "visibility"
-        }}</mat-icon>
-      </mat-form-field>
+        <mat-icon
+          class="password-toggle"
+          (click)="togglePasswordVisibility()"
+          >{{ showPassword ? "visibility_off" : "visibility" }}</mat-icon
+        >
+      </div>
     </div>
   </div>
 
   <div class="spacer3"></div>
 
   <div class="button-position">
-    <button class="btn btn-orange-form" type="submit">Prihlásiť sa</button>
+    <button mat-button class="submit-button" type="submit">Prihlásiť sa</button>
   </div>
 </form>
 

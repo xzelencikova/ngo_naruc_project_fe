@@ -1,18 +1,30 @@
 <mat-dialog-content align="center">
-  <img src="../../../../../../../assets/images/send_popup.svg">
+  <img src="../../../../../../../assets/images/send_popup.svg" />
 </mat-dialog-content>
 
 <h1 mat-dialog-title>ULOŽIŤ ZMENY?</h1>
 
 <mat-dialog-content class="dialog-text" align="center">
-  <p>Cheš natrvalo uložiť hodnotenie klienta? Po uložení zmien sa fáza č. {{client!.last_phase + 1}} uzavrie.</p>
+  <p>
+    Cheš natrvalo uložiť hodnotenie klienta? Po uložení zmien sa fáza č.
+    {{ client!.last_phase + 1 }} uzavrie.
+  </p>
 
-  <p>V pozorovacom hárku je {{data.unasweredQuestions}} nevyplnených otázok.</p>
+  <p>
+    V pozorovacom hárku je {{ data.unasweredQuestions }} nevyplnených otázok.
+  </p>
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
   <button mat-button mat-dialog-close class="cancel-button">NIE</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="submit-button">ÁNO</button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    class="submit-button"
+  >
+    ÁNO
+  </button>
 </mat-dialog-actions>
 
 <mat-dialog-content align="center">

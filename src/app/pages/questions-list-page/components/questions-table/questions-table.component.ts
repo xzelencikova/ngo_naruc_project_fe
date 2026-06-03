@@ -8,7 +8,7 @@ import { QuestionService } from 'src/app/services/question.service';
 import { QuestionModel } from 'src/app/models/question.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AddQuestionFormComponent } from '../add-question-form/add-question-form.component';
-import { DeleteWindowComponent } from '../modal-window/delete-window.component';
+import { PopupWindowComponent } from 'src/app/components/popup-window/popup-window.component';
 import { AlertService } from 'src/app/components/alert';
 
 @Component({
@@ -105,9 +105,13 @@ export class QuestionsTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteQuestion(e: any) {
-    const dialogRef = this.dialog.open(DeleteWindowComponent, {
+    const dialogRef = this.dialog.open(PopupWindowComponent, {
       data: {
-        question: e,
+        img: '../../../../../../../assets/images/delete_popup.svg',
+        footerMessage: 'Po potvrdení už nebude možné tento krok vrátiť späť.',
+        title: 'VYMAZAŤ OTÁZKU',
+        message: `Praješ si natrvalo vymazať nasledujúcu otázku:`,
+        submessage: `${e.question}\n (${e.category})?`,
       },
     });
 

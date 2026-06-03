@@ -5,7 +5,7 @@ import { ClientModel } from 'src/app/models/client.model';
 import { RatingModel } from 'src/app/models/rating.model';
 import { ClientService } from 'src/app/services/client.service';
 import { RatingService } from 'src/app/services/rating.service';
-import { DeleteWindowComponent } from '../delete-window/delete-window.component';
+import { PopupWindowComponent } from 'src/app/components/popup-window/popup-window.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService } from 'src/app/components/alert';
 
@@ -50,7 +50,7 @@ export class RatingsHistoryComponent {
         id: rating.id,
         phase: rating.phase,
         answered_questions_count: rating.ratings.filter(
-          (questions: any) => questions.rating !== null,
+          (questions: any) => questions.rating !== null && questions.rating > 0,
         ).length,
         all_questions_count: rating.ratings.length,
         last_updated_by: rating.last_update_by,
@@ -77,7 +77,14 @@ export class RatingsHistoryComponent {
 
   // Function to delete a specified rating
   deletePhase(id: number) {
-    const dialogRef = this.dialog.open(DeleteWindowComponent, {});
+    const dialogRef = this.dialog.open(PopupWindowComponent, {
+      data: {
+        img: '../../../../../../../assets/images/delete_popup.svg',
+        footerMessage: 'Po potvrdení už nebude možné tento krok vrátiť späť.',
+        title: 'VYMAZAŤ HODNOTENIE',
+        message: 'Praješ si natrvalo vymazať toto hodnotenie?',
+      },
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

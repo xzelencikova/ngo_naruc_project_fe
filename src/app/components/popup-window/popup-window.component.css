@@ -1,29 +1,6 @@
 .dialog-text {
   text-align: center;
   padding: 2rem 0 2rem 0;
-  overflow: visible;
-}
-
-textarea {
-  border-radius: 40px;
-  padding: 10% 5%;
-  margin: 5%;
-  resize: none;
-}
-
-select {
-  border-radius: 80px;
-  margin: 5%;
-}
-
-:host ::ng-deep .mat-mdc-dialog-container,
-.mat-mdc-dialog-container .mdc-dialog__container,
-.mat-mdc-dialog-container .mdc-dialog__surface {
-  width: 1000px !important;
-}
-
-img {
-  width: 100%;
 }
 
 @media screen and (max-width: 1280px) {
@@ -42,6 +19,11 @@ img {
 
   .col-md-7 {
     width: 100%;
+  }
+
+  .cancel-button,
+  .submit-button {
+    padding: 1rem 2rem;
   }
 }
 
@@ -62,4 +44,13 @@ img {
   .col-md-7 {
     width: 100%;
   }
+
+  .cancel-button,
+  .submit-button {
+    padding: 1rem 2rem;
+  }
+}
+
+.submessage {
+  white-space: pre-line;
 }

@@ -22,6 +22,9 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
 import { ContractNumberFormatterDirective } from './shared/directives/contract-number-formatter.directive';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PopupWindowComponent } from './components/popup-window/popup-window.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { ContractNumberFormatterDirective } from './shared/directives/contract-n
     HeaderComponent,
     SpinnerComponent,
     SpinnerWrapperComponent,
+    PopupWindowComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -42,6 +46,8 @@ import { ContractNumberFormatterDirective } from './shared/directives/contract-n
     PortalModule,
     PlotlyModule.forRoot(PlotlyJS),
     ContractNumberFormatterDirective,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [
     {

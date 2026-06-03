@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ContractNumberFormatterDirective } from 'src/app/shared/directives/contract-number-formatter.directive';
+import { MatAnchor, MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [HomePage, NewClientFormComponent],
@@ -21,6 +22,8 @@ import { ContractNumberFormatterDirective } from 'src/app/shared/directives/cont
     MatFormFieldModule,
     MatSelectModule,
     ContractNumberFormatterDirective,
+    MatAnchor,
+    MatButtonModule,
   ],
   providers: [],
   schemas: [],

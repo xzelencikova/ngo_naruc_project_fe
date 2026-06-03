@@ -70,7 +70,7 @@ export class ChangeFormComponent {
 
     this.userService.updateUserById(this.user.id!, updatedUser).subscribe({
       next: (success) => {
-        this.userService.selectedUser$.emit(success);
+        this.userService.selectedUser$.emit(updatedUser);
         this.alertService.success('Údaje boli úspešne zmenené.', 'Výborne!');
 
         // Emit the updated user data

@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { UserModel } from 'src/app/models/user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserDataService {
   private userSource = new BehaviorSubject<UserModel | null>(null);
@@ -21,5 +21,9 @@ export class UserDataService {
   updateUserData(updatedUser: UserModel) {
     this.userSource.next(updatedUser);
     this.userDataUpdateSource.next(updatedUser);
+
+    localStorage.setItem('user_name', updatedUser.name);
+    localStorage.setItem('user_surname', updatedUser.surname);
+    localStorage.setItem('user_role', updatedUser.role);
   }
 }

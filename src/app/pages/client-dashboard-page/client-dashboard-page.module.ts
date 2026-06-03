@@ -21,7 +21,6 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { RatingsHistoryComponent } from './components/ratings-history/ratings-history.component';
-import { DeleteWindowComponent } from './components/delete-window/delete-window.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { DeleteWindowComponent } from './components/delete-window/delete-window.
     QuestionsOverviewChartComponent,
     RatingsHistoryComponent,
     NoDataComponent,
-    DeleteWindowComponent,
   ],
   imports: [
     CommonModule,

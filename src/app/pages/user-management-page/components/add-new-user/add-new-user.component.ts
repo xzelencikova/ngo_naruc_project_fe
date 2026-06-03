@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/user.model';
 import { AlertService } from 'src/app/components/alert';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-new-user',
@@ -20,6 +21,7 @@ export class AddNewUserComponent implements OnInit {
   });
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private userService: UserService,
     private alertService: AlertService,
@@ -49,6 +51,7 @@ export class AddNewUserComponent implements OnInit {
           'Používateľ bol úspešne vytvorený.',
           'Výborne!',
         );
+        this.data.reload();
       },
       error: (err) => {
         this.alertService.error(

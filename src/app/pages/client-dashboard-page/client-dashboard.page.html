@@ -3,21 +3,20 @@
     @if (client.id && client.id > 0) {
     <div class="overview-header">
       <div>
-        <h1 class="client-name">
+        <h1>
           {{ client.name }} {{ client.surname }} @if (client.active) {
           <span class="status-badge active">Aktívny</span>
           } @else {
           <span class="status-badge inactive">Neaktívny</span>
           }
         </h1>
-        <h3>Číslo zmluvy: {{client.contract_no}}</h3>
+        <h5>Číslo zmluvy: {{client.contract_no}}</h5>
       </div>
 
       @if (!isDownload) {
       <div style="display: flex">
         @if (ratings.length < 3) {
         <button
-          matButton
           role="button"
           class="questionnaire-button"
           (click)="loadQuestionnaire()"
@@ -28,7 +27,7 @@
         } @if (ratings.length > 0) {
         <div style="display: grid">
           <button
-            matButton
+            mat-button
             role="button"
             class="download-button"
             (click)="prepareExportToPDF()"
@@ -37,7 +36,7 @@
             <i class="fa fa-solid fa-download fa-lg"></i>
           </button>
           <button
-            matButton
+            mat-button
             role="button"
             class="download-button"
             (click)="exportToExcel()"

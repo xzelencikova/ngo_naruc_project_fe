@@ -1,102 +1,102 @@
-html, body {
-    margin: 0;
-    height:100vh;
+html,
+body {
+  margin: 0;
+  height: 100vh;
 }
 
-.wrapper{
-    display: flex;
-    margin: 0;
-    height:100vh;
+.wrapper {
+  display: flex;
+  margin: 0;
+  height: 100vh;
 }
 
-.container-blue{
-    /* display:block; */
-    
-    background-color: #F7FBFF;
-    width: 40%;
+.container-blue {
+  /* display:block; */
+
+  background-color: #f7fbff;
+  width: 40%;
 }
 
-.container-white{
-    display:block;
-    height: 100%;
-    background-color: #FFFFFF;
-    width: 60%;
+.container-white {
+  display: block;
+  height: 100%;
+  background-color: #ffffff;
+  width: 60%;
 }
 
-.page-content-logo{
-    display: block;
-    text-align: center;
-    padding-top: 11%;
-    height: 17%;
+.page-content-logo {
+  display: block;
+  text-align: center;
+  padding-top: 11%;
+  height: 17%;
 }
 
-.page-content{
-    display: block;
-    position: inherit;
-    text-align: center;
+.page-content {
+  display: block;
+  position: inherit;
+  text-align: center;
 }
 
-.main-logo >img{
-    width: 22%;
+.main-logo > img {
+  width: 22%;
 }
 
-
-.welcome{
-    font-size: 48px;
-    font-weight: bold;
+.welcome {
+  font-size: 48px;
+  font-weight: bold;
 }
 
-.description{
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: #5C5C5C;
+.description {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #5c5c5c;
 }
 
-.login-img{
-    position: inherit;
-    text-align: center;
+.login-img {
+  position: inherit;
+  text-align: center;
 }
 
 .img-fluid {
-    max-width: 30vw;
+  max-width: 30vw;
 }
 
-
-.spacer{
-    padding-top: 8vh;
+.spacer {
+  padding-top: 8vh;
 }
 
-
-.login-form{
-    align-items: center;
-    justify-content: center;
-    display: flex;
+.login-form {
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 @media screen and (max-width: 1280px) {
-    .container-blue, .container-white {
-        width: 50%;
-        padding: 2rem;
-    }
-}
-  
-  @media screen and (max-width: 767px) {
-    img {
-        display: none;
-    }
-
-    .wrapper {
-        display: block;
-    }
-  
-    .container-blue, .container-white {
-        width: 100%;
-        padding: 2rem;
-    }
-
-    .page-content-logo {
-        display: none;
-    }
+  .container-blue,
+  .container-white {
+    width: 50%;
+    padding: 2rem;
   }
+}
+
+@media screen and (max-width: 767px) {
+  img {
+    display: none;
+  }
+
+  .wrapper {
+    display: block;
+  }
+
+  .container-blue,
+  .container-white {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .page-content-logo {
+    display: none;
+  }
+}

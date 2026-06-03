@@ -9,17 +9,27 @@
   padding: 0 2rem;
   border-radius: 10px;
   font-weight: 600;
-  color: white;
-  background: linear-gradient(0.25turn, #ff4d00, #fc7900);
+  color: var(--text-on-primary);
+  background: linear-gradient(
+    0.25turn,
+    var(--primary-start),
+    var(--primary-end)
+  );
   border: none;
   margin-right: 1rem;
-}
-.questionnaire-button.i {
-  color: #ff4d00;
+
+  /* Material text-button tokens */
+  --mat-text-button-label-text-color: var(--text-on-primary);
+  --mat-text-button-state-layer-color: transparent;
 }
 
 .questionnaire-button:hover {
   background: linear-gradient(88deg, #d44900 -0.01%, #ff6c1d 100.02%);
+}
+
+.questionnaire-button:disabled {
+  cursor: not-allowed;
+  background: var(--icon-neutral);
 }
 
 .download-button {
@@ -34,12 +44,6 @@
 .download-button:hover {
   background: linear-gradient(90deg, #ff4d00 0%, #fc7900 99.99%);
   color: white;
-}
-
-.client-name {
-  color: #5c5c5c;
-  font-size: 34px;
-  font-weight: 600;
 }
 
 .status-badge {
@@ -133,7 +137,7 @@
 
 .phase-progress .score {
   padding: 1rem 0;
-  font-size: 35px;
+  font-size: 28px;
 }
 
 .score-card {
