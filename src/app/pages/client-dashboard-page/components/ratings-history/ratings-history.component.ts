@@ -16,7 +16,7 @@ import { AlertService } from 'src/app/components/alert';
   standalone: false,
 })
 export class RatingsHistoryComponent {
-  client?: ClientModel;
+  @Input() client: ClientModel;
   displayedColumns: string[] = [
     'phase',
     'answered_questions_count',
@@ -94,11 +94,29 @@ export class RatingsHistoryComponent {
               'Hodnotenie bolo úspešne odstránené.',
               'Výborne!',
             );
-            window.location.reload();
           },
           error: (err) => {
             this.alertService.error(
               'Nepodarilo sa odstrániť hodnotenie.',
+              'Nastala chyba!',
+            );
+          },
+        });
+        const updatedClient: ClientModel = {
+          ...this.client,
+          active: true,
+        };
+        this.clientService.updateClientById(updatedClient).subscribe({
+          next: (success) => {
+            this.alertService.success(
+              'Klient bol úspešne aktualizovaný.',
+              'Výborne!',
+            );
+            window.location.reload();
+          },
+          error: (err) => {
+            this.alertService.error(
+              'Nepodarilo sa aktualizovať stav klienta.',
               'Nastala chyba!',
             );
           },

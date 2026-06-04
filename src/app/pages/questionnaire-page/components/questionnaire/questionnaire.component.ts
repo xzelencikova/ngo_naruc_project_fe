@@ -84,7 +84,6 @@ export class QuestionnaireComponent
     library: FaIconLibrary,
     private ratingService: RatingService,
     private clientService: ClientService,
-    private saveMessageBar: MatSnackBar,
     private dialog: MatDialog,
     private router: Router,
     private alertService: AlertService,
@@ -108,13 +107,10 @@ export class QuestionnaireComponent
             if (this.prefill_questionnaire === undefined)
               group[question.id] = [null];
             else {
-              group[question.id] = [
-                String(
-                  this.prefill_questionnaire.ratings.filter(
-                    (q) => q.question_id == question.id,
-                  )[0].rating,
-                ),
-              ];
+              const rating = this.prefill_questionnaire.ratings
+                .filter((q) => q.question_id == question.id)
+                .map((q) => q.rating)[0];
+              group[question.id] = String(rating === 0 ? null : rating);
             }
           });
 
@@ -137,9 +133,9 @@ export class QuestionnaireComponent
 
   ngOnDestroy(): void {}
 
-  saveFormData(): void {
+  saveRating(ratingId: number): any {
     let rating: RatingModel = {
-      id: this.prefill_questionnaire.id,
+      id: ratingId,
       last_update_date: new Date(),
       last_update_by:
         localStorage.getItem('user_name') +
@@ -151,16 +147,16 @@ export class QuestionnaireComponent
       client_id: this.client?.id ? this.client.id : 0,
       phase: this.prefill_questionnaire
         ? this.prefill_questionnaire?.phase
-        : this.client?.last_phase! + 1,
+        : this.client?.last_phase!,
       ratings: [],
     };
-    console.log(this.questForm);
+
     this.questionnaire.forEach((category) => {
       category.questions.forEach((question) => {
         const value = (this.questForm.value as any)[question.id];
         rating.ratings.push({
           question_id: question.id,
-          rating_id: this.prefill_questionnaire?.id || 0,
+          rating_id: ratingId,
           rating:
             value === 'null' || value === null || value === '' || value === 0
               ? null
@@ -190,42 +186,10 @@ export class QuestionnaireComponent
   }
 
   submitFormData(): boolean {
-    let rating: RatingModel = {
-      id: 0,
-      last_update_date: new Date(),
-      last_update_by:
-        localStorage.getItem('user_name') +
-        ' ' +
-        localStorage.getItem('user_surname'),
-      client: this.client?.name
-        ? `${this.client.name} ${this.client.surname}`
-        : '',
-      client_id: this.client?.id ? this.client.id : 0,
-      phase: this.client?.last_phase ? this.client.last_phase + 1 : 1,
-      ratings: [],
-    };
+    this.client!.last_phase = this.client!.last_phase + 1;
+    if (this.client!.last_phase === 3) this.client!.active = false;
 
-    if (this.client!.last_phase < 3)
-      this.client!.last_phase = this.client!.last_phase + 1;
-    else this.client!.active = false;
-
-    this.questionnaire.forEach((category) => {
-      category.questions.forEach((question) => {
-        const value = (this.questForm.value as any)[question.id];
-        rating.ratings.push({
-          question_id: question.id,
-          rating:
-            value === 'null' || value === null || value === '' || value === 0
-              ? null
-              : Number(value),
-          question: question.question,
-          category: category.category,
-          category_order: category.category_order,
-          rating_id: 0,
-          icon: category.icon,
-        });
-      });
-    });
+    this.saveRating(0);
 
     this.clientService.updateClientById(this.client!).subscribe({
       next: (success) => {
@@ -243,21 +207,6 @@ export class QuestionnaireComponent
       },
     });
 
-    this.subscription2 = this.ratingService.addNewRating(rating).subscribe({
-      next: (success) => {
-        this.alertService.success(
-          'Pozorovací hárok bol úspešne uložený.',
-          'Výborne!',
-        );
-      },
-      error: (err) => {
-        this.alertService.error(
-          'Nebolo možné uložiť hodnotenie klienta.',
-          'Nastala chyba!',
-        );
-        return false;
-      },
-    });
     return true;
   }
 

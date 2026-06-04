@@ -1,8 +1,8 @@
 <alert [maxItems]="3" [delay]="0"></alert>
-<div style="padding: 1rem 2rem; display: flex; justify-content: space-between">
-  <div style="width: 70%">
+<div class="row col-md-12">
+  <div class="col-md-8">
     <div class="form-group row">
-      <div class="col-md-10 size-input-wrapper">
+      <div class="size-input-wrapper">
         <input
           #searchVal
           placeholder="Vyhľadaj klienta"
@@ -14,7 +14,7 @@
       </div>
     </div>
   </div>
-  <div>
+  <div class="col-md-4" style="display: flex; justify-content: end">
     <button mat-button color="primary" (click)="lockClients()">
       @if (lock) {
         <i class="fas fa-lock"></i> Uzamknúť klientov

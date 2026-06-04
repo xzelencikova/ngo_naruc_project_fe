@@ -29,12 +29,7 @@ export class QuestionnairePage {
     private clientService: ClientService,
     private ratingService: RatingService,
     private questionService: QuestionService,
-  ) {
-    // this.clientService.selectedClient$.subscribe(value => {
-    //   this.clientName = `${value.name} ${value.surname}`;
-    //   this.client = value;
-    // });
-  }
+  ) {}
 
   ngOnInit() {
     this.client = this.clientService.getSelectedClient();

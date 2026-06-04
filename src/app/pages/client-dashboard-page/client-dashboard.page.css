@@ -73,13 +73,17 @@
 
 @media screen and (max-width: 720px) {
   h1 {
-    font-size: 2px;
+    font-size: 30px;
   }
 
   .questionnaire-button,
   .download-button {
     font-size: 12px !important;
     padding: 1rem 2rem !important;
+  }
+
+  h5 {
+    font-size: 15px;
   }
 }
 

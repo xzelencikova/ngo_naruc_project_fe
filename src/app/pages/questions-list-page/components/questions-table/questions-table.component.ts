@@ -155,7 +155,7 @@ export class QuestionsTableComponent implements OnInit, AfterViewInit {
         lock_questions: this.dataSource.filteredData
           .filter((question) => !question.is_valid)
           .map((question) => question.id),
-        unlock_clients: this.dataSource.filteredData
+        unlock_questions: this.dataSource.filteredData
           .filter((question) => question.is_valid)
           .map((client) => client.id),
       };

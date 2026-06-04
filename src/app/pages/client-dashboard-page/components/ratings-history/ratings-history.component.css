@@ -2,3 +2,36 @@
   text-align: center;
   padding: 2rem 0 5rem 0;
 }
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 1280px) {
+  table {
+    width: fit-content !important;
+  }
+
+  p {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  table {
+    width: fit-content !important;
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  .col-md-1 {
+    width: 20px;
+  }
+
+  .col-md-9 {
+    width: 80%;
+  }
+}

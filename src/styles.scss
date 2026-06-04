@@ -1,9 +1,9 @@
 // /* You can add global styles to this file, and also import other style files */
 @use "@angular/material" as mat;
 
-@import "./styles/_variables.scss";
-@import "./styles/_material-overrides.scss";
-@import "@fortawesome/fontawesome-free/css/all.css";
+@use "./styles/_variables.scss";
+@use "./styles/_material-overrides.scss";
+@use "@fortawesome/fontawesome-free/css/all.css";
 
 @include mat.core();
 
